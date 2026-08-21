@@ -130,6 +130,51 @@ async function main() {
     });
   }
 
+  /* ---------- one race, one row ----------
+     The state's calendar carries the same election more than once, two ways:
+
+       1. Straight republishes. The January 13 North Charleston special election
+          is present five times — ids 14897, 15196, 15399, 16259, 16496 — under
+          one title and date, because re-publishing mints a new id.
+       2. County splits. The same race is listed once per county it touches with
+          the county appended in capitals: "(CHARLESTON)", "(DORCHESTER)".
+
+     Deduping on the id catches neither, since all seven ids differ. Deduping on
+     the exact title catches the five but not the two. The key is the title with
+     a trailing ALL-CAPS parenthetical stripped, plus the date.
+
+     Merging matters as much as collapsing: counties unite, so a Dorchester
+     reader still finds the race, and the type is taken from whichever record's
+     own tag agrees with its own title — the five republished copies are tagged
+     "General" while calling themselves a special election, and the two county
+     rows are tagged "Special". Trust the tag that matches the name. */
+  const stripCounty = t => String(t || "").replace(/\s*\([A-Z][A-Z .'-]*\)\s*$/, "").trim();
+  const raceKey = e => stripCounty(e.title).toLowerCase()
+    .replace(/\s+/g, " ").replace(/[.,;:]+$/, "").trim() + "|" + e.date;
+  const agrees = e => {
+    const t = String(e.type || "").toLowerCase();
+    return t && new RegExp(`\\b${t}\\b`, "i").test(String(e.title || "")) ? 2 : 1;
+  };
+
+  const byRace = new Map();
+  for (const e of elections) {
+    const k = raceKey(e);
+    const prev = byRace.get(k);
+    if (!prev) { byRace.set(k, e); continue; }
+    const union = [...new Set([...(prev.counties || []), ...(e.counties || [])])].sort();
+    const keep = agrees(e) > agrees(prev) ? e : prev;
+    keep.counties = union;
+    keep.where = union.length ? union.map(c => `${c} County`).join(", ") : "Statewide";
+    keep.title = stripCounty(keep.title);
+    keep.url = keep.url || prev.url || e.url;
+    byRace.set(k, keep);
+  }
+  const collapsed = byRace.size;
+  if (collapsed < elections.length) {
+    console.log(`Collapsed ${elections.length - collapsed} duplicate record(s) into ${collapsed} race(s).`);
+  }
+  elections = [...byRace.values()];
+
   elections.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.title.localeCompare(b.title)));
 
   // Read the previous file for two reasons: the sanity gate below, and to carry
