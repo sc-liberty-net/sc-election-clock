@@ -1,0 +1,62 @@
+# Cronvass — the scheduled canvasser.
+# Every six hours it asks scvotes.gov for the full election calendar, rewrites
+# data/elections.json, and commits the result. The web page reads that file.
+# Nothing here needs Claude, a laptop, or a human.
+
+name: Cronvass — Refresh Election Data
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"      # 00:17, 06:17, 12:17, 18:17 UTC — off the hour so
+                                # it is not queued behind GitHub's :00 rush.
+                                # Every run commits, so the repo is never idle.
+  workflow_dispatch:            # the "Run workflow" button, for on-demand checks
+  push:
+    paths:
+      - "scripts/fetch-elections.mjs"
+      - ".github/workflows/cronvass.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cronvass
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out The Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Pull The Election Calendar
+        run: node scripts/fetch-elections.mjs
+
+      # Commit on every run, not only when the data changed. The file always
+      # differs because checked_at moves each time, and that is the point: a
+      # repository with no commits for 60 days has its scheduled workflows
+      # disabled by GitHub, and a job that only commits when the news is
+      # interesting will eventually go quiet long enough to switch itself off.
+      # A year of this costs about 1 MB of packed history.
+      - name: Commit The Check
+        run: |
+          git config user.name  "cronvass[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/elections.json
+          if git diff --staged --quiet; then
+            echo "Nothing staged — fetch-elections.mjs did not write. Not committing."
+            exit 0
+          fi
+          if grep -q '"changed_this_run": true' data/elections.json; then
+            MSG="Cronvass: election data CHANGED ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+          else
+            MSG="Cronvass: checked, no change ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+          fi
+          git commit -m "$MSG"
+          git push
