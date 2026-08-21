@@ -6,6 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>South Carolina Election Clock</title>
 <meta name="description" content="A live countdown to every South Carolina election — statewide, municipal, and special — with the state's own calendar checked automatically every six hours.">
+<!-- Defence in depth for a page that fetches from three third parties and
+     writes their values into the DOM. Inline script and style are the page's own
+     and must stay allowed; everything else is closed. connect-src names the two
+     hosts the Check buttons talk to, so a tampered file cannot exfiltrate to a
+     fourth. frame-ancestors is omitted because a <meta> CSP cannot carry it. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://scvotes.gov https://vrems.scvotes.sc.gov; form-action 'none'; base-uri 'self'; object-src 'none'; frame-src 'none'">
 <meta name="color-scheme" content="dark">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗳️</text></svg>">
 <meta property="og:title" content="South Carolina Election Clock">
@@ -126,10 +132,14 @@
      of the 342px container (12/342 = 3.509cqw and so on), so the ceiling and the
      fluid rule agree exactly at full width and the type still steps down in
      proportion on a narrow phone. */
-  .masthead .eyebrow   { font-size: clamp(8px,  3.509cqw, 12px); }
-  .masthead #pageTitle { font-size: clamp(14px, 7.018cqw, 24px); }
-  .masthead #pageSub   { font-size: clamp(12px, 5.264cqw, 18px); }
-  .masthead .nowbar    { font-size: clamp(10px, 3.509cqw, 12px); }
+  /* The fixed size first, the fluid one second. Container queries are Baseline
+     but only since 2023 — an engine that does not parse `cqw` discards the whole
+     clamp() and would otherwise fall back to the inherited body size, which is
+     wrong for all four. This way it lands on the intended ceiling instead. */
+  .masthead .eyebrow   { font-size: 12px; font-size: clamp(8px,  3.509cqw, 12px); }
+  .masthead #pageTitle { font-size: 24px; font-size: clamp(14px, 7.018cqw, 24px); }
+  .masthead #pageSub   { font-size: 18px; font-size: clamp(12px, 5.264cqw, 18px); }
+  .masthead .nowbar    { font-size: 12px; font-size: clamp(10px, 3.509cqw, 12px); }
   /* The subtitle's coefficient is calibrated against its LONGER string — the
      off-year one — so neither wraps. The timezone warning is held at a fixed
      size because it only appears for out-of-state readers and would otherwise
@@ -189,11 +199,16 @@
   .masthead > * + * { margin-top: 8px; }
 
   /* ---- provenance banner ---- */
+  /* The source list turned this from one line into a paragraph, so the tier chip
+     aligns to the first line rather than floating in the middle of the block. */
   .prov {
-    display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 12px;
+    display: flex; align-items: flex-start; gap: 10px; padding: 11px 16px; border-radius: 12px;
     border: 1px solid var(--line); background: var(--panel); font-size: 12.5px;
     color: var(--ink-dim); line-height: 1.5; margin-bottom: 8px; box-shadow: var(--shadow);
   }
+  .prov > span:last-child { min-width: 0; }
+  .prov a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .prov a:hover { color: var(--ev); border-bottom-color: var(--ev); }
   .tier {
     flex: none; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
     padding: 3px 7px; border-radius: 5px; border: 1px solid currentColor;
@@ -312,6 +327,30 @@
     list-style: none; cursor: pointer; padding: 18px 20px 16px;
     display: flex; align-items: center; gap: 11px; flex-wrap: wrap;
   }
+  /* ---- the countdown card, and the panel docked beneath it ----
+     Same surface, border and radius as every other panel, but with its bottom
+     edge squared off and its bottom border dropped, so the dropdown's own top
+     border becomes the single line between them. Nothing is nested inside
+     anything: they are two boxes that meet. */
+  .sp-clockcard {
+    display: none; position: relative; overflow: hidden;
+    padding: 18px 20px 16px;
+    border: 1px solid var(--line); border-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    background: var(--panel); box-shadow: var(--shadow);
+  }
+  .sp-stack.has-clock .sp-clockcard { display: block; }
+  /* The yellow rule caps the pair, not each half — so it sits on whichever box
+     is on top, and the other one gives it up. */
+  .sp-clockcard::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--sp); z-index: 1; }
+  .sp-stack.has-clock > #special { border-radius: 0 0 16px 16px; }
+  .sp-stack.has-clock > #special::before { display: none; }
+  .sp-clockcard { --c: var(--sp); }
+  .sp-clockcard .units { margin-bottom: 0; }
+  .sp-clockcard .clock-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+  .sp-clockcard .clock-note { margin-bottom: 14px; }
+  .sp-clockcard .bar { margin-top: 12px; }
+  .sp-clockcard .sp-foot { margin-top: 12px; padding-top: 0; border-top: 0; }
   .sp-panel > summary::-webkit-details-marker { display: none; }
   .sp-panel > summary:focus-visible { outline: 2px solid var(--sp); outline-offset: -2px; }
   .sp-panel > summary:hover .sp-title { color: var(--sp); }
@@ -362,12 +401,37 @@
      multi-county row wrap inside itself rather than widen the row. */
   .sp-d { font-size: 12px; line-height: 17px; color: var(--ink-dim); margin-top: 5px;
           display: flex; align-items: center; gap: 8px; }
+  /* One race can carry more than one tag now, so they travel as a group: they
+     keep their own tight spacing and wrap together rather than one pill peeling
+     off onto the next line by itself. */
+  .pills { display: inline-flex; align-items: center; gap: 5px; flex: none; }
   .sp-where { min-width: 0; }
   .sp-w { text-align: right; font-size: 13px; line-height: 19px; font-weight: 560;
           color: var(--ink-dim); white-space: nowrap; }
   .sp-w span { display: block; font-size: 11px; line-height: 16px; font-weight: 500;
                color: var(--ink-faint); margin-top: 4px; }
   .sp-empty { font-size: 13.5px; color: var(--ink-dim); line-height: 1.65; margin: 0; }
+  /* Standing explanation for a whole panel — the kind of thing that belongs
+     above the list once rather than repeated on every row in it. */
+  .sp-note { font-size: 12.5px; color: var(--ink-faint); line-height: 1.6;
+             margin: 0 0 14px; padding-left: 11px; box-shadow: inset 3px 0 0 var(--line); }
+  /* Held races stay in their own panel rather than moving to a graveyard panel
+     of their own: a North Charleston race that already happened belongs with
+     North Charleston races, not filed under "past" beside a school board. They
+     are folded away because this page is a countdown — what is coming is the
+     answer, what is done is the reference behind it. */
+  .heldwrap { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+  .heldwrap > summary {
+    list-style: none; cursor: pointer; font-size: 12px; font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint);
+    display: inline-flex; align-items: center; gap: 8px; padding: 4px 0;
+  }
+  .heldwrap > summary::-webkit-details-marker { display: none; }
+  .heldwrap > summary:hover { color: var(--ink-dim); }
+  .heldwrap > summary:focus-visible { outline: 2px solid var(--ev); outline-offset: 3px; border-radius: 4px; }
+  .heldwrap .sp-chev { font-size: 9px; }
+  .heldwrap[open] > summary .sp-chev { transform: rotate(90deg); }
+  .heldwrap .sp-list { margin-top: 8px; }
   /* Whole-pixel height and no fractional line-height, so all four borders land
      on the same pixel grid and none of them reads heavier than the others. */
   .pill {
@@ -378,12 +442,15 @@
   }
   .pill-special { color: var(--sp); border-color: currentColor; }
   .pill-primary, .pill-runoff { color: var(--ev); border-color: currentColor; }
+  /* The same green the timeline uses for Counting & Certification, so "General"
+     reads as one colour across the whole page. */
+  .pill-general { color: var(--good); border-color: currentColor; }
 
   /* ---- county filter ---- */
-  .spfilter { display: flex; align-items: center; gap: 9px; margin: 16px 0 0; font-size: 12.5px; color: var(--ink-dim); flex-wrap: wrap; }
+  .spfilter { display: flex; align-items: center; gap: 9px; margin: 0 0 16px; font-size: 12.5px; color: var(--ink-dim); flex-wrap: wrap; }
   .spfilter select {
     font: inherit; font-size: 12.5px; color: var(--ink); background: var(--panel-2);
-    border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; max-width: 260px;
+    border: 1px solid var(--line); border-radius: 8px; padding: 13px 10px; cursor: pointer; max-width: 100%;
   }
   .spfilter select:focus-visible { outline: 2px solid var(--sp); outline-offset: 1px; }
 
@@ -392,12 +459,23 @@
     display: flex; align-items: center; gap: 13px; flex-wrap: wrap;
     font-size: 12px; color: var(--ink-faint); margin: 12px 0 0; line-height: 1.55;
   }
-  /* An inline grid whose columns are all 1fr: both buttons take the width of
-     the wider one, so they match without either being measured by hand. */
-  .feedbtns { flex: none; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; }
+  /* A grid whose columns are both 1fr: the two buttons take the width of the
+     wider one, so they match without either being measured by hand.
+
+     `flex: none` used to sit here, which meant this strip kept its content
+     width no matter how narrow the screen got — 411px of buttons inside a
+     320px phone, and the whole document scrolled sideways. It can shrink now,
+     and below 520px the pair stacks rather than being squeezed. */
+  .feedbtns {
+    flex: 0 1 auto; min-width: 0; max-width: 100%;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  .feedbtns > * { min-width: 0; }
+  @media (max-width: 860px) { .feedbtns { grid-template-columns: 1fr 1fr; width: 100%; } }
+  @media (max-width: 520px) { .feedbtns { grid-template-columns: 1fr; width: 100%; } }
   .checkbtn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 9px 15px; border-radius: 9px; border: 1px solid var(--line);
+    padding: 14px 15px; border-radius: 9px; border: 1px solid var(--line);
     background: var(--panel); color: var(--ink); font-family: inherit;
     font-size: 12.5px; font-weight: 600; cursor: pointer; box-shadow: var(--shadow);
     text-decoration: none; white-space: nowrap; text-align: center;
@@ -510,9 +588,11 @@
   .hidden { display: none !important; }
 
   @media (max-width: 720px) {
-    header { flex-direction: column; align-items: stretch; gap: 14px; }
-    h1 { font-size: 23px; }
-    .yearbay { flex: none; }
+    /* Three declarations lived here that could never take effect and have been
+       removed: `header { flex-direction; gap }` (the header is display:block
+       with one child, so flex properties are inert), `h1 { font-size: 23px }`
+       (.masthead #pageTitle outranks a bare h1, so the fluid size always won),
+       and `.yearbay { flex: none }` (its parent is not a flex container). */
     .yeartile { align-self: center; }
     .clocks { grid-template-columns: 1fr; }
     .unit .n { font-size: 26px; }
@@ -527,6 +607,14 @@
 </style>
 </head>
 <body>
+<noscript>
+  <div style="max-width:1060px;margin:16px auto;padding:12px 16px;border-radius:12px;border:1px solid #364357;
+              background:#1d2533;color:#e9eff8;font:13px/1.6 ui-sans-serif,-apple-system,'Segoe UI',Roboto,sans-serif;">
+    This page counts down in real time, so it needs JavaScript. With scripts off, nothing below will fill in.
+    The South Carolina Election Commission publishes the same dates without any script at
+    <a href="https://scvotes.gov/elections-statistics/upcoming-elections/" style="color:#64a6ff">scvotes.gov</a>.
+  </div>
+</noscript>
 <div class="wrap">
 
   <header>
@@ -622,8 +710,17 @@
 
   <hr class="rule">
 
-  <div id="groupPanels">
-    <div id="groupList">
+  <!-- Special is static markup because its body has controls the generated
+       panels do not; renderGroups detaches and re-inserts it around each
+       rewrite so it stays first in this list. -->
+  <div id="groupList">
+    <!-- Two boxes, one object. The countdown is its own panel; the dropdown
+         docks to its underside — square edges where they meet, a single shared
+         hairline, and the yellow rule capping the pair rather than each half.
+         When there is no next race the clock card removes itself and the panel
+         gets its own top corners back. -->
+    <div class="sp-stack" id="specialStack">
+      <section class="sp-clockcard" id="spClockBay" aria-label="Countdown to the next special election"></section>
       <details class="sp-panel grp" id="special">
         <summary>
           <span class="sp-chev">&#9654;</span>
@@ -639,7 +736,10 @@
   <div class="feed">
     <div class="feedbtns">
       <button class="checkbtn" id="checkBtn" type="button">
-        <span class="glyph">&#8635;</span><span id="checkLabel">Check For New Elections</span>
+        <span class="glyph">&#8635;</span><span id="checkLabel">Check Upcoming Elections</span>
+      </button>
+      <button class="checkbtn" id="pastBtn" type="button">
+        <span class="glyph">&#8634;</span><span id="pastLabel">Check Past Elections</span>
       </button>
       <a class="checkbtn" href="https://scvotes.gov/elections-statistics/upcoming-elections/" target="_blank" rel="noopener">
         <span class="glyph">&#8599;</span><span>Open The State&rsquo;s List</span>
@@ -671,6 +771,9 @@
     re-checked automatically every six hours.
     <b>2026 statewide dates</b> are transcribed from the
     <a href="https://scvotes.gov/wp-content/uploads/2026/04/2026-Election-Calendar-Draft-scVOTES_.pdf" target="_blank" rel="noopener">2026 Election Calendar</a>.
+    <b>U.S. House and Senate seats</b> and the candidates filed for them come from the
+    <a href="https://api.open.fec.gov/developers/" target="_blank" rel="noopener">Federal Election Commission&rsquo;s OpenFEC API</a>,
+    a work of the United States government in the public domain.
     <b>Later years</b> are computed from statute — S.C. Code
     <a href="https://www.scstatehouse.gov/code/t07c013.php" target="_blank" rel="noopener">&sect;7-13-10</a> (election day),
     &sect;7-13-25 (early voting period and hours), and &sect;7-13-40 (primary date), with the 30-day registration cutoff
@@ -690,12 +793,39 @@
   /* Where the scheduled job writes the state's calendar. Relative, so it works
      on any host and on a local file:// copy alike. */
   var FEED_URL = "data/elections.json";
+  var FEC_URL  = "data/congress.json";   // written by scripts/fetch-congress.mjs, optional
+  var SEAT_URL = "data/seats.json";      // written by scripts/fetch-seats.mjs, optional
 
   /* The one place the page names its source. The eyebrow used to carry it, but
      the provenance banner is where a reader is already being told how much to
      trust the dates, which is the same question. */
-  var SOURCE_LINK = '<a href="https://scvotes.gov/elections-statistics/upcoming-elections/" ' +
-                    'target="_blank" rel="noopener">scvotes.gov</a>';
+  /* Every place this page's facts come from, named and linked. A civic page that
+     will not say where it got something is asking to be taken on trust, and this
+     one is unofficial — the sources are the only reason to believe it. */
+  var SOURCES = [
+    { u: "https://scvotes.gov/elections-statistics/upcoming-elections/", l: "scvotes.gov",
+      w: "election dates, special and local races" },
+    { u: "https://www.scstatehouse.gov/code/t07c013.php", l: "S.C. Code Title 7, Ch. 13",
+      w: "the statutes the projected dates are computed from" },
+    { u: "https://www.scstatehouse.gov/scconstitution/scconst.php", l: "S.C. Constitution",
+      w: "which offices are elected, and in which years" },
+    { u: "https://data.openstates.org/people/current/sc.csv", l: "Open States",
+      w: "General Assembly districts and sitting members" },
+    { u: "https://www.scstatehouse.gov/", l: "scstatehouse.gov",
+      w: "legislator profiles" },
+    { u: "https://unitedstates.github.io/congress-legislators/", l: "congress-legislators",
+      w: "South Carolina&rsquo;s sitting congressional delegation" },
+    { u: "https://api.open.fec.gov/developers/", l: "OpenFEC",
+      w: "federal seats and candidate filings" },
+    { u: "https://sc.gov/government/getting-know-your-government/elected-officials/constitutional-officers",
+      l: "sc.gov", w: "statewide constitutional officers" }
+  ];
+
+  function sourceListHtml() {
+    return SOURCES.map(function (s) {
+      return '<a href="' + s.u + '" target="_blank" rel="noopener">' + s.l + '</a> (' + s.w + ')';
+    }).join("; ");
+  }
 
   /* ---------- official .gov destinations, one per action ---------- */
   var LINK = {
@@ -707,7 +837,6 @@
     photoId:  { u: "https://scvotes.gov/voters/photo-id-requirements/",                        l: "Check Photo ID Rules" },
     absTrack: { u: "https://vrems.scvotes.sc.gov/Voter/Login?PageMode=AbsenteeInfo",           l: "Track Your Absentee Ballot" },
     polling:  { u: "https://vrems.scvotes.sc.gov/Voter/Login?PageMode=PollingPlace",           l: "Find Your Polling Place" },
-    sample:   { u: "https://vrems.scvotes.sc.gov/Voter/Login?PageMode=Sampleballot",           l: "Get Your Sample Ballot" },
     uocava:   { u: "https://scvotes.gov/voters/military-overseas-citizens/",                   l: "Military And Overseas Voting" },
     audits:   { u: "https://scvotes.gov/elections-statistics/election-audits/",                l: "See Audit Reports" },
     results:  { u: "https://scvotes.gov/elections-statistics/election-results/",               l: "View Certified Results" },
@@ -721,7 +850,7 @@
      inherits whatever the device's time zone data says, and stays right.
      A fixed rule is kept only as a fallback for ancient browsers. ---------- */
 
-  var ET_OFFSET_FMT = null, ET_CLOCK_FMT = null;
+  var ET_OFFSET_FMT = null, ET_CLOCK_FMT = null, ET_DATE_FMT = null;
   try {
     ET_OFFSET_FMT = new Intl.DateTimeFormat("en-US", {
       timeZone: "America/New_York", timeZoneName: "longOffset", year: "numeric"
@@ -730,8 +859,20 @@
       timeZone: "America/New_York", weekday: "short", month: "short", day: "numeric",
       hour: "numeric", minute: "2-digit", second: "2-digit", timeZoneName: "short"
     });
+    // yyyy-mm-dd in Eastern time. The API's start_date wants a calendar day, and
+    // the calendar day that matters is South Carolina's, not the reader's.
+    ET_DATE_FMT = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit"
+    });
     ET_OFFSET_FMT.formatToParts(new Date());
-  } catch (e) { ET_OFFSET_FMT = null; }
+  } catch (e) { ET_OFFSET_FMT = null; ET_DATE_FMT = null; }
+
+  /* Falls back to the browser's own date if Intl has no zone database — a wrong
+     day by a few hours is better than a request with "undefined" in it. */
+  function todayET() {
+    if (ET_DATE_FMT) { try { return ET_DATE_FMT.format(new Date()); } catch (e) {} }
+    return new Date().toISOString().slice(0, 10);
+  }
 
   function utc(y, m, d) { return new Date(Date.UTC(y, m, d)); }
 
@@ -774,6 +915,27 @@
   function esc(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  /* esc() makes a string safe as TEXT. It does not make it safe as a URL —
+     `javascript:alert(1)` contains none of the characters esc() touches, so it
+     passes through untouched and becomes a live script handler the moment a
+     reader clicks the link.
+
+     Every href on this page is built from a value fetched from somewhere else:
+     the state's calendar, the Open States roster, the congressional roster. If
+     any of those were tampered with, that is script execution on this page's own
+     origin. So a URL is a link only if it parses and speaks http or https;
+     anything else returns null and the caller renders plain text instead.
+
+     new URL() rather than a regex: it resolves relative paths, decodes escapes,
+     and settles the scheme the same way the browser will. */
+  function safeUrl(u) {
+    if (!u) return null;
+    try {
+      var parsed = new URL(String(u), location.href);
+      return (parsed.protocol === "http:" || parsed.protocol === "https:") ? parsed.href : null;
+    } catch (e) { return null; }
   }
 
   /* ---------- the official 2026 calendar (transcribed, not derived) ---------- */
@@ -867,7 +1029,7 @@
     { key: "assembly", label: "General Assembly Elections",
       re: /house district|senate district|state house|state senate|general assembly/i },
     // The eight statewide constitutional offices, by name, and nothing else.
-    { key: "executive", label: "State Executive Offices",
+    { key: "executive", label: "State Executive Officer Elections",
       re: /\bgovernor\b|lieutenant governor|attorney general|secretary of state|state treasurer|comptroller general|superintendent of education|commissioner of agriculture/i,
       whenEmpty: "South Carolina&rsquo;s statewide executive offices — governor, attorney general, secretary of state and the rest — are decided on the statewide general election ballot. The Election Commission does not list them as separate events on its calendar, so they are counted down by the two clocks at the top of this page rather than here. Expect this panel to fill only when a vacancy forces a standalone race." },
     // Both U.S. Senate seats and all seven House districts. "District N" alone is
@@ -875,7 +1037,7 @@
     // seat — so it must appear with congressional or U.S. House wording.
     { key: "congress", label: "U.S. Congressional Elections",
       re: /u\.?\s?s\.?\s*(house|senate|congress|representative)|united states (house|senate|congress)|congressional district|\bcongress\b|house of representatives/i,
-      whenEmpty: "Regular congressional races share the statewide general election ballot and are counted down by the clocks above. This panel fills when a seat is contested on its own — a special election or a separate primary." }
+      whenEmpty: "Regular congressional races share the statewide general election ballot, so the state&rsquo;s calendar lists them as one event rather than seven. Seat-by-seat detail comes from the Federal Election Commission instead, and appears here once <code>data/congress.json</code> is published alongside this page." }
   ];
 
   // A congressional or statewide race must not be swept up by the General
@@ -895,21 +1057,20 @@
 
   /* ---------- the live feed ----------
      data/elections.json is rewritten every six hours by a scheduled job that
-     reads the Election Commission's own calendar API. If the fetch fails —
-     offline, first load before the job has ever run, opened from a USB stick —
-     the hand-entered list below takes over so the page is never blank. -------- */
+     reads the Election Commission's own calendar API. If that file cannot be
+     read, the page says so plainly rather than showing a substitute list.
+
+     A hand-entered fallback used to live here: five 2026 races, stamped with
+     the date someone typed them. It had no entries for any other year, so from
+     2027 on it would have answered "nothing scheduled" — which is a different
+     and worse claim than "the calendar could not be loaded". An honest empty
+     state ages better than stale data. ------------------------------------- */
 
   var FEED = null;              // parsed elections.json
+  var FEC = null;               // parsed congress.json, or null when the file is absent
+  var SEATS = null;             // parsed seats.json — General Assembly + statewide executive
+  var PAST_MODE = false;        // set by Check Past Elections; flips the seat panels to the last cycle
   var FEED_STATE = "loading";   // loading | live | offline
-  var FALLBACK_AS_OF = "17 Aug 2026";
-  var FALLBACK = [
-    { y:2026, t:"U.S. Senate Special Republican Primary Runoff", where:"Statewide", type:"Runoff",
-      d:"the winner appears on the Nov 3 general election ballot", day:utc(2026,7,25) },
-    { y:2026, t:"Town Of Salley Special Election", where:"Aiken County", type:"Special", d:"", day:utc(2026,7,25) },
-    { y:2026, t:"Town Of Greeleyville Special Election", where:"Williamsburg County", type:"Special", d:"", day:utc(2026,7,25) },
-    { y:2026, t:"S.C. Senate District 15 Special Primary", where:"York County", type:"Primary", d:"", day:utc(2026,8,1) },
-    { y:2026, t:"Town Of Ehrhardt Special Election", where:"Bamberg County", type:"Special", d:"", day:utc(2026,8,22) }
-  ];
 
   function hhmm(s, dh, dm) {
     if (typeof s === "string" && s.length >= 16) {
@@ -917,6 +1078,91 @@
       if (!isNaN(h) && !isNaN(m)) return [h, m];
     }
     return [dh, dm];
+  }
+
+  /* ---------- one race, one row ----------
+     The state's calendar carries the same election more than once, in two
+     different shapes, and both were reaching the page:
+
+     1. Straight republishes. The January 13 North Charleston special election
+        appears five times under one title and date with five different ids —
+        14897, 15196, 15399, 16259, 16496 — because re-publishing an event mints
+        a new id rather than editing the old one.
+     2. County splits. The same race is also listed once per county it touches,
+        with the county appended in capitals: "… Special Elect (CHARLESTON)" and
+        "… Special Elect (DORCHESTER)". Two more rows for the same election.
+
+     Deduping on the id — which is what the code did — collapses none of it,
+     since every one of those seven records has a different id. Deduping on the
+     exact title collapses the five but not the two, because their titles differ
+     by the suffix. So the key is the title with a trailing ALL-CAPS parenthetical
+     removed, plus the date. A real title does not end in a bracketed shout. ---- */
+
+  /* ---- Rule 1: a truncated "Elect" is an Election ----
+     The state's calendar clips long titles: "City of North Charleston Special
+     Elect" is what it actually publishes, mid-word. Any word that is a genuine
+     PREFIX of "election" is expanded to the whole word.
+
+     Prefix-testing rather than a plain /elec/ match is what keeps this safe.
+     "Elector", "Electoral" and "Electric" all contain "elec" but diverge from
+     "election" at the fifth or sixth letter, so they are left alone; only
+     "Elec", "Elect", "Electi" and "Electio" are repaired. Case follows the
+     source word, and an already-complete "Election" or "Elections" is a no-op.
+
+     Repairing at ingest also means the key below sees the repaired title, so a
+     clipped copy and a complete one collapse into one race instead of two. */
+  var WORD_ELECTION = "election";
+  function fixTitle(t) {
+    return String(t == null ? "" : t).replace(/\b(elec[a-z]*)\b/gi, function (w) {
+      var low = w.toLowerCase();
+      if (low === WORD_ELECTION || low === "elections") return w;
+      if (WORD_ELECTION.indexOf(low) !== 0) return w;          // not a prefix: leave it
+      return w[0] === w[0].toUpperCase() ? "Election" : WORD_ELECTION;
+    });
+  }
+
+  function raceKey(title, dayMs) {
+    return String(title || "")
+      .replace(/\s*\([A-Z][A-Z .'-]*\)\s*$/, "")   // drop "(CHARLESTON)"
+      .toLowerCase().replace(/\s+/g, " ").replace(/[.,;:]+$/, "").trim() + "|" + dayMs;
+  }
+
+  /* When records collapse, their facts merge rather than the first one winning.
+     Counties unite — that is the whole point of the county split, and dropping
+     the others would hide Dorchester from a Dorchester reader. Type is decided
+     by which record's own tag agrees with its own title: those five republished
+     copies are tagged "General" while calling themselves a special election,
+     and the two county rows are tagged "Special". The tag that matches the name
+     is the one to trust. */
+  function typeAgrees(e) {
+    var t = String(e.type || "").toLowerCase();
+    return t && new RegExp("\\b" + t + "\\b", "i").test(String(e.t || "")) ? 2 : 1;
+  }
+
+  function dedupeRaces(list) {
+    var byKey = {}, order = [];
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i];
+      /* A row may declare itself unmergeable. Only the two U.S. Senate seats do:
+         they share a title and a date by nature, and collapsing them would erase
+         one of South Carolina's two senators from the page. */
+      var k = e.keepDistinct ? "keep|" + e.keepDistinct + "|" + e.day.getTime()
+                             : raceKey(e.t, e.day.getTime());
+      var prev = byKey[k];
+      if (!prev) { byKey[k] = e; order.push(k); continue; }
+      var union = (prev.counties || []).slice();
+      (e.counties || []).forEach(function (c) { if (union.indexOf(c) < 0) union.push(c); });
+      union.sort();
+      var keep = typeAgrees(e) > typeAgrees(prev) ? e : prev;
+      keep.counties = union;
+      keep.where = union.length
+        ? union.map(function (c) { return c + " County"; }).join(", ")
+        : (keep.where || "Statewide");
+      keep.t = keep.t.replace(/\s*\([A-Z][A-Z .'-]*\)\s*$/, "");   // the suffix was county, and county is now in `where`
+      keep.url = keep.url || prev.url || e.url;
+      byKey[k] = keep;
+    }
+    return order.map(function (k) { return byKey[k]; });
   }
 
   function normFeed(y) {
@@ -928,32 +1174,26 @@
       var p = e.date.split("-");
       var s = hhmm(e.start_et, 7, 0), en = hhmm(e.end_et, 19, 0);
       out.push({
-        t: e.title || "Election", where: e.where || "", type: e.type || "Election",
-        counties: e.counties || [], d: "",
+        t: fixTitle(e.title || "Election"), where: e.where || "", type: e.type || "Election",
+        counties: (e.counties || []).slice(), d: "",
         day: utc(+p[0], +p[1] - 1, +p[2]),
         sh: s[0], sm: s[1], eh: en[0], em: en[1],
         url: e.url || null
       });
     }
+    out = dedupeRaces(out);        // one choke point: every panel sees clean rows
     out.sort(function (a, b) { return a.day - b.day; });
     return out;
   }
 
-  function normFallback(y) {
-    return FALLBACK.filter(function (s) { return s.y === y; }).map(function (s) {
-      return { t: s.t, where: s.where, type: s.type, counties: [], d: s.d, day: s.day,
-               sh: 7, sm: 0, eh: 19, em: 0, url: null };
-    });
-  }
-
   function specialsFor(y) {
-    var all = (FEED_STATE === "live") ? normFeed(y) : normFallback(y);
+    var all = normFeed(y);
     return all.filter(function (e) { return inGroup(e, "special"); });
   }
 
   // Everything for the year, ungrouped — what the five secondary panels sieve.
   function allFor(y) {
-    return (FEED_STATE === "live") ? normFeed(y) : normFallback(y);
+    return normFeed(y);   // empty until the saved calendar loads
   }
 
   /* Two clocks on the data, and they answer different questions.
@@ -990,7 +1230,31 @@
         FEED = j; FEED_STATE = "live";
       })
       .catch(function () { FEED_STATE = "offline"; })
+      .then(loadFec)
       .then(afterFeed);
+  }
+
+  /* The federal roster is a separate, optional file. A repository that never
+     sets an FEC key simply has no data/congress.json, and this resolves to
+     nothing — the Congressional panel then behaves exactly as it did before.
+     It never rejects, so a missing or broken file cannot hold up the page. */
+  function loadFec() {
+    return Promise.all([
+      sideLoad(FEC_URL, function (j) { if (j && j.seats && j.seats.length) FEC = j; }),
+      sideLoad(SEAT_URL, function (j) { if (j && j.assembly) SEATS = j; })
+    ]);
+  }
+
+  /* Both roster files are optional. A repository that never runs their scripts
+     simply has no such file, this resolves to nothing, and the panels fall back
+     to what the state's calendar alone can say. Neither ever rejects, so a
+     missing or malformed file cannot hold up the page. */
+  function sideLoad(url, apply) {
+    var u = url + (url.indexOf("?") < 0 ? "?" : "&") + "v=" + Math.floor(Date.now() / 6e4);
+    return fetch(u, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(apply)
+      .catch(function () { /* absent is the normal case, not an error */ });
   }
 
   function afterFeed() {
@@ -999,6 +1263,76 @@
     renderSpecial(t);
     renderGroups(t);
     renderFeedMsg();
+    autoPullSpecials();          // the one line that presses the button, quietly
+  }
+
+  /* ---------- the quiet pull on load ----------
+     Cronvass refreshes the saved file every six hours, which is fine for a
+     school board race scheduled a year out and not fine for a special election
+     called on Tuesday to fill a seat vacated on Monday. Those are the ones
+     nothing on this page can predict, so those are the only ones worth asking
+     the state about the moment someone opens it.
+
+     Three rules keep this from becoming the button:
+
+     It pulls SPECIALS ONLY, and merges rather than replaces. The button swaps
+     the whole list; this adds races the saved file has not caught up with and
+     leaves the other five panels reading from the published copy.
+
+     It runs the same collapse the button and Cronvass run — same raceKey, same
+     county merge — so a race the saved file already holds cannot come back as a
+     duplicate under a republished id or a "(CHARLESTON)" suffix.
+
+     It fails silently. A visitor who did not press anything should never meet a
+     red error; if scvotes.gov refuses the browser, the saved list stands and the
+     status line is left exactly as it was. It speaks up only with news. */
+
+  function isSpecialApi(e) {
+    var g = GROUPS[0];
+    return g.re.test(String(e.title || "")) || g.type.test(String(e.type || ""));
+  }
+
+  function autoPullSpecials() {
+    if (FEED_STATE !== "live" || checking) return;   // nothing to merge into, or the reader got there first
+    var startedWith = FEED;                          // see the bail-out below
+
+    fetchAllPages(todayET()).then(function (raw) {
+      /* A reader can press a button while this is still in the air. That press
+         replaces FEED outright and writes its own status line, so merging into
+         the new list and talking over its message would be wrong on both counts.
+         If the list is no longer the one this pull started against, drop it. */
+      if (checking || FEED !== startedWith) return;
+
+      var seen = {}, live = [];
+      for (var i = 0; i < raw.length; i++) {
+        var e = fromApiEvent(raw[i]);
+        if (!e || seen[e.id]) continue;
+        seen[e.id] = 1;
+        live.push(e);
+      }
+      live = collapseApiRaces(live).filter(isSpecialApi);
+
+      var have = {}, added = [];
+      for (var k = 0; k < FEED.elections.length; k++) have[raceKey(FEED.elections[k].title, FEED.elections[k].date)] = 1;
+      for (var j = 0; j < live.length; j++) {
+        if (have[raceKey(live[j].title, live[j].date)]) continue;
+        FEED.elections.push(live[j]);
+        added.push(live[j].title);
+      }
+      if (!added.length) return;                     // nothing new: say nothing
+
+      FEED.count = FEED.elections.length;
+      FEED.elections.sort(function (a, b) {
+        return a.date < b.date ? -1 : a.date > b.date ? 1 : a.title.localeCompare(b.title);
+      });
+      spKey = null;
+      var t = Date.now();
+      renderSpecial(t);
+      renderGroups(t);
+      msg("ok", "<b>" + added.length + (added.length === 1 ? " special election has" : " special elections have") +
+        "</b> been called since this page was last published: " + esc(added.slice(0, 3).join(", ")) +
+        (added.length > 3 ? ", and others" : "") + ". Added to the list above from scvotes.gov just now.");
+    }).catch(function () { /* silent by design — see above */ });
   }
 
   /* ---------- asking the state directly, on demand ----------
@@ -1045,7 +1379,7 @@
     var c = classifyCategories(ev.categories);
     return {
       id: ev.id,
-      title: String(ev.title || "Election").replace(/&#8217;/g, "’").replace(/&amp;/g, "&").trim(),
+      title: fixTitle(String(ev.title || "Election").replace(/&#8217;/g, "’").replace(/&amp;/g, "&").trim()),
       date: date,
       start_et: String(ev.start_date || "").trim() || null,
       end_et: String(ev.end_date || "").trim() || null,
@@ -1066,13 +1400,26 @@
     } catch (e) { return new Date().toISOString().slice(0, 16).replace("T", " "); }
   }
 
-  function setChecking(on, label) {
+  /* Both buttons hit the same endpoint, so neither may run while the other is
+     mid-flight: the one that finishes second would overwrite the first. Whichever
+     was pressed shows the spinner and the status word; the other simply greys. */
+  var CHECK_UI = {
+    upcoming: { btn: "checkBtn", label: "checkLabel", idle: "Check Upcoming Elections" },
+    past:     { btn: "pastBtn",  label: "pastLabel",  idle: "Check Past Elections" }
+  };
+
+  function setChecking(on, label, mode) {
     checking = on;
-    var b = $("checkBtn"), l = $("checkLabel");
-    if (!b) return;
-    b.disabled = on;
-    b.classList.toggle("busy", on);
-    if (l) l.textContent = label || (on ? "Asking scvotes.gov…" : "Check For New Elections");
+    var active = CHECK_UI[mode || "upcoming"];
+    for (var k in CHECK_UI) {
+      var ui = CHECK_UI[k], b = $(ui.btn), l = $(ui.label);
+      if (!b) continue;
+      b.disabled = on;
+      b.classList.toggle("busy", on && k === (mode || "upcoming"));
+      if (l) l.textContent = (ui === active)
+        ? (label || (on ? "Asking scvotes.gov…" : ui.idle))
+        : ui.idle;
+    }
   }
 
   function msg(cls, html) {
@@ -1104,15 +1451,56 @@
     return page(1);
   }
 
-  /* silent=true is the automatic pull that runs once on page load. It behaves
-     exactly like the button except in failure: a visitor who arrives to a red
-     error they did not ask for learns nothing useful, so a silent attempt that
-     is refused simply leaves the saved list and its normal status line in place.
-     The button, pressed deliberately, always reports what happened. */
-  function checkNow(silent) {
+  /* Two callers, two windows, one code path. `mode` is "upcoming" or "past".
+     This used to take a `silent` flag for an automatic on-load pull that no
+     longer exists — and because the click handler was wired straight to this
+     function, the browser's MouseEvent arrived as that flag and suppressed
+     every error the button was supposed to show. */
+  /* checkNow works on raw API shapes, not normFeed's shapes, so it needs the
+     same collapse expressed over {title, date, counties, type}. Same key, same
+     merge rules — only the field names differ. */
+  function collapseApiRaces(list) {
+    var byKey = {}, order = [];
+    var agrees = function (e) {
+      var t = String(e.type || "").toLowerCase();
+      return t && new RegExp("\\b" + t + "\\b", "i").test(String(e.title || "")) ? 2 : 1;
+    };
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i], k = raceKey(e.title, e.date), prev = byKey[k];
+      if (!prev) { byKey[k] = e; order.push(k); continue; }
+      var union = (prev.counties || []).slice();
+      (e.counties || []).forEach(function (c) { if (union.indexOf(c) < 0) union.push(c); });
+      union.sort();
+      var keep = agrees(e) > agrees(prev) ? e : prev;
+      keep.counties = union;
+      keep.where = union.length
+        ? union.map(function (c) { return c + " County"; }).join(", ")
+        : "Statewide";
+      keep.title = String(keep.title).replace(/\s*\([A-Z][A-Z .'-]*\)\s*$/, "").trim();
+      keep.url = keep.url || prev.url || e.url;
+      byKey[k] = keep;
+    }
+    return order.map(function (k) { return byKey[k]; });
+  }
+
+  function checkNow(mode) {
     if (checking) return;
-    setChecking(true);
-    if (!silent) msg("", "Asking the South Carolina Election Commission for its current calendar…");
+    mode = mode === "past" ? "past" : "upcoming";
+    /* The seat panels are computed, not fetched — there is no past-races feed to
+       ask for. Flipping this makes them look back to the most recent cycle each
+       office actually voted in, so both halves of the page answer the same
+       question the button asked. */
+    if (PAST_MODE !== (mode === "past")) {
+      PAST_MODE = (mode === "past");
+      /* Flip the computed panels straight away rather than waiting on the
+         network. The seat rows are derived from statute and a local roster, so
+         they can answer the button's question with no request at all — and if
+         the request to scvotes.gov then fails, they still answered it. */
+      spKey = null;
+      renderGroups(Date.now());
+    }
+    setChecking(true, null, mode);
+    msg("", "Asking the South Carolina Election Commission for its current calendar…");
 
     // Compare on name-and-date, not on the state's internal event id. Ids are
     // reassigned when an event is re-published, and the seed file shipped with
@@ -1123,18 +1511,47 @@
     if (FEED && FEED.elections) {
       for (var i = 0; i < FEED.elections.length; i++) {
         var f = FEED.elections[i];
-        beforeKeys[String(f.title).toLowerCase() + "|" + f.date] = 1;
+        beforeKeys[raceKey(f.title, f.date)] = 1;   // the key the collapse uses
       }
     }
-    var startDate = new Date().getUTCFullYear() + "-01-01";
+    /* Two windows for two questions.
+
+       "Upcoming" asks from today onward; "past" asks from January 1 and keeps
+       only what has already closed. Cronvass keeps the January window either
+       way, because the saved file is the record and a whole year should stay
+       browsable on the year dial — but a reader pressing a button is asking one
+       of these two questions, not both, and each answer is filtered to match.
+
+       Dated in Eastern time: after 8pm ET the UTC date has already rolled over,
+       and a UTC-dated window would quietly drop a race being held today. */
+    var startDate = mode === "past" ? (todayET().slice(0, 4) + "-01-01") : todayET();
 
     fetchAllPages(startDate).then(function (raw) {
+      /* Dedupe on the id first — pagination can hand back the same record — and
+         then on the race itself, because the state publishes one election under
+         several ids and once per county. See raceKey above. */
       var seen = {}, elections = [];
       for (var i = 0; i < raw.length; i++) {
         var e = fromApiEvent(raw[i]);
         if (!e || seen[e.id]) continue;
         seen[e.id] = 1;
         elections.push(e);
+      }
+      elections = collapseApiRaces(elections);
+
+      /* Each button filters out the other's subject. The API's start_date only
+         bounds the near end, so an "upcoming" pull can still contain a race that
+         closed earlier today; the close time is what decides, not the date. */
+      var cutoff = Date.now();
+      elections = elections.filter(function (e) {
+        var p = String(e.date).split("-");
+        var close = Date.UTC(+p[0], +p[1] - 1, +p[2], 23, 0, 0);   // 7pm ET, in UTC
+        return mode === "past" ? close <= cutoff : close > cutoff;
+      });
+      if (!elections.length) {
+        throw new Error(mode === "past"
+          ? "The state's calendar has no elections on record as already held this year."
+          : "The state's calendar has no upcoming elections listed.");
       }
       if (!elections.length) throw new Error("The state's calendar came back empty.");
 
@@ -1167,7 +1584,7 @@
       var t = Date.now();
       renderSpecial(t);
       renderGroups(t);          // every panel re-sieves the new list
-      setChecking(false, "Check Again");
+      setChecking(false, null, mode);
 
       var newsFlash = before === 0 ? ""
         : added > 0 ? " <b>" + added + (added === 1 ? " is new: " : " are new: ") +
@@ -1175,12 +1592,15 @@
         : " Nothing new since this page loaded.";
       msg("ok", "<b>Read live from scvotes.gov</b> at " + esc(nowStampET()) + " ET — " +
         elections.length + (elections.length === 1 ? " election" : " elections") +
-        " on the calendar, sorted into the panels above." + newsFlash +
-        " This updates your view only; the published copy is refreshed separately.");
+        (mode === "past"
+          ? " already held this year, sorted into the panels above. Each panel&rsquo;s upcoming " +
+            "list is empty because this view holds only finished races"
+          : " scheduled from today onward, sorted into the panels above." + newsFlash +
+            " Races already held are not in this view") +
+        " — reload the page for the saved calendar, past and future together.");
       if (!$("special").open) $("special").open = true;
     }).catch(function (err) {
-      setChecking(false, silent ? "Check For New Elections" : "Try Again");
-      if (silent) { renderFeedMsg(); return; }
+      setChecking(false, "Try Again", mode);
       var why = (err && err.message) || "The request failed.";
       var blocked = !err || !err.message || /Failed to fetch|NetworkError|Load failed|CORS/i.test(String(err.message));
       msg("err",
@@ -1197,8 +1617,9 @@
     if (checking) return;
     if (FEED_STATE === "loading") { msg("", "Loading the saved calendar…"); return; }
     if (FEED_STATE === "offline") {
-      msg("err", "<b>The saved calendar could not be loaded.</b> Showing the short list written into this file on " +
-        FALLBACK_AS_OF + ". Press the button to ask the state directly.");
+      msg("err", "<b>The saved calendar could not be loaded.</b> The statewide clocks above are computed from " +
+        "statute and are unaffected; the election panels cannot be filled until this page can read " +
+        "data/elections.json or ask the state directly. Press the button to try the live calendar.");
       return;
     }
     var checkedH = feedAgeHours("checked_at");
@@ -1296,7 +1717,7 @@
       jump.classList.toggle("hidden", target > MAXY);
       prov.innerHTML = '<span class="tier projected">Off Year</span>' +
         '<span>South Carolina runs no statewide election in odd-numbered years. Municipal, school board, and ' +
-        'special elections still happen — those are in the panel above, read from ' + SOURCE_LINK + '.</span>';
+        'special elections still happen, and are listed below. <b>Sources:</b> ' + sourceListHtml() + '.</span>';
       spKey = null;
       renderSpecial(Date.now());
       return;
@@ -1313,12 +1734,12 @@
     prov.innerHTML = data.official
       ? '<span class="tier official">Official</span>' +
         '<span>Every statewide date below is transcribed from the South Carolina Election Commission&rsquo;s published ' + year +
-        ' election calendar, and the special and local elections are read from the same source &mdash; ' + SOURCE_LINK + '.</span>'
+        ' election calendar. <b>Sources:</b> ' + sourceListHtml() + '.</span>'
       : '<span class="tier projected">Projected</span>' +
         '<span>The Election Commission has not published a ' + year + ' calendar yet. These statewide dates are derived from statute ' +
-        '(S.C. Code &sect;7-13-10, &sect;7-13-25, &sect;7-13-40 and the 30-day registration cutoff) and are unofficial; the special ' +
-        'and local elections are read from ' + SOURCE_LINK + '. ' +
-        'Administrative dates that follow Election Day are set year by year and are omitted rather than guessed.</span>';
+        '(S.C. Code &sect;7-13-10, &sect;7-13-15, &sect;7-13-25 and the 30-day registration cutoff) and are unofficial. ' +
+        'Administrative dates that follow Election Day are set year by year and are omitted rather than guessed. ' +
+        '<b>Sources:</b> ' + sourceListHtml() + '.</span>';
 
     lastDay = null;
     spKey = null;
@@ -1352,27 +1773,37 @@
     });
   }
 
+  /* All three countdowns run through here — Early Voting, Election Day, and the
+     next special election. They used to be two implementations of the same
+     arithmetic, which is how the special clock ended up without a progress bar.
+
+     What differs per clock is passed in, not branched on: `live.titleId` and
+     `live.idle` name the heading, and `live.window` sets how far back the
+     progress bar measures from. A statewide election is visible a year out, so
+     its bar spans a year; a special election is called weeks ahead, and a
+     year-long bar would sit at 95% from the moment it appeared. */
   function paintClock(pfx, target, now, live) {
-    var diff = target - now, titleId = pfx === "ev" ? "evTitle" : "edTitle";
+    var diff = target - now, bar = $(pfx + "-bar"), foot = $(pfx + "-foot");
+    if (live.titleId) setText(live.titleId, diff <= 0 ? live.title : live.idle);
     if (diff <= 0) {
       ["w","d","h","m","s"].forEach(function (u) { setText(pfx + "-" + u, "0"); });
-      $(pfx + "-bar").style.width = "100%";
-      $(pfx + "-foot").innerHTML = live.done;
-      setText(titleId, live.title);
+      if (bar) bar.style.width = "100%";
+      if (foot) foot.innerHTML = live.done;
       return;
     }
-    setText(titleId, pfx === "ev" ? "Early Voting Opens" : "Election Day");
     setText(pfx + "-w", String(Math.floor(diff / WEEK)));
     setText(pfx + "-d", String(Math.floor((diff % WEEK) / DAY)));
     setText(pfx + "-h", pad(Math.floor((diff % DAY) / HOUR)));
     setText(pfx + "-m", pad(Math.floor((diff % HOUR) / MIN)));
     setText(pfx + "-s", pad(Math.floor((diff % MIN) / SEC)));
-    $(pfx + "-foot").innerHTML =
+    if (foot) foot.innerHTML =
       "<b>" + Math.floor(diff / DAY).toLocaleString() + " days</b> &middot; " +
       Math.floor(diff / HOUR).toLocaleString() + " hours";
-    var origin = target - 365.25 * DAY;
-    var pct = Math.max(0, Math.min(100, ((now - origin) / (target - origin)) * 100));
-    $(pfx + "-bar").style.width = pct.toFixed(2) + "%";
+    if (bar) {
+      var origin = target - (live.window || 365.25 * DAY);
+      var pct = Math.max(0, Math.min(100, ((now - origin) / (target - origin)) * 100));
+      bar.style.width = pct.toFixed(2) + "%";
+    }
   }
 
   /* ---------- special elections panel ---------- */
@@ -1415,19 +1846,115 @@
 
 
 
+  /* Rows are built the same way in both places, so they are built in one place.
+     `lead` marks the next race up — only the upcoming list ever gets one. */
+  /* ---- Rule 2: the title is evidence too ----
+     "Senate District 15 Special Primary" is filed by the state under one
+     category — Primary — which loses the fact that it is a special. A race whose
+     own name says Special, Primary or Runoff carries that tag whether or not the
+     Commission filed it that way, and the state's own category is kept alongside.
+
+     Deduped case-insensitively, so a race tagged Special and named Special shows
+     one Special pill, not two. Order is fixed rather than incidental: the words
+     found in the name come first, most specific first, and the filed category
+     brings up the rear. */
+  function raceTags(e) {
+    var t = String(e.t || ""), out = [];
+    function push(x) {
+      x = String(x || "").trim();
+      if (!x) return;
+      for (var i = 0; i < out.length; i++) if (out[i].toLowerCase() === x.toLowerCase()) return;
+      out.push(x);
+    }
+    if (/\bspecial\b/i.test(t)) push("Special");
+    if (/\bprimary\b/i.test(t)) push("Primary");
+    if (/\brunoff\b/i.test(t)) push("Runoff");
+    push(e.type);
+    return out;
+  }
+
+  function tagPills(e) {
+    return raceTags(e).map(function (tag) {
+      return '<span class="pill pill-' + esc(tag.toLowerCase()) + '">' + esc(tag) + '</span>';
+    }).join("");
+  }
+
+  function raceRow(e, now, past, lead) {
+    var href = safeUrl(e.url);
+    var title = href
+      ? '<a href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(e.t) + '</a>'
+      : esc(e.t);
+    return '<div class="sp-row' + (past ? " past" : "") + (lead ? " next" : "") + '">' +
+             '<span class="dot"></span>' +
+             '<div><div class="sp-n">' + title + '</div><div class="sp-d">' +
+               '<span class="pills">' + tagPills(e) + '</span>' +
+               '<span class="sp-where">' + esc(e.where || "") +
+                 (e.dHtml ? ' &middot; ' + e.dHtml : (e.d ? ' &middot; ' + esc(e.d) : '')) + '</span>' +
+             '</div></div>' +
+             '<div class="sp-w">' + fmt(e.day) +
+               '<span>' + (past ? "held" : humanGap(spOpen(e) - now)) + '</span>' +
+             '</div>' +
+           '</div>';
+  }
+
+  function splitByTime(list, now) {
+    var up = [], held = [];
+    for (var i = 0; i < list.length; i++) (spClose(list[i]) <= now ? held : up).push(list[i]);
+    held.reverse();                       // most recently held first
+    return { up: up, held: held };
+  }
+
+  function heldBlock(held, now) {
+    if (!held.length) return "";
+    var rows = "";
+    for (var i = 0; i < held.length; i++) rows += raceRow(held[i], now, true, false);
+    return '<details class="heldwrap"><summary><span class="sp-chev">&#9654;</span>' +
+             held.length + (held.length === 1 ? " Race Already Held" : " Races Already Held") +
+           '</summary><div class="sp-list">' + rows + '</div></details>';
+  }
+
+  /* One writer for the bay, so nothing can leave a stale countdown above a panel
+     whose race has passed. */
+  function setClockBay(html) {
+    var bay = $("spClockBay"), stack = $("specialStack");
+    if (bay) bay.innerHTML = html || "";
+    /* The class, not :empty, decides — the dropdown's corners depend on whether
+       the card above it is showing, and a CSS rule cannot round one box based on
+       a sibling's emptiness. */
+    if (stack) stack.classList.toggle("has-clock", !!html);
+  }
+
   function buildSpecialBody(all, list, nxt, now) {
     if (FEED_STATE === "loading") {
       setText("spBadge", "Checking…");
+      setClockBay("");
       $("spBody").innerHTML = '<p class="sp-empty">Reading the state&rsquo;s election calendar&hellip;</p>';
       return;
     }
+    /* "None Listed" would be a claim about South Carolina. This is a claim
+       about this page: it could not read its own data file. */
+    if (FEED_STATE === "offline") {
+      setText("spBadge", "Unavailable");
+      setText("spPeek", "");
+      setClockBay("");
+      $("spBody").innerHTML = '<p class="sp-empty">The saved calendar could not be loaded, so this page ' +
+        'cannot say what is scheduled. Press <b>Check For New Elections</b> to ask the Election Commission ' +
+        'directly, or open the state&rsquo;s list from the button below.</p>';
+      return;
+    }
 
-    setText("spBadge", list.length ? list.length + " Listed" : "None Listed");
+    var split = splitByTime(list, now);
+    /* The badge counts what is still coming. "12 Listed" beside a panel of
+       eleven finished races reads as news when it is history. */
+    setText("spBadge", split.up.length
+      ? split.up.length + " Upcoming"
+      : (split.held.length ? "All Held" : "None Listed"));
 
     var filterHtml = countyOptions(all);
 
     if (!list.length) {
       setText("spPeek", "");
+      setClockBay("");
       $("spBody").innerHTML =
         '<p class="sp-empty">No special election is on the state&rsquo;s calendar for ' + year +
         (spCounty === "all" ? "" : " in the selection below") + '. ' +
@@ -1439,43 +1966,236 @@
 
     var head = '';
 
+    /* The same anatomy as the two clocks at the top of the page — heading and
+       date, five units, a footer, a progress bar — because it is now the same
+       painter driving all three. */
     var units = nxt
-      ? '<div class="units">' +
+      ? '<div class="clock-head">' +
+          '<span class="clock-title" id="spClockTitle">' + esc(nxt.t) + '</span>' +
+          '<span class="clock-date">' + fmt(nxt.day) + ' &middot; ' +
+            (nxt.sh == null ? 7 : nxt.sh) + ':' + pad(nxt.sm || 0) + ' a.m.</span>' +
+        '</div>' +
+        '<div class="clock-note">' + esc(nxt.where || "") + '</div>' +
+        '<div class="units">' +
           '<div class="unit lead"><span class="n" id="sp-w">–</span><span class="l">Wk</span></div>' +
           '<div class="unit"><span class="n" id="sp-d">–</span><span class="l">Day</span></div>' +
           '<div class="unit"><span class="n" id="sp-h">–</span><span class="l">Hr</span></div>' +
           '<div class="unit"><span class="n" id="sp-m">–</span><span class="l">Min</span></div>' +
           '<div class="unit"><span class="n" id="sp-s">–</span><span class="l">Sec</span></div>' +
-        '</div><div class="sp-foot" id="sp-foot"></div>'
+        '</div>' +
+        '<div class="sp-foot" id="sp-foot"></div>' +
+        '<div class="bar"><i id="sp-bar"></i></div>'
       : '';
+    setClockBay(units);
 
-    var rows = '', found = false;
-    for (var i = 0; i < list.length; i++) {
-      var s = list[i], past = spClose(s) <= now, isNext = !past && !found;
-      if (isNext) found = true;
-      var title = s.url
-        ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.t) + '</a>'
-        : esc(s.t);
-      var typeCls = String(s.type || "").toLowerCase();
-      var meta = '<span class="pill pill-' + esc(typeCls) + '">' + esc(s.type) + '</span>' +
-                 '<span class="sp-where">' + esc(s.where || "") + (s.d ? ' · ' + esc(s.d) : '') + '</span>';
-      rows += '<div class="sp-row' + (past ? " past" : "") + (isNext ? " next" : "") + '">' +
-                '<span class="dot"></span>' +
-                '<div><div class="sp-n">' + title + '</div><div class="sp-d">' + meta + '</div></div>' +
-                '<div class="sp-w">' + fmt(s.day) +
-                  '<span>' + (past ? "held" : humanGap(spOpen(s) - now)) + '</span>' +
-                '</div>' +
-              '</div>';
-    }
+    var rows = '';
+    for (var i = 0; i < split.up.length; i++) rows += raceRow(split.up[i], now, false, i === 0);
 
-    $("spBody").innerHTML = head + units + filterHtml + '<div class="sp-list">' + rows + '</div>' +
-      '';
+    var upcomingHtml = split.up.length
+      ? '<div class="sp-list">' + rows + '</div>'
+      : '<p class="sp-empty">Every special election on the ' + year + ' calendar has been held.</p>';
+
+    $("spBody").innerHTML = head + filterHtml + upcomingHtml + heldBlock(split.held, now);
   }
 
   /* The five secondary panels. Deliberately plainer than the Special panel
      above them: a list and a count, no countdown units and no county filter.
      Special elections are the ones nothing else on the page can predict, so
      they keep the featured treatment; these are reference. */
+
+  /* The FEC roster, expressed as rows this page already knows how to draw.
+
+     These are not events on the state's calendar — scvotes.gov lists one
+     "Statewide General Election" and leaves it at that, which is why this panel
+     used to hold nothing but an explanation of its own emptiness. Each seat is
+     dated to the general election so it sorts and counts down with everything
+     else, and the row carries what the state's feed cannot: who has filed.
+
+     Districts with no filers are kept deliberately. "No candidate has filed
+     with the FEC yet" is information; a missing row reads as a missing seat. */
+  function fecRows(y) {
+    if (!FEC || !FEC.seats) return [];
+    /* The roster file covers one cycle. In past mode it is still the right
+       answer only if that cycle has already voted. */
+    if (PAST_MODE) {
+      if (FEC.cycle > y || at(generalDay(FEC.cycle), 19) > Date.now()) return [];
+    } else if (FEC.cycle !== y) return [];
+    var d = FEC.general_election_date;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(d))) return [];
+    var p = String(d).split("-");
+    var cycleDay = utc(+p[0], +p[1] - 1, +p[2]);
+    return FEC.seats.map(function (seat) {
+      /* Each seat is dated to its OWN next election, not to the cycle's. Both
+         Senate seats are listed, but only one is on this ballot; dating the
+         other to the same day would say it is. */
+      var day = (seat.ballot_year && seat.ballot_year !== FEC.cycle)
+        ? generalDay(seat.ballot_year) : cycleDay;
+      return {
+        t: seat.label,
+        where: seat.where,
+        type: "General",
+        counties: [],
+        /* Filing counts move week to week and are the FEC's business, not the
+           reader's first question. Who holds the seat is the durable fact, and
+           it links to that member's own official page. */
+        dHtml: heldByHtml(seat.incumbent),
+        day: day, sh: 7, sm: 0, eh: 19, em: 0,
+        url: seat.url,
+        fec: true,
+        /* Both U.S. Senate seats belong on the page and only one is ever on the
+           ballot in a given year, so they share a title and a date and would
+           otherwise collapse into each other. This is the single exemption from
+           the duplicate filter, and it is granted by seat, not by title text. */
+        keepDistinct: seat.office === "S" ? "senate-class-" + seat.senate_class : null
+      };
+    });
+  }
+
+  /* Names arrive from a roster of sitting members, so they are already in
+     ordinary case. Escaped either way — this is markup built around a value
+     fetched from elsewhere. */
+  function heldByHtml(inc) {
+    if (!inc || !inc.name) return "Seat vacant";
+    var label = esc(inc.name) + (inc.party ? " (" + esc(inc.party) + ")" : "");
+    var href = safeUrl(inc.url);
+    return "Held by " + (href
+      ? '<a href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + label + '</a>'
+      : label);
+  }
+
+  /* The state's calendar and the FEC describe the same seats in different words.
+     scvotes.gov says "U.S. Senate General Election"; the FEC says "U.S. Senate"
+     and adds who filed for it. Left alone, both rows render — one race, listed
+     twice, which is the exact complaint that started the dedupe work.
+
+     raceKey cannot catch this: the titles genuinely differ, so there is nothing
+     for a title-based key to collapse. What matches them is the SEAT — office
+     plus district — on a given date. Where both sources describe one seat, the
+     FEC row wins, because it is the one carrying candidates.
+
+     Specials are deliberately excluded from seat-matching. A special election
+     for a House seat can share a date with the regular election for that same
+     seat, and they are two different races. */
+  function congressSeat(title) {
+    var t = String(title || "");
+    if (/\bspecial\b|\bvacancy\b|\bunexpired\b/i.test(t)) return null;
+    if (/u\.?\s?s\.?\s*senate|united states senate/i.test(t)) return "S";
+    var m = t.match(/(?:u\.?\s?s\.?\s*house|congressional)\D*?(\d{1,2})\b/i);
+    return m ? "H" + String(+m[1]) : null;
+  }
+
+  /* ---------- seats as rows ----------
+     The state's calendar answers "when is an election", never "what is on it" —
+     one "Statewide General Election" event, offices unlisted. So the General
+     Assembly and Executive panels are built from the seats themselves.
+
+     There is no machine-readable official roster of South Carolina candidates.
+     The Election Commission's candidate system only renders results on POST, and
+     the Ethics Commission's public site is a JavaScript shell with no reachable
+     API. This does not pretend to know who is running; it says which seats are
+     contested and who holds them now, which is checkable.
+
+     Which years each office is on the ballot is law, not data:
+       House      every even year          Const. Art. III ss. 2-3, Code s. 2-1-20
+       Senate     presidential years       Const. Art. III s. 6 (four-year terms)
+       Executive  midterm years            Const. Art. IV ss. 3-4, Art. VI s. 7 */
+
+  var BALLOT_RULE = {
+    even:         function (y) { return y % 2 === 0; },
+    presidential: function (y) { return y % 4 === 0; },
+    midterm:      function (y) { return y % 4 === 2; }
+  };
+
+  /* Election Day for any year, from the same statute the clocks use, so a seat
+     row and the countdown above it can never disagree about the date. */
+  function generalDay(y) {
+    var firstMon = nthDow(y, 10, 1, 1);
+    return addDays(firstMon, 1);                       // s. 7-13-10
+  }
+
+  /* In past mode the panels look backwards: the most recent year that both
+     satisfies the office's cycle and has already voted. */
+  function cycleYear(rule, y, now) {
+    var test = BALLOT_RULE[rule] || BALLOT_RULE.even;
+    if (!PAST_MODE) return test(y) ? y : null;
+    for (var back = y; back >= y - 8; back--) {
+      if (!test(back)) continue;
+      if (at(generalDay(back), 19) <= now) return back;
+    }
+    return null;
+  }
+
+  function seatRow(title, where, note, day, url) {
+    return { t: title, where: where, type: "General", counties: [], d: note,
+             day: day, sh: 7, sm: 0, eh: 19, em: 0, url: url || null, seat: true };
+  }
+
+  function assemblyRows(y, now) {
+    if (!SEATS || !SEATS.assembly) return [];
+    var out = [];
+    ["house", "senate"].forEach(function (k) {
+      var ch = SEATS.assembly[k];
+      if (!ch || !ch.districts) return;
+      var yr = cycleYear(ch.ballot_rule, y, now);
+      if (yr === null) return;
+      var day = generalDay(yr);
+      /* "Seat vacant" is a claim about South Carolina. Before the roster has ever
+         been fetched every district looks vacant, and saying so would be false
+         about all 170 at once. If a chamber has no members at all, the roster
+         simply has not loaded; if it has members and this one is missing, the
+         seat really is empty. */
+      var rosterLoaded = ch.districts.some(function (x) { return !!x.incumbent; });
+      ch.districts.forEach(function (d) {
+        var row = seatRow(ch.label + " District " + d.district, "District " + d.district, "", day,
+                          "https://www.scstatehouse.gov/member.php?chamber=" + (k === "house" ? "H" : "S"));
+        /* member.php is keyed by an opaque code, not by district, so the URL is
+           lifted from the roster rather than constructed. A seat with no sitting
+           member gets no link, because there is no profile to point at. */
+        /* Campaign site if one has been supplied and verified, official profile
+           otherwise. Nothing here is generated from a name — see CAMPAIGN_SITES
+           in scripts/fetch-seats.mjs for why. */
+        row.dHtml = d.incumbent
+          ? heldByHtml({ name: d.incumbent, party: d.party, url: d.campaign || d.profile })
+          : (rosterLoaded ? "Seat vacant" : "Member roster not loaded yet");
+        out.push(row);
+      });
+    });
+    return out;
+  }
+
+  function executiveRows(y, now) {
+    if (!SEATS || !SEATS.executive) return [];
+    var yr = cycleYear("midterm", y, now);
+    if (yr === null) return [];
+    var day = generalDay(yr);
+    return SEATS.executive.map(function (e) {
+      var row = seatRow(e.office + " Election", "Statewide", "", day,
+        "https://sc.gov/government/getting-know-your-government/elected-officials/constitutional-officers");
+      /* "Elected statewide" said nothing a reader could not see from the
+         heading, and the four-year term is now stated once in the note above
+         the list. What is left is the fact worth carrying per row: who holds
+         the office, linked to that office's own page. */
+      row.dHtml = heldByHtml(e.holder ? { name: e.holder, party: e.party, url: e.url } : null) +
+        (e.appointed ? ", appointed" : "");
+      return row;
+    });
+  }
+
+  function mergeCongress(fec, state) {
+    var claimed = {};
+    for (var i = 0; i < fec.length; i++) {
+      /* An exempt row does not claim its seat against the state's calendar —
+         with two Senate seats sharing one name, a claim would be ambiguous. */
+      if (fec[i].keepDistinct) continue;
+      var k = congressSeat(fec[i].t);
+      if (k) claimed[k + "|" + fec[i].day.getTime()] = 1;
+    }
+    var kept = state.filter(function (e) {
+      var k = congressSeat(e.t);
+      return !k || !claimed[k + "|" + e.day.getTime()];
+    });
+    return dedupeRaces(fec.concat(kept));
+  }
 
   function renderGroups(now) {
     var host = $("groupList");
@@ -1486,57 +2206,46 @@
     for (var g = 1; g < GROUPS.length; g++) {          // 0 is Special, rendered above
       var spec = GROUPS[g];
       var list = all.filter(function (e) { return inGroup(e, spec.key); });
+      if (spec.key === "congress") list = mergeCongress(fecRows(year), list);
+      if (spec.key === "assembly")  list = dedupeRaces(assemblyRows(year, now).concat(list));
+      if (spec.key === "executive") list = dedupeRaces(executiveRows(year, now).concat(list));
 
-      /* One race, one row. The state's calendar sometimes carries the same
-         election twice — republished under a new id, or listed once per county
-         for a race that spans two — and a panel that shows both looks broken.
-         Keyed on name-and-date rather than id, because the id is the thing that
-         changes when an event is republished. */
-      var seenRow = {}, deduped = [];
-      for (var d = 0; d < list.length; d++) {
-        var k = String(list[d].t).toLowerCase().replace(/\s+/g, " ").trim() + "|" + list[d].day.getTime();
-        if (seenRow[k]) continue;
-        seenRow[k] = 1;
-        deduped.push(list[d]);
-      }
-      list = deduped;
+      // Rows arrive deduped from normFeed, so this only has to order them.
       list.sort(function (a, b) { return a.day - b.day; });
 
       var nxt = null;
       for (var i = 0; i < list.length; i++) { if (spClose(list[i]) > now) { nxt = list[i]; break; } }
 
-      var rows = "", found = false;
-      for (var j = 0; j < list.length; j++) {
-        var e = list[j], past = spClose(e) <= now, isNext = !past && !found;
-        if (isNext) found = true;
-        var title = e.url
-          ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.t) + '</a>'
-          : esc(e.t);
-        rows += '<div class="sp-row' + (past ? " past" : "") + (isNext ? " next" : "") + '">' +
-                  '<span class="dot"></span>' +
-                  '<div><div class="sp-n">' + title + '</div><div class="sp-d">' +
-                    '<span class="pill pill-' + esc(String(e.type || "").toLowerCase()) + '">' + esc(e.type) + '</span>' +
-                    '<span class="sp-where">' + esc(e.where || "") + '</span>' +
-                  '</div></div>' +
-                  '<div class="sp-w">' + fmt(e.day) +
-                    '<span>' + (past ? "held" : humanGap(spOpen(e) - now)) + '</span>' +
-                  '</div>' +
-                '</div>';
-      }
+      var gsplit = splitByTime(list, now);
+      var rows = "";
+      for (var j = 0; j < gsplit.up.length; j++) rows += raceRow(gsplit.up[j], now, false, j === 0);
 
-      var body = list.length
+      /* One standing explanation per panel, above the list rather than repeated
+         down it: the Lieutenant Governor's ticket, and the two chambers' terms. */
+      var note = (SEATS && SEATS.notes && SEATS.notes[spec.key]) ? SEATS.notes[spec.key] : "";
+      /* Escaped, not trusted. The note arrives in seats.json, which is fetched
+         like everything else — a raw insertion here was an executing XSS. */
+      var noteHtml = (note && (gsplit.up.length || gsplit.held.length))
+        ? '<p class="sp-note">' + esc(note) + '</p>' : "";
+
+      var body = noteHtml + (gsplit.up.length
         ? '<div class="sp-list">' + rows + '</div>'
-        : '<p class="sp-empty">' + (spec.whenEmpty ||
-            "Nothing in this category is on the state&rsquo;s calendar for " + year + ".") + '</p>';
+        : '<p class="sp-empty">' + (FEED_STATE === "offline"
+            ? "The saved calendar could not be loaded, so this panel cannot say what is scheduled."
+            : gsplit.held.length
+              ? "Every race in this category on the " + year + " calendar has been held."
+              : (spec.whenEmpty ||
+                 "Nothing in this category is on the state&rsquo;s calendar for " + year + ".")) + '</p>')
+        + heldBlock(gsplit.held, now);
 
       html += '<details class="sp-panel grp" id="grp-' + spec.key + '">' +
                 '<summary>' +
                   '<span class="sp-chev">&#9654;</span>' +
                   '<span class="sp-title">' + spec.label + '</span>' +
-                  '<span class="sp-badge">' + (list.length ? list.length + " Listed" : "None") + '</span>' +
+                  '<span class="sp-badge">' + (gsplit.up.length ? gsplit.up.length + " Upcoming"
+                     : (FEED_STATE === "offline" ? "Unavailable" : (gsplit.held.length ? "All Held" : "None"))) + '</span>' +
                   '<span class="sp-peek">' +
-                    (nxt ? "Next: " + fmt(nxt.day) + " &middot; " + humanGap(spOpen(nxt) - now)
-                         : (list.length ? "All Held" : "")) +
+                    (nxt ? "Next: " + fmt(nxt.day) + " &middot; " + humanGap(spOpen(nxt) - now) : "") +
                   '</span>' +
                 '</summary>' +
                 '<div class="sp-body">' + body + '</div>' +
@@ -1547,11 +2256,13 @@
     var open = {};
     var prior = host.querySelectorAll("details");
     for (var k = 0; k < prior.length; k++) if (prior[k].open) open[prior[k].id] = 1;
-    /* The Special panel is static markup that now lives inside this same list,
-       and innerHTML would destroy it along with the listener bound to its body.
-       Detach it first, rewrite the generated panels, then put it back on top —
-       moving the node preserves both its open state and its event listeners. */
-    var featured = document.getElementById("special");
+    /* The Special stack — countdown card plus docked dropdown — is static markup
+       living inside this same list, and innerHTML would destroy it along with the
+       listener bound to its body. Detach the whole stack first, rewrite the
+       generated panels, then put it back on top: moving the node preserves its
+       open state, its event listeners, and the has-clock class that squares off
+       the seam between the two boxes. */
+    var featured = document.getElementById("specialStack");
     if (featured && featured.parentNode === host) host.removeChild(featured);
     host.innerHTML = html;
     if (featured) host.insertBefore(featured, host.firstChild);
@@ -1568,23 +2279,16 @@
     if (key !== spKey) { spKey = key; buildSpecialBody(all, list, nxt, now); renderGroups(now); }
     if (!nxt) { setText("spPeek", list.length ? "All Held" : ""); return; }
 
-    var diff = spOpen(nxt) - now;
-    if (diff <= 0) {
-      ["w","d","h","m","s"].forEach(function (u) { setText("sp-" + u, "0"); });
-      setText("spPeek", "Polls Are Open Today");
-      if ($("sp-foot")) $("sp-foot").innerHTML = "<b>Polls are open now</b> until 7:00&nbsp;p.m.";
-      return;
-    }
-    setText("sp-w", String(Math.floor(diff / WEEK)));
-    setText("sp-d", String(Math.floor((diff % WEEK) / DAY)));
-    setText("sp-h", pad(Math.floor((diff % DAY) / HOUR)));
-    setText("sp-m", pad(Math.floor((diff % HOUR) / MIN)));
-    setText("sp-s", pad(Math.floor((diff % MIN) / SEC)));
-    setText("spPeek", "Next: " + fmt(nxt.day) + " · " + humanGap(diff));
-    if ($("sp-foot")) {
-      $("sp-foot").innerHTML = "<b>" + Math.floor(diff / DAY).toLocaleString() + " days</b> &middot; " +
-        Math.floor(diff / HOUR).toLocaleString() + " hours";
-    }
+    var open = spOpen(nxt), diff = open - now;
+    paintClock("sp", open, now, {
+      titleId: "spClockTitle",
+      idle: nxt.t,
+      title: "Polls Are Open Now",
+      done: "<b>Polls are open now</b> until 7:00&nbsp;p.m.",
+      window: 90 * DAY          // specials are called weeks out, not a year
+    });
+    setText("spPeek", diff <= 0 ? "Polls Are Open Today"
+                                : "Next: " + fmt(nxt.day) + " · " + humanGap(diff));
   }
 
   var lastDay = null;
@@ -1631,6 +2335,7 @@
     if (!data.hasGeneral) return;
 
     paintClock("ev", data.evStart, now, {
+      titleId: "evTitle", idle: "Early Voting Opens",
       title: now <= data.evEnd ? "Early Voting Is Open" : "Early Voting Has Closed",
       done: now <= data.evEnd
         ? "<b>Open now.</b> 8:30&nbsp;a.m.–6:00&nbsp;p.m., Mon–Sat, through the final Saturday."
@@ -1638,6 +2343,7 @@
     });
 
     paintClock("ed", data.edStart, now, {
+      titleId: "edTitle", idle: "Election Day",
       title: now <= data.edEnd ? "Polls Are Open" : "Polls Have Closed",
       done: now <= data.edEnd
         ? "<b>Polls open until 7:00&nbsp;p.m.</b> Vote at your assigned precinct."
@@ -1671,7 +2377,10 @@
     if (!document.hidden) { var a = feedAgeHours(); if (a == null || a > 6) loadFeed(); }
   });
 
-  $("checkBtn").addEventListener("click", checkNow);
+  /* The wrapper matters: wired directly, addEventListener would hand checkNow
+     the browser's MouseEvent as its first argument. */
+  $("checkBtn").addEventListener("click", function () { checkNow("upcoming"); });
+  $("pastBtn").addEventListener("click", function () { checkNow("past"); });
   renderYear();
   loadFeed();
   setInterval(tick, 1000);

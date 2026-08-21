@@ -58,6 +58,16 @@ function countyFromCategory(name) {
   return m ? titleCase(m[1].trim()) : null;
 }
 
+const WORD_ELECTION = "election";
+function fixTitle(t) {
+  return String(t == null ? "" : t).replace(/\b(elec[a-z]*)\b/gi, w => {
+    const low = w.toLowerCase();
+    if (low === WORD_ELECTION || low === "elections") return w;
+    if (!WORD_ELECTION.startsWith(low)) return w;
+    return w[0] === w[0].toUpperCase() ? "Election" : WORD_ELECTION;
+  });
+}
+
 function classify(categories) {
   const counties = [];
   let type = null;
@@ -112,7 +122,7 @@ async function main() {
 
     elections.push({
       id: ev.id,
-      title: String(ev.title || "").replace(/&#8217;/g, "’").replace(/&amp;/g, "&").trim(),
+      title: fixTitle(String(ev.title || "").replace(/&#8217;/g, "’").replace(/&amp;/g, "&").trim()),
       date,
       start_et: String(ev.start_date || "").trim() || null,
       end_et: String(ev.end_date || "").trim() || null,
@@ -148,6 +158,12 @@ async function main() {
      own tag agrees with its own title — the five republished copies are tagged
      "General" while calling themselves a special election, and the two county
      rows are tagged "Special". Trust the tag that matches the name. */
+  /* The state clips long titles mid-word: "City of North Charleston Special
+     Elect" is what it publishes. Any word that is a genuine PREFIX of "election"
+     is expanded. Prefix-testing keeps "Elector", "Electoral" and "Electric"
+     untouched — they contain "elec" but diverge from "election" early. Repairing
+     before the key is built also collapses a clipped copy and a complete one
+     into a single race. */
   const stripCounty = t => String(t || "").replace(/\s*\([A-Z][A-Z .'-]*\)\s*$/, "").trim();
   const raceKey = e => stripCounty(e.title).toLowerCase()
     .replace(/\s+/g, " ").replace(/[.,;:]+$/, "").trim() + "|" + e.date;

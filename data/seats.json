@@ -1,0 +1,1299 @@
+{
+  "state": "SC",
+  "source": "Open States current-people file (CC0) for seats and incumbents; ballot cycles from statute",
+  "source_url": "http://127.0.0.1:8912/sc.csv",
+  "licence": "CC0 1.0 Universal",
+  "statutes": {
+    "house": "S.C. Const. Art. III sections 2-3; S.C. Code sections 2-1-20, 2-1-40 \u2014 124 seats, 2-year terms, every even year",
+    "senate": "S.C. Const. Art. III section 6 \u2014 46 seats, 4-year terms, presidential years (2024, 2028)",
+    "executive": "S.C. Const. Art. IV sections 3-4, Art. VI section 7 \u2014 4-year terms, midterm years (2022, 2026, 2030)"
+  },
+  "assembly": {
+    "house": {
+      "label": "S.C. House of Representatives",
+      "seats": 124,
+      "term_years": 2,
+      "ballot_rule": "even",
+      "districts": [
+        {
+          "district": 1,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 2,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 3,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 4,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 5,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 6,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 7,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 8,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 9,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 10,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 11,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 12,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 13,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 14,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 15,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 16,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 17,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 18,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 19,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 20,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 21,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 22,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 23,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 24,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 25,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 26,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 27,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 28,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 29,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 30,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 31,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 32,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 33,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 34,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 35,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 36,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 37,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 38,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 39,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 40,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 41,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 42,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 43,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 44,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 45,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 46,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 47,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 48,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 49,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 50,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 51,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 52,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 53,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 54,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 55,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 56,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 57,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 58,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 59,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 60,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 61,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 62,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 63,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 64,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 65,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 66,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 67,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 68,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 69,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 70,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 71,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 72,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 73,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 74,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 75,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 76,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 77,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 78,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 79,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 80,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 81,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 82,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 83,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 84,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 85,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 86,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 87,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 88,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 89,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 90,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 91,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 92,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 93,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 94,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 95,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 96,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 97,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 98,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 99,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 100,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 101,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 102,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 103,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 104,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 105,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 106,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 107,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 108,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 109,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 110,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 111,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 112,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 113,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 114,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 115,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 116,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 117,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 118,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 119,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 120,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 121,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 122,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 123,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 124,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        }
+      ]
+    },
+    "senate": {
+      "label": "S.C. Senate",
+      "seats": 46,
+      "term_years": 4,
+      "ballot_rule": "presidential",
+      "districts": [
+        {
+          "district": 1,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 2,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 3,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 4,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 5,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 6,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 7,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 8,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 9,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 10,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 11,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 12,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 13,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 14,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 15,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 16,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 17,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 18,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 19,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 20,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 21,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 22,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 23,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 24,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 25,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 26,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 27,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 28,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 29,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 30,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 31,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 32,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 33,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 34,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 35,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 36,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 37,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 38,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 39,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 40,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 41,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 42,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 43,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 44,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 45,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        },
+        {
+          "district": 46,
+          "incumbent": null,
+          "party": null,
+          "profile": null,
+          "campaign": null
+        }
+      ]
+    }
+  },
+  "executive_verified": "2026-08-21",
+  "executive": [
+    {
+      "term_years": 4,
+      "ballot_rule": "midterm",
+      "office": "Governor",
+      "holder": "Henry McMaster",
+      "party": "R",
+      "url": "https://governor.sc.gov/governors-biography"
+    },
+    {
+      "term_years": 4,
+      "ballot_rule": "midterm",
+      "office": "Lieutenant Governor",
+      "ticket": true,
+      "holder": "Pamela Evette",
+      "party": "R",
+      "url": "https://governor.sc.gov/lieutenant-governor/pamela-evette"
+    },
+    {
+      "term_years": 4,
+      "ballot_rule": "midterm",
+      "office": "Attorney General",
+      "holder": "Alan Wilson",
+      "party": "R",
+      "url": "https://www.scag.gov/about-the-office/meet-the-attorney-general/"
+    },
+    {
+      "term_years": 4,
+      "ballot_rule": "midterm",
+      "office": "Secretary of State",
+      "holder": "Mark Hammond",
+      "party": "R",
+      "url": "https://sos.sc.gov/about-us/secretarys-biography"
+    },
+    {
+      "term_years": 4,
+      "ballot_rule": "midterm",
+      "office": "State Treasurer",
+      "holder": "Curtis M. Loftis, Jr.",
+      "party": "R",
+      "url": "https://treasurer.sc.gov/about-us/meet-the-treasurer/"
+    },
+    {
+      "term_years": 4,
+      "ballot_rule": "midterm",
+      "office": "Comptroller General",
+      "holder": "Brian J. Gaines",
+      "party": null,
+      "appointed": true,
+      "url": "https://cg.sc.gov/meet-the-comptroller-general"
+    },
+    {
+      "term_years": 4,
+      "ballot_rule": "midterm",
+      "office": "Superintendent of Education",
+      "holder": "Ellen E. Weaver",
+      "party": "R",
+      "url": "https://ed.sc.gov/about/superintendent-of-education/"
+    },
+    {
+      "term_years": 4,
+      "ballot_rule": "midterm",
+      "office": "Commissioner of Agriculture",
+      "holder": "Hugh E. Weathers",
+      "party": "R",
+      "url": "https://agriculture.sc.gov/meet-the-commissioner"
+    }
+  ],
+  "notes": {
+    "executive": "Every office below serves a four-year term. The Lieutenant Governor is elected on the Governor\u2019s ticket, not separately.",
+    "assembly": "House terms run two years and every seat is contested each even year. Senate terms run four years, contested together in presidential years."
+  },
+  "counts": {
+    "house_incumbents": 0,
+    "senate_incumbents": 0,
+    "profiles_linked": 0,
+    "campaign_sites": 0
+  },
+  "seed_note": "Seat skeleton only. Incumbents, profile links and party are filled in by scripts/fetch-seats.mjs on the first Cronvass run. The eight statewide officeholders above ARE verified (see executive_verified)."
+}

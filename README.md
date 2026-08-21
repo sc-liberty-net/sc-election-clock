@@ -8,11 +8,33 @@ and special — that keeps itself current without anyone editing it.
 | File | What It Does |
 | --- | --- |
 | `index.html` | The page itself. Open it in any browser; it needs no build step and no server. |
-| `data/elections.json` | The machine-readable election list the page reads. Rewritten on every check. |
+| `data/elections.json` | The machine-readable election list the page reads. Rewritten on every check. Ships with a small hand-made seed; Cronvass replaces it with the state's full calendar on its first run. |
 | `scripts/fetch-elections.mjs` | **Cronvass** — the script that reads the state's calendar and rewrites `data/elections.json`. |
+| `scripts/fetch-congress.mjs` | Reads the Federal Election Commission's roster and writes `data/congress.json`. Optional — needs a free API key. |
 | `scripts/check-contrast.mjs` | Scores every colour pair in a palette against WCAG minimums. Run it after any colour change. |
 | `.github/workflows/cronvass.yml` | The schedule that runs Cronvass every six hours. |
-| `SETUP.md` | Step-by-step instructions for putting this online at its own URL. |
+| `INSTALL.md` | **Start here.** Step-by-step upload and verification. |
+| `SETUP.md` | Background on hosting choices and how the pieces fit. |
+| `scripts/fetch-seats.mjs` | Seats and incumbents for the General Assembly, plus the statewide officeholders. |
+
+**Security**
+
+Every value on this page arrives from somewhere else — the state's calendar, two public rosters,
+the FEC — and is written into the DOM. Two rules keep that safe.
+
+`esc()` makes a string safe as **text**. It does not make it safe as a **URL**:
+`javascript:alert(1)` contains none of the characters `esc()` escapes, so it survives untouched
+and becomes a live script handler the moment a reader clicks. Every href is therefore built
+through `safeUrl()`, which parses the value with `new URL()` and returns it only if the scheme
+is `http:` or `https:`. Anything else renders as plain text with no link.
+
+Panel notes are escaped too. They arrive in `data/seats.json`, which is fetched like everything
+else; inserting them as raw markup was an executing cross-site scripting hole.
+
+A `<meta>` Content-Security-Policy closes what is left: no external scripts, no objects, no
+frames, no form submissions, and `connect-src` limited to this origin plus scvotes.gov, so a
+tampered file cannot exfiltrate anywhere. Every outbound link carries
+`rel="noopener noreferrer"`.
 
 **Where The Data Comes From**
 
@@ -23,6 +45,112 @@ election type (`Special`, `General`, `Primary`, `Runoff`).
 
 Cronvass reads that endpoint, not the HTML of the page — so a redesign of scvotes.gov
 does not break it.
+
+**When Two Sources Disagree, The Fresher Page Wins**
+
+Both the FEC and the @unitedstates congress-legislators roster can tell you who
+"the incumbent" is, and they can disagree — because they answer different questions.
+The FEC's incumbent flag is attached to a **candidate record filed months earlier**; it
+does not move when a seat changes hands mid-term. The roster is corrected within days of
+a death, resignation or appointment.
+
+That distinction is not hypothetical. Senator Lindsey Graham died in July 2026 after
+winning renomination; Governor McMaster appointed **Darline Graham** to serve out the term.
+The FEC still carries "GRAHAM, LINDSEY O." as the filed incumbent. The roster carries
+Darline Graham. **The page shows Darline Graham**, because the roster is the more recently
+updated page and the question being asked is "who holds this seat now."
+
+So the rule is: the FEC is authoritative for *filings*, the roster for *membership*, and
+membership overwrites anything filing data implied. Applied in that order in
+`fetch-congress.mjs` — the roster pass runs after the candidate pass, deliberately.
+
+**Where The Congressional Panel Comes From**
+
+South Carolina's calendar does not enumerate federal seats. Regular U.S. House and Senate
+races ride the statewide general election ballot, so scvotes.gov lists one event —
+"Statewide General Election" — and the Congressional panel had nothing to show but an
+explanation of why it was empty.
+
+The FEC does enumerate them, because every candidate for federal office has to file with it.
+`scripts/fetch-congress.mjs` reads two OpenFEC endpoints — `/election-dates/` for the real
+calendar dates and `/candidates/` for the roster — and writes `data/congress.json`: one entry
+per seat, with who has filed, their party, and the incumbent.
+
+Three things about that file are deliberate.
+
+**All seven House districts are listed, filed or not.** `/candidates/` returns filers, not
+seats, so a district nobody has filed in yet is simply absent from the response. The seven
+districts are hardcoded and the API results are laid over them, because "No candidate has
+filed with the FEC yet" is information and a missing row reads as a missing seat.
+
+**The Senate seat appears only when the FEC says there is one.** There is no Senate-class
+field anywhere in the API. Rather than hardcode the class arithmetic and let it rot, the seat
+is included when the FEC reports either a Senate election date or a filed Senate candidate for
+the cycle.
+
+**Seat rows and state rows are matched on the seat, not the title.** scvotes.gov says
+"U.S. Senate General Election"; the FEC says "U.S. Senate". Nothing title-based can collapse
+those, so the merge matches on office-plus-district for a given date and lets the FEC row win,
+since it is the one carrying candidates. Special elections are excluded from that matching — a
+special for a House seat can share a date with the regular election for the same seat, and
+they are two different races.
+
+**Setting it up.** Get a free key at <https://api.data.gov/signup/>, then add it at
+**Settings -> Secrets and variables -> Actions -> New repository secret**, named `FEC_API_KEY`.
+The whole thing is optional: with no key the script prints why and exits 0, with no
+`data/congress.json` the page omits these rows, and neither case fails the workflow or shows
+the reader an error. FEC data is public domain under 17 USC 105 with a CC0 dedication, so
+there is nothing to license.
+
+**One Race, One Row**
+
+The state's calendar is not clean, and the page has to be. The January 13 North Charleston
+special election is present **seven times** in the state's own feed: five straight republishes
+under five different ids (14897, 15196, 15399, 16259, 16496) with the same title and date,
+plus two county-split copies suffixed `(CHARLESTON)` and `(DORCHESTER)`.
+
+Deduplicating on the event id collapses none of that — all seven ids differ. Deduplicating on
+the exact title collapses the five but not the two. So the key is **the title with a trailing
+ALL-CAPS parenthetical stripped, plus the date**, and collapsing merges rather than discards:
+counties unite, so a Dorchester reader still finds the race, and the type is taken from
+whichever record's own tag agrees with its own title — the five republished copies are tagged
+`General` while calling themselves a special election, and the two county rows are tagged
+`Special`. The tag that matches the name is the one to trust.
+
+Cronvass applies this before writing the file, and the page applies it again to anything the
+**Check For New Elections** button pulls live, so both routes produce the same rows.
+
+**The Quiet Pull On Load**
+
+Cronvass refreshes the saved file every six hours. That is fine for a school board race
+scheduled a year out and not fine for a special election called on Tuesday to fill a seat
+vacated on Monday — those are the races nothing on this page can predict, so those are the
+only ones worth asking the state about the instant someone opens it.
+
+So the page presses its own **Check Upcoming Elections** button once on load, narrowed three
+ways: **specials only**, **merged rather than replacing** (the other five panels keep reading
+the published copy), and **silent on failure**. It runs the same duplicate collapse as the
+button and Cronvass, so a race the saved file already holds cannot reappear under a
+republished id or a `(CHARLESTON)` suffix. It speaks up only when it finds something the
+published copy has not caught up with, and if scvotes.gov refuses the browser the saved list
+simply stands.
+
+**How Many Races To Expect**
+
+Cronvass asks for everything from January 1 of the current year onward; the state's API caps
+the far end at about two years out. That is a few hundred records — 193 as of August 2026 —
+most of them already held, because the window deliberately starts at the top of the year so a
+whole year stays browsable on the year dial.
+
+Each panel therefore shows what is **coming** and folds what is **done** behind a
+"3 Races Already Held" disclosure. Badges count upcoming races only: a panel reading
+"12 Listed" next to eleven finished elections reports history as if it were news.
+
+The **Check For New Elections** button uses a narrower window than Cronvass: it asks for
+**today onward**, dated in Eastern time. Cronvass is writing the record, so it keeps the year;
+the button is answering "what is coming?", and eight months of finished races answers a
+different question. Because a live check returns only future races, the "Already Held" folds
+empty out after you press it — reloading the page restores the saved calendar with its history.
 
 **Two Ways The Page Gets Current**
 
