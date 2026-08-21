@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-08-21T21:46:39.840Z",
-  "checked_at_et": "Aug 21, 2026, 5:46 PM",
+  "checked_at": "2026-08-21T21:51:59.673Z",
+  "checked_at_et": "Aug 21, 2026, 5:51 PM",
   "generated_at": "2026-08-21T21:46:39.840Z",
   "generated_at_et": "Aug 21, 2026, 5:46 PM",
-  "changed_this_run": true,
+  "changed_this_run": false,
   "source": "https://scvotes.gov/elections-statistics/upcoming-elections/",
   "api": "https://scvotes.gov/wp-json/tribe/events/v1/events",
   "window_start": "2026-01-01",

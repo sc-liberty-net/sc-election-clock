@@ -1,12 +1,12 @@
 {
   "state": "SC",
   "source": "Open States current-people file (CC0) for seats and incumbents; ballot cycles from statute",
-  "source_url": "http://127.0.0.1:8912/sc.csv",
+  "source_url": "https://data.openstates.org/people/current/sc.csv",
   "licence": "CC0 1.0 Universal",
   "statutes": {
-    "house": "S.C. Const. Art. III sections 2-3; S.C. Code sections 2-1-20, 2-1-40 \u2014 124 seats, 2-year terms, every even year",
-    "senate": "S.C. Const. Art. III section 6 \u2014 46 seats, 4-year terms, presidential years (2024, 2028)",
-    "executive": "S.C. Const. Art. IV sections 3-4, Art. VI section 7 \u2014 4-year terms, midterm years (2022, 2026, 2030)"
+    "house": "S.C. Const. Art. III sections 2-3; S.C. Code sections 2-1-20, 2-1-40 — 124 seats, 2-year terms, every even year",
+    "senate": "S.C. Const. Art. III section 6 — 46 seats, 4-year terms, presidential years (2024, 2028)",
+    "executive": "S.C. Const. Art. IV sections 3-4, Art. VI section 7 — 4-year terms, midterm years (2022, 2026, 2030)"
   },
   "assembly": {
     "house": {
@@ -17,870 +17,870 @@
       "districts": [
         {
           "district": 1,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Bill Whitmire",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1914204316",
           "campaign": null
         },
         {
           "district": 2,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Adam Duncan",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0502272667",
           "campaign": null
         },
         {
           "district": 3,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Phillip Bowers",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0169318162",
           "campaign": null
         },
         {
           "district": 4,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Davey Hiott",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0848863535",
           "campaign": null
         },
         {
           "district": 5,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Neal Collins",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0388636317",
           "campaign": null
         },
         {
           "district": 6,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "April Cromer",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0434090857",
           "campaign": null
         },
         {
           "district": 7,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Lee Gilreath",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0675852192",
           "campaign": null
         },
         {
           "district": 8,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Don Chapman",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0347727231",
           "campaign": null
         },
         {
           "district": 9,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Blake Sanders",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1624999805",
           "campaign": null
         },
         {
           "district": 10,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Thomas Beach",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0129545439",
           "campaign": null
         },
         {
           "district": 11,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Craig Gagnon",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0632954470",
           "campaign": null
         },
         {
           "district": 12,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Daniel Gibson",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0667045375",
           "campaign": null
         },
         {
           "district": 13,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "John McCravy",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1217045309",
           "campaign": null
         },
         {
           "district": 14,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Luke Rankin",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1510227092",
           "campaign": null
         },
         {
           "district": 15,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "J.A. Moore",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1356818019",
           "campaign": null
         },
         {
           "district": 16,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Mark Willis",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1942613404",
           "campaign": null
         },
         {
           "district": 17,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Mike Burns",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0257954515",
           "campaign": null
         },
         {
           "district": 18,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Alan Morgan",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1374999835",
           "campaign": null
         },
         {
           "district": 19,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Patrick Haddon",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0733806731",
           "campaign": null
         },
         {
           "district": 20,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Stephen Frank",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0614772654",
           "campaign": null
         },
         {
           "district": 21,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Dianne Mitchell",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1344175976",
           "campaign": null
         },
         {
           "district": 22,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Paul Wickensimer",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1914630453",
           "campaign": null
         },
         {
           "district": 23,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Chandra Dillard",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0479545397",
           "campaign": null
         },
         {
           "district": 24,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Bruce Bannister",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0103409079",
           "campaign": null
         },
         {
           "district": 25,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Wendell Jones",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0953408977",
           "campaign": null
         },
         {
           "district": 26,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "David Martin",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1157954407",
           "campaign": null
         },
         {
           "district": 27,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "David Vaughan",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1865908867",
           "campaign": null
         },
         {
           "district": 28,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Chris Huff",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0893181711",
           "campaign": null
         },
         {
           "district": 29,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Dennis Moss",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1379545289",
           "campaign": null
         },
         {
           "district": 30,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Brian Lawson",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1067613508",
           "campaign": null
         },
         {
           "district": 31,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Rosalyn Henderson-Myers",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0824999901",
           "campaign": null
         },
         {
           "district": 32,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Scott Montgomery",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1351704384",
           "campaign": null
         },
         {
           "district": 33,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Travis Moore",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1365908927",
           "campaign": null
         },
         {
           "district": 34,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Sarita Edgerton",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0522159029",
           "campaign": null
         },
         {
           "district": 35,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Bill Chumley",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0351704504",
           "campaign": null
         },
         {
           "district": 36,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Rob Harris",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0764772636",
           "campaign": null
         },
         {
           "district": 37,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Steven Long",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1120454411",
           "campaign": null
         },
         {
           "district": 38,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Josiah Magnuson",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1130965774",
           "campaign": null
         },
         {
           "district": 39,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Cal Forrest",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0608238564",
           "campaign": null
         },
         {
           "district": 40,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Joe White",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1912499771",
           "campaign": null
         },
         {
           "district": 41,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Annie McDaniel",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1221590763",
           "campaign": null
         },
         {
           "district": 42,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Doug Gilliam",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0675426055",
           "campaign": null
         },
         {
           "district": 43,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Randy Ligon",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1087499870",
           "campaign": null
         },
         {
           "district": 44,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Mike Neese",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1403977105",
           "campaign": null
         },
         {
           "district": 45,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Brandon Newton",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1418607785",
           "campaign": null
         },
         {
           "district": 46,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Heath Sessions",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1649715712",
           "campaign": null
         },
         {
           "district": 47,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tommy Pope",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1484090731",
           "campaign": null
         },
         {
           "district": 48,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Brandon Guffey",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0730681731",
           "campaign": null
         },
         {
           "district": 49,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "John King",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1002272607",
           "campaign": null
         },
         {
           "district": 50,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Keishan Scott",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1645738439",
           "campaign": null
         },
         {
           "district": 51,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "David Weeks",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1898863409",
           "campaign": null
         },
         {
           "district": 52,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jermaine Johnson",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0943181705",
           "campaign": null
         },
         {
           "district": 53,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Richie Yow",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1998863577",
           "campaign": null
         },
         {
           "district": 54,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jason Luck",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1126420320",
           "campaign": null
         },
         {
           "district": 55,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jackie Hayes",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0802272631",
           "campaign": null
         },
         {
           "district": 56,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tim McGinnis",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1256818031",
           "campaign": null
         },
         {
           "district": 57,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Lucas Atkinson",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0066477265",
           "campaign": null
         },
         {
           "district": 58,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jeff Johnson",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0938636251",
           "campaign": null
         },
         {
           "district": 59,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Terry Alexander",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0011363635",
           "campaign": null
         },
         {
           "district": 60,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Phillip Lowe",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1125568047",
           "campaign": null
         },
         {
           "district": 61,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Carla Schuessler",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1635227077",
           "campaign": null
         },
         {
           "district": 62,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Robert Williams",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1942045222",
           "campaign": null
         },
         {
           "district": 63,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jay Jordan",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0957954431",
           "campaign": null
         },
         {
           "district": 64,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Fawn Pedalino",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1453408917",
           "campaign": null
         },
         {
           "district": 65,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Cody Mitchell",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1344033930",
           "campaign": null
         },
         {
           "district": 66,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jackie Terribile",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1812357738",
           "campaign": null
         },
         {
           "district": 67,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Murrell Smith",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1703408887",
           "campaign": null
         },
         {
           "district": 68,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Heather Crawford",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0428977222",
           "campaign": null
         },
         {
           "district": 69,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Chris Wooten",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1978408854",
           "campaign": null
         },
         {
           "district": 70,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Robert Reese",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1527840726",
           "campaign": null
         },
         {
           "district": 71,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Nathan Ballentine",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0102272715",
           "campaign": null
         },
         {
           "district": 72,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Seth Rose",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1584090719",
           "campaign": null
         },
         {
           "district": 73,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Chris Hart",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0770454453",
           "campaign": null
         },
         {
           "district": 74,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Todd Rutherford",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1614772534",
           "campaign": null
         },
         {
           "district": 75,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Heather Bauer",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0125568167",
           "campaign": null
         },
         {
           "district": 76,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Leon Howard",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0879545349",
           "campaign": null
         },
         {
           "district": 77,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Kambrell Garvin",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0657954467",
           "campaign": null
         },
         {
           "district": 78,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Beth Bernstein",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0141477256",
           "campaign": null
         },
         {
           "district": 79,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Hamilton Grant",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0705681734",
           "campaign": null
         },
         {
           "district": 80,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Kathy Landing",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1066477145",
           "campaign": null
         },
         {
           "district": 81,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Charlie Hartz",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0776136271",
           "campaign": null
         },
         {
           "district": 82,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Bill Clyburn",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0363636320",
           "campaign": null
         },
         {
           "district": 83,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Bill Hixon",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0849715808",
           "campaign": null
         },
         {
           "district": 84,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Melissa Oremus",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1432386192",
           "campaign": null
         },
         {
           "district": 85,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jay Kilmartin",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0993323745",
           "campaign": null
         },
         {
           "district": 86,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Bill Taylor",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1811363419",
           "campaign": null
         },
         {
           "district": 87,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Paula Calhoon",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0293181783",
           "campaign": null
         },
         {
           "district": 88,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "John Lastinger",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1066761236",
           "campaign": null
         },
         {
           "district": 89,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Micah Caskey",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0329545415",
           "campaign": null
         },
         {
           "district": 90,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Justin Bamberg",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0102840897",
           "campaign": null
         },
         {
           "district": 91,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Lonnie Hosey",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0874999895",
           "campaign": null
         },
         {
           "district": 92,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Brandon Cox",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0428124949",
           "campaign": null
         },
         {
           "district": 93,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jerry Govan",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0702272643",
           "campaign": null
         },
         {
           "district": 94,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Gil Gatch",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0658522648",
           "campaign": null
         },
         {
           "district": 95,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Gilda Cobb-Hunter",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0372727228",
           "campaign": null
         },
         {
           "district": 96,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Ryan McCabe",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1206818037",
           "campaign": null
         },
         {
           "district": 97,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Robby Robbins",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1565340722",
           "campaign": null
         },
         {
           "district": 98,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Greg Ford",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0605681746",
           "campaign": null
         },
         {
           "district": 99,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Mark Smith",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1724999793",
           "campaign": null
         },
         {
           "district": 100,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Sylleste Davis",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0456249946",
           "campaign": null
         },
         {
           "district": 101,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Roger Kirby",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1006818061",
           "campaign": null
         },
         {
           "district": 102,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Harriet Holman",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0867045351",
           "campaign": null
         },
         {
           "district": 103,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Carl Anderson",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0021590907",
           "campaign": null
         },
         {
           "district": 104,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "William Bailey",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0088636353",
           "campaign": null
         },
         {
           "district": 105,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Kevin Hardee",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0743749911",
           "campaign": null
         },
         {
           "district": 106,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Val Guest",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0730113549",
           "campaign": null
         },
         {
           "district": 107,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Case Brittain",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0202272703",
           "campaign": null
         },
         {
           "district": 108,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Lee Hewitt",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0834658991",
           "campaign": null
         },
         {
           "district": 109,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tiffany Spann-Wilder",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1742897519",
           "campaign": null
         },
         {
           "district": 110,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tom Hartnett",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0774999907",
           "campaign": null
         },
         {
           "district": 111,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Wendell Gilliard",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0675568101",
           "campaign": null
         },
         {
           "district": 112,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Joe Bustos",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0278409057",
           "campaign": null
         },
         {
           "district": 113,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Courtney Waters",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1896590682",
           "campaign": null
         },
         {
           "district": 114,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Gary Brewer",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0192045432",
           "campaign": null
         },
         {
           "district": 115,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Spencer Wetmore",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1905681590",
           "campaign": null
         },
         {
           "district": 116,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "James Teeple",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1812215692",
           "campaign": null
         },
         {
           "district": 117,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jordan Pace",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1433984204",
           "campaign": null
         },
         {
           "district": 118,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Bill Herbkersman",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0832954446",
           "campaign": null
         },
         {
           "district": 119,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Leon Stavrinakis",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1747727063",
           "campaign": null
         },
         {
           "district": 120,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Weston Newton",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1418749830",
           "campaign": null
         },
         {
           "district": 121,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Michael Rivers",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1564346404",
           "campaign": null
         },
         {
           "district": 122,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Bill Hager",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0733948776",
           "campaign": null
         },
         {
           "district": 123,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jeff Bradley",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0171590889",
           "campaign": null
         },
         {
           "district": 124,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Shannon Erickson",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0539772663",
           "campaign": null
         }
       ]
@@ -893,324 +893,324 @@
       "districts": [
         {
           "district": 1,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tom Alexander",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0013636362",
           "campaign": null
         },
         {
           "district": 2,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Rex Rice",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1547727087",
           "campaign": null
         },
         {
           "district": 3,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Richard Cash",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0328409052",
           "campaign": null
         },
         {
           "district": 4,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Mike Gambrell",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0635227197",
           "campaign": null
         },
         {
           "district": 5,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tom Corbin",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0402272679",
           "campaign": null
         },
         {
           "district": 6,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jason Elliott",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0529545391",
           "campaign": null
         },
         {
           "district": 7,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Karl Allen",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0015340908",
           "campaign": null
         },
         {
           "district": 8,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Ross Turner",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1847727051",
           "campaign": null
         },
         {
           "district": 9,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Danny Verdin",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1874999775",
           "campaign": null
         },
         {
           "district": 10,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Billy Garrett",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0638636287",
           "campaign": null
         },
         {
           "district": 11,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Josh Kimbrell",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0993465790",
           "campaign": null
         },
         {
           "district": 12,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Lee Bright",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0193181795",
           "campaign": null
         },
         {
           "district": 13,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Shane Martin",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1179545313",
           "campaign": null
         },
         {
           "district": 14,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Harvey Peeler",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1454545280",
           "campaign": null
         },
         {
           "district": 15,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Wes Climer",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0356818139",
           "campaign": null
         },
         {
           "district": 16,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Michael Johnson",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0949431704",
           "campaign": null
         },
         {
           "district": 17,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Everett Stubbs",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1780681605",
           "campaign": null
         },
         {
           "district": 18,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Ronnie Cromer",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0438636311",
           "campaign": null
         },
         {
           "district": 19,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tameika Isaac Devine",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0477840852",
           "campaign": null
         },
         {
           "district": 20,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Ed Sutton",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1782954332",
           "campaign": null
         },
         {
           "district": 21,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Darrell Jackson",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0920454435",
           "campaign": null
         },
         {
           "district": 22,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Overture Walker",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1889772501",
           "campaign": null
         },
         {
           "district": 23,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Carlisle Kennedy",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0984090791",
           "campaign": null
         },
         {
           "district": 24,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tom Young",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1996590730",
           "campaign": null
         },
         {
           "district": 25,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Shane Massey",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1185227131",
           "campaign": null
         },
         {
           "district": 26,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Russell Ott",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1433096420",
           "campaign": null
         },
         {
           "district": 27,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Allen Blackmon",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0143749983",
           "campaign": null
         },
         {
           "district": 28,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Greg Hembree",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0819318084",
           "campaign": null
         },
         {
           "district": 29,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "J.D. Chaplin",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0346590868",
           "campaign": null
         },
         {
           "district": 30,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Kent Williams",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1938636131",
           "campaign": null
         },
         {
           "district": 31,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Mike Reichenbach",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1528408908",
           "campaign": null
         },
         {
           "district": 32,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Ronnie Sabb",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1617045261",
           "campaign": null
         },
         {
           "district": 33,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Luke Rankin",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1511363455",
           "campaign": null
         },
         {
           "district": 34,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Stephen Goldfinch",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0682386282",
           "campaign": null
         },
         {
           "district": 35,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jeffrey Graham",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0703124916",
           "campaign": null
         },
         {
           "district": 36,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Jeff Zell",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1999431789",
           "campaign": null
         },
         {
           "district": 37,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Larry Grooms",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0729545367",
           "campaign": null
         },
         {
           "district": 38,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Sean Bennett",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0141193165",
           "campaign": null
         },
         {
           "district": 39,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tom Fernandez",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0574999931",
           "campaign": null
         },
         {
           "district": 40,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Brad Hutto",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0912499891",
           "campaign": null
         },
         {
           "district": 41,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Matt Leber",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1074431690",
           "campaign": null
         },
         {
           "district": 42,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Deon Tedder",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=1811931601",
           "campaign": null
         },
         {
           "district": 43,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Chip Campsen",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0302272691",
           "campaign": null
         },
         {
           "district": 44,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Brian Adams",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0002272727",
           "campaign": null
         },
         {
           "district": 45,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Margie Bright Matthews",
+          "party": "D",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0194318159",
           "campaign": null
         },
         {
           "district": 46,
-          "incumbent": null,
-          "party": null,
-          "profile": null,
+          "incumbent": "Tom Davis",
+          "party": "R",
+          "profile": "https://www.scstatehouse.gov/member.php?code=0456818127",
           "campaign": null
         }
       ]
@@ -1286,14 +1286,13 @@
     }
   ],
   "notes": {
-    "executive": "Every office below serves a four-year term. The Lieutenant Governor is elected on the Governor\u2019s ticket, not separately.",
+    "executive": "Every office below serves a four-year term. The Lieutenant Governor is elected on the Governor’s ticket, not separately.",
     "assembly": "House terms run two years and every seat is contested each even year. Senate terms run four years, contested together in presidential years."
   },
   "counts": {
-    "house_incumbents": 0,
-    "senate_incumbents": 0,
-    "profiles_linked": 0,
+    "house_incumbents": 124,
+    "senate_incumbents": 46,
+    "profiles_linked": 170,
     "campaign_sites": 0
-  },
-  "seed_note": "Seat skeleton only. Incumbents, profile links and party are filled in by scripts/fetch-seats.mjs on the first Cronvass run. The eight statewide officeholders above ARE verified (see executive_verified)."
+  }
 }
