@@ -1,31 +1,1287 @@
 {
-  "checked_at": "2026-08-18T03:55:55Z",
-  "checked_at_et": "Aug 17, 2026, 11:55 PM",
-  "generated_at": "2026-08-18T03:55:55Z",
-  "generated_at_et": "Aug 17, 2026, 11:55 PM",
+  "checked_at": "2026-08-21T06:36:59.444Z",
+  "checked_at_et": "Aug 21, 2026, 2:36 AM",
+  "generated_at": "2026-08-21T06:36:59.444Z",
+  "generated_at_et": "Aug 21, 2026, 2:36 AM",
   "changed_this_run": true,
   "source": "https://scvotes.gov/elections-statistics/upcoming-elections/",
   "api": "https://scvotes.gov/wp-json/tribe/events/v1/events",
   "window_start": "2026-01-01",
-  "filter": "none \u2014 every event on the state's calendar; the page groups them",
-  "seed": true,
-  "count": 19,
+  "filter": "none — every event on the state's calendar; the page groups them",
+  "count": 148,
   "elections": [
     {
-      "id": 900000,
-      "title": "Town of Salley Special Election",
-      "date": "2026-08-25",
-      "start_et": "2026-08-25 07:00:00",
-      "end_et": "2026-08-25 19:00:00",
+      "id": 14890,
+      "title": "State House District 98 Special Election",
+      "date": "2026-01-06",
+      "start_et": "2026-01-06 07:00:00",
+      "end_et": "2026-01-06 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Dorchester"
+      ],
+      "where": "Dorchester County",
+      "url": "https://scvotes.gov/event/state-house-district-98-special-election/"
+    },
+    {
+      "id": 16623,
+      "title": "City of North Charleston Special Elect",
+      "date": "2026-01-13",
+      "start_et": "2026-01-13 07:00:00",
+      "end_et": "2026-01-13 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Charleston",
+        "Dorchester"
+      ],
+      "where": "Charleston County, Dorchester County",
+      "url": "https://scvotes.gov/event/city-of-north-charleston-special-elect-charleston/"
+    },
+    {
+      "id": 14894,
+      "title": "Town of Gray Court Special Election",
+      "date": "2026-01-20",
+      "start_et": "2026-01-20 07:00:00",
+      "end_et": "2026-01-20 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Laurens"
+      ],
+      "where": "Laurens County",
+      "url": "https://scvotes.gov/event/town-of-gray-court-special-election-2/"
+    },
+    {
+      "id": 14900,
+      "title": "Town of Waterloo Special Election",
+      "date": "2026-01-20",
+      "start_et": "2026-01-20 07:00:00",
+      "end_et": "2026-01-20 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Laurens"
+      ],
+      "where": "Laurens County",
+      "url": "https://scvotes.gov/event/town-of-waterloo-special-election/"
+    },
+    {
+      "id": 14893,
+      "title": "West Pelzer Mayor Special Election",
+      "date": "2026-01-20",
+      "start_et": "2026-01-20 07:00:00",
+      "end_et": "2026-01-20 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/event/west-pelzer-mayor-special-election/"
+    },
+    {
+      "id": 14902,
+      "title": "City of Tega Cay Special Election",
+      "date": "2026-02-03",
+      "start_et": "2026-02-03 07:00:00",
+      "end_et": "2026-02-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "York"
+      ],
+      "where": "York County",
+      "url": "https://scvotes.gov/event/city-of-tega-cay-special-election/"
+    },
+    {
+      "id": 14901,
+      "title": "Town of Arcadia Lakes Special Election",
+      "date": "2026-02-03",
+      "start_et": "2026-02-03 07:00:00",
+      "end_et": "2026-02-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Richland"
+      ],
+      "where": "Richland County",
+      "url": "https://scvotes.gov/event/town-of-arcadia-lakes-special-election/"
+    },
+    {
+      "id": 15199,
+      "title": "Town of Ward Special Election",
+      "date": "2026-02-03",
+      "start_et": "2026-02-03 07:00:00",
+      "end_et": "2026-02-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Saluda"
+      ],
+      "where": "Saluda County",
+      "url": "https://scvotes.gov/event/town-of-ward-special-election-2/"
+    },
+    {
+      "id": 14903,
+      "title": "Cherokee Co Council Dist 7 Primary",
+      "date": "2026-02-10",
+      "start_et": "2026-02-10 07:00:00",
+      "end_et": "2026-02-10 19:00:00",
+      "type": "Primary",
+      "counties": [
+        "Cherokee"
+      ],
+      "where": "Cherokee County",
+      "url": "https://scvotes.gov/event/cherokee-co-council-dist-7-primary/"
+    },
+    {
+      "id": 14912,
+      "title": "Chesnee City Council Special Election",
+      "date": "2026-02-10",
+      "start_et": "2026-02-10 07:00:00",
+      "end_et": "2026-02-10 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Cherokee",
+        "Spartanburg"
+      ],
+      "where": "Cherokee County, Spartanburg County",
+      "url": "https://scvotes.gov/event/chesnee-city-council-special-election-spartanburg-3/"
+    },
+    {
+      "id": 14911,
+      "title": "Lyman Town Council Special Election",
+      "date": "2026-02-10",
+      "start_et": "2026-02-10 07:00:00",
+      "end_et": "2026-02-10 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Spartanburg"
+      ],
+      "where": "Spartanburg County",
+      "url": "https://scvotes.gov/event/lyman-town-council-special-election-3/"
+    },
+    {
+      "id": 14910,
+      "title": "Town of Sellers General Election",
+      "date": "2026-02-10",
+      "start_et": "2026-02-10 07:00:00",
+      "end_et": "2026-02-10 19:00:00",
+      "type": "General",
+      "counties": [
+        "Marion"
+      ],
+      "where": "Marion County",
+      "url": "https://scvotes.gov/event/town-of-sellers-general-election-2/"
+    },
+    {
+      "id": 14913,
+      "title": "City of Folly Beach Special Election",
+      "date": "2026-02-17",
+      "start_et": "2026-02-17 07:00:00",
+      "end_et": "2026-02-17 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Charleston"
+      ],
+      "where": "Charleston County",
+      "url": "https://scvotes.gov/event/city-of-folly-beach-special-election-3/"
+    },
+    {
+      "id": 14914,
+      "title": "Swansea Town Council Dist 4 Spec Elect",
+      "date": "2026-02-17",
+      "start_et": "2026-02-17 07:00:00",
+      "end_et": "2026-02-17 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Lexington"
+      ],
+      "where": "Lexington County",
+      "url": "https://scvotes.gov/event/swansea-town-council-dist-4-spec-elect/"
+    },
+    {
+      "id": 14915,
+      "title": "Town of Batesburg-Leesville Special Elec",
+      "date": "2026-02-17",
+      "start_et": "2026-02-17 07:00:00",
+      "end_et": "2026-02-17 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Lexington"
+      ],
+      "where": "Lexington County",
+      "url": "https://scvotes.gov/event/town-of-batesburg-leesville-special-elec/"
+    },
+    {
+      "id": 15204,
+      "title": "City of North Myrtle Beach Special",
+      "date": "2026-02-24",
+      "start_et": "2026-02-24 07:00:00",
+      "end_et": "2026-02-24 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Horry"
+      ],
+      "where": "Horry County",
+      "url": "https://scvotes.gov/event/city-of-north-myrtle-beach-special-2/"
+    },
+    {
+      "id": 14916,
+      "title": "Gaffney City Council Dist 6 Spec Elect",
+      "date": "2026-03-03",
+      "start_et": "2026-03-03 07:00:00",
+      "end_et": "2026-03-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Cherokee"
+      ],
+      "where": "Cherokee County",
+      "url": "https://scvotes.gov/event/gaffney-city-council-dist-6-spec-elect/"
+    },
+    {
+      "id": 15205,
+      "title": "Town of Lodge Special Election",
+      "date": "2026-03-03",
+      "start_et": "2026-03-03 07:00:00",
+      "end_et": "2026-03-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Colleton"
+      ],
+      "where": "Colleton County",
+      "url": "https://scvotes.gov/event/town-of-lodge-special-election-3/"
+    },
+    {
+      "id": 15208,
+      "title": "County Council Dist 2 Primary",
+      "date": "2026-03-10",
+      "start_et": "2026-03-10 07:00:00",
+      "end_et": "2026-03-10 19:00:00",
+      "type": "Primary",
+      "counties": [
+        "Clarendon"
+      ],
+      "where": "Clarendon County",
+      "url": "https://scvotes.gov/event/county-council-dist-2-primary-2/"
+    },
+    {
+      "id": 14917,
+      "title": "School District Three Bond Referendum",
+      "date": "2026-03-10",
+      "start_et": "2026-03-10 07:00:00",
+      "end_et": "2026-03-10 19:00:00",
+      "type": "Referendum",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/event/school-district-three-bond-referendum/"
+    },
+    {
+      "id": 15209,
+      "title": "Florence School District 2 Gen Election",
+      "date": "2026-03-19",
+      "start_et": "2026-03-19 07:00:00",
+      "end_et": "2026-03-19 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/florence-school-district-2-gen-election/"
+    },
+    {
+      "id": 15210,
+      "title": "County Council District 6 Primary",
+      "date": "2026-03-24",
+      "start_et": "2026-03-24 07:00:00",
+      "end_et": "2026-03-24 19:00:00",
+      "type": "Primary",
+      "counties": [
+        "Dorchester"
+      ],
+      "where": "Dorchester County",
+      "url": "https://scvotes.gov/event/county-council-district-6-primary/"
+    },
+    {
+      "id": 15211,
+      "title": "Elloree Town Council Special Election",
+      "date": "2026-03-31",
+      "start_et": "2026-03-31 07:00:00",
+      "end_et": "2026-03-31 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Orangeburg"
+      ],
+      "where": "Orangeburg County",
+      "url": "https://scvotes.gov/event/elloree-town-council-special-election-2/"
+    },
+    {
+      "id": 14918,
+      "title": "Lamar Town Council - Special Election",
+      "date": "2026-03-31",
+      "start_et": "2026-03-31 07:00:00",
+      "end_et": "2026-03-31 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Darlington"
+      ],
+      "where": "Darlington County",
+      "url": "https://scvotes.gov/event/lamar-town-council-special-election/"
+    },
+    {
+      "id": 15404,
+      "title": "Prosperity Town Council Special Election",
+      "date": "2026-03-31",
+      "start_et": "2026-03-31 07:00:00",
+      "end_et": "2026-03-31 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Newberry"
+      ],
+      "where": "Newberry County",
+      "url": "https://scvotes.gov/event/prosperity-town-council-special-election-2/"
+    },
+    {
+      "id": 15216,
+      "title": "Spartanburg Co School Dist 6 Referendum",
+      "date": "2026-03-31",
+      "start_et": "2026-03-31 07:00:00",
+      "end_et": "2026-03-31 19:00:00",
+      "type": "Referendum",
+      "counties": [
+        "Spartanburg"
+      ],
+      "where": "Spartanburg County",
+      "url": "https://scvotes.gov/event/spartanburg-co-school-dist-6-referendum/"
+    },
+    {
+      "id": 15218,
+      "title": "Springfield Town Council Spec Election",
+      "date": "2026-03-31",
+      "start_et": "2026-03-31 07:00:00",
+      "end_et": "2026-03-31 19:00:00",
+      "type": "Election",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/springfield-town-council-spec-election-3/"
+    },
+    {
+      "id": 15219,
+      "title": "Town of Aynor Special Election",
+      "date": "2026-03-31",
+      "start_et": "2026-03-31 07:00:00",
+      "end_et": "2026-03-31 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Horry"
+      ],
+      "where": "Horry County",
+      "url": "https://scvotes.gov/event/town-of-aynor-special-election-2/"
+    },
+    {
+      "id": 15220,
+      "title": "Town of Calhoun Falls Special Election",
+      "date": "2026-03-31",
+      "start_et": "2026-03-31 07:00:00",
+      "end_et": "2026-03-31 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Abbeville"
+      ],
+      "where": "Abbeville County",
+      "url": "https://scvotes.gov/event/town-of-calhoun-falls-special-election/"
+    },
+    {
+      "id": 15221,
+      "title": "Woodford Town Council Spec Election",
+      "date": "2026-03-31",
+      "start_et": "2026-03-31 07:00:00",
+      "end_et": "2026-03-31 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Orangeburg"
+      ],
+      "where": "Orangeburg County",
+      "url": "https://scvotes.gov/event/woodford-town-council-spec-election-5/"
+    },
+    {
+      "id": 15222,
+      "title": "City of Anderson General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/event/city-of-anderson-general-election-4/"
+    },
+    {
+      "id": 15223,
+      "title": "City of Manning General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Clarendon"
+      ],
+      "where": "Clarendon County",
+      "url": "https://scvotes.gov/event/city-of-manning-general-election-4/"
+    },
+    {
+      "id": 15224,
+      "title": "City of Ridgeway General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Fairfield"
+      ],
+      "where": "Fairfield County",
+      "url": "https://scvotes.gov/event/city-of-ridgeway-general-election-4/"
+    },
+    {
+      "id": 14919,
+      "title": "Great Falls General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Chester"
+      ],
+      "where": "Chester County",
+      "url": "https://scvotes.gov/event/great-falls-general-election/"
+    },
+    {
+      "id": 15412,
+      "title": "Greeleyville Town Council Spec Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Williamsburg"
+      ],
+      "where": "Williamsburg County",
+      "url": "https://scvotes.gov/event/greeleyville-town-council-spec-election-2/"
+    },
+    {
+      "id": 15413,
+      "title": "Pinewood Town Council Special Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Sumter"
+      ],
+      "where": "Sumter County",
+      "url": "https://scvotes.gov/event/pinewood-town-council-special-election-3/"
+    },
+    {
+      "id": 14925,
+      "title": "Town of Chesterfield General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Chesterfield"
+      ],
+      "where": "Chesterfield County",
+      "url": "https://scvotes.gov/event/town-of-chesterfield-general-election-4/"
+    },
+    {
+      "id": 14927,
+      "title": "Town of Edgefield General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Edgefield"
+      ],
+      "where": "Edgefield County",
+      "url": "https://scvotes.gov/event/town-of-edgefield-general-election-4/"
+    },
+    {
+      "id": 15226,
+      "title": "Town of Hampton General",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Hampton"
+      ],
+      "where": "Hampton County",
+      "url": "https://scvotes.gov/event/town-of-hampton-general-2/"
+    },
+    {
+      "id": 15415,
+      "title": "Town of Jamestown Special Town Council",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Berkeley"
+      ],
+      "where": "Berkeley County",
+      "url": "https://scvotes.gov/event/town-of-jamestown-special-town-council/"
+    },
+    {
+      "id": 14928,
+      "title": "Town of Johnston General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Edgefield"
+      ],
+      "where": "Edgefield County",
+      "url": "https://scvotes.gov/event/town-of-johnston-general-election-4/"
+    },
+    {
+      "id": 14929,
+      "title": "Town of McCormick General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Mccormick"
+      ],
+      "where": "Mccormick County",
+      "url": "https://scvotes.gov/event/town-of-mccormick-general-election/"
+    },
+    {
+      "id": 14935,
+      "title": "Town of Parksville General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Mccormick"
+      ],
+      "where": "Mccormick County",
+      "url": "https://scvotes.gov/event/town-of-parksville-general-election/"
+    },
+    {
+      "id": 14926,
+      "title": "Town of Summerton General Election",
+      "date": "2026-04-07",
+      "start_et": "2026-04-07 07:00:00",
+      "end_et": "2026-04-07 19:00:00",
+      "type": "General",
+      "counties": [
+        "Clarendon"
+      ],
+      "where": "Clarendon County",
+      "url": "https://scvotes.gov/event/town-of-summerton-general-election-4/"
+    },
+    {
+      "id": 14937,
+      "title": "Board of Education General Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "General",
+      "counties": [
+        "Marion"
+      ],
+      "where": "Marion County",
+      "url": "https://scvotes.gov/event/board-of-education-general-election/"
+    },
+    {
+      "id": 14936,
+      "title": "Cherokee Co Council Dist 7 Special Elect",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Cherokee"
+      ],
+      "where": "Cherokee County",
+      "url": "https://scvotes.gov/event/cherokee-co-council-dist-7-special-elect/"
+    },
+    {
+      "id": 15717,
+      "title": "Lamar Town Council - Special Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Darlington"
+      ],
+      "where": "Darlington County",
+      "url": "https://scvotes.gov/event/lamar-town-council-special-election-3/"
+    },
+    {
+      "id": 15227,
+      "title": "Lexington School Dist 4 Special Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Lexington"
+      ],
+      "where": "Lexington County",
+      "url": "https://scvotes.gov/event/lexington-school-dist-4-special-election-3/"
+    },
+    {
+      "id": 15718,
+      "title": "Prosperity Town Council Special Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Newberry"
+      ],
+      "where": "Newberry County",
+      "url": "https://scvotes.gov/event/prosperity-town-council-special-election-3/"
+    },
+    {
+      "id": 15416,
+      "title": "Slater Marietta Fire Special Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Greenville"
+      ],
+      "where": "Greenville County",
+      "url": "https://scvotes.gov/event/slater-marietta-fire-special-election/"
+    },
+    {
+      "id": 15417,
+      "title": "Town of Eastover General Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "General",
+      "counties": [
+        "Richland"
+      ],
+      "where": "Richland County",
+      "url": "https://scvotes.gov/event/town-of-eastover-general-election-5/"
+    },
+    {
+      "id": 14938,
+      "title": "Town of Jonesville General Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "General",
+      "counties": [
+        "Union"
+      ],
+      "where": "Union County",
+      "url": "https://scvotes.gov/event/town-of-jonesville-general-election-4/"
+    },
+    {
+      "id": 15228,
+      "title": "Town of Wagener Special Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
       "type": "Special",
       "counties": [
         "Aiken"
       ],
       "where": "Aiken County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/town-of-wagener-special-election/"
     },
     {
-      "id": 900001,
+      "id": 15229,
+      "title": "Town of Ward Special Election",
+      "date": "2026-04-14",
+      "start_et": "2026-04-14 07:00:00",
+      "end_et": "2026-04-14 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Saluda"
+      ],
+      "where": "Saluda County",
+      "url": "https://scvotes.gov/event/town-of-ward-special-election-3/"
+    },
+    {
+      "id": 15418,
+      "title": "Great Falls Town Council Spec Election",
+      "date": "2026-04-21",
+      "start_et": "2026-04-21 07:00:00",
+      "end_et": "2026-04-21 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Chester"
+      ],
+      "where": "Chester County",
+      "url": "https://scvotes.gov/event/great-falls-town-council-spec-election-2/"
+    },
+    {
+      "id": 15419,
+      "title": "West Pelzer Special Election",
+      "date": "2026-04-21",
+      "start_et": "2026-04-21 07:00:00",
+      "end_et": "2026-04-21 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/event/west-pelzer-special-election/"
+    },
+    {
+      "id": 15420,
+      "title": "Central Pacolet Town Council Spec Elect",
+      "date": "2026-04-28",
+      "start_et": "2026-04-28 07:00:00",
+      "end_et": "2026-04-28 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Spartanburg"
+      ],
+      "where": "Spartanburg County",
+      "url": "https://scvotes.gov/event/central-pacolet-town-council-spec-elect-3/"
+    },
+    {
+      "id": 15421,
+      "title": "City of Lancaster 05 Special Election",
+      "date": "2026-04-28",
+      "start_et": "2026-04-28 07:00:00",
+      "end_et": "2026-04-28 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Lancaster"
+      ],
+      "where": "Lancaster County",
+      "url": "https://scvotes.gov/event/city-of-lancaster-05-special-election/"
+    },
+    {
+      "id": 15422,
+      "title": "Inman City Council Special Election",
+      "date": "2026-04-28",
+      "start_et": "2026-04-28 07:00:00",
+      "end_et": "2026-04-28 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Spartanburg"
+      ],
+      "where": "Spartanburg County",
+      "url": "https://scvotes.gov/event/inman-city-council-special-election-3/"
+    },
+    {
+      "id": 15490,
+      "title": "School District Two Bond Referendum",
+      "date": "2026-05-02",
+      "start_et": "2026-05-02 07:00:00",
+      "end_et": "2026-05-02 19:00:00",
+      "type": "General",
+      "counties": [
+        "Anderson",
+        "Greenville"
+      ],
+      "where": "Anderson County, Greenville County",
+      "url": "https://scvotes.gov/event/school-district-two-bond-referendum-greenville/"
+    },
+    {
+      "id": 15233,
+      "title": "City of Jenkinsville General Election",
+      "date": "2026-05-05",
+      "start_et": "2026-05-05 07:00:00",
+      "end_et": "2026-05-05 19:00:00",
+      "type": "General",
+      "counties": [
+        "Fairfield"
+      ],
+      "where": "Fairfield County",
+      "url": "https://scvotes.gov/event/city-of-jenkinsville-general-election-4/"
+    },
+    {
+      "id": 15424,
+      "title": "Olanta Town Council Special Election",
+      "date": "2026-05-05",
+      "start_et": "2026-05-05 07:00:00",
+      "end_et": "2026-05-05 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/olanta-town-council-special-election/"
+    },
+    {
+      "id": 15429,
+      "title": "Town of Clover Special Election",
+      "date": "2026-05-05",
+      "start_et": "2026-05-05 07:00:00",
+      "end_et": "2026-05-05 19:00:00",
+      "type": "Special",
+      "counties": [
+        "York"
+      ],
+      "where": "York County",
+      "url": "https://scvotes.gov/event/town-of-clover-special-election-4/"
+    },
+    {
+      "id": 15430,
+      "title": "Beaufort School Board Dist 9 Spec Elect",
+      "date": "2026-05-12",
+      "start_et": "2026-05-12 07:00:00",
+      "end_et": "2026-05-12 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Beaufort"
+      ],
+      "where": "Beaufort County",
+      "url": "https://scvotes.gov/event/beaufort-school-board-dist-9-spec-elect/"
+    },
+    {
+      "id": 15234,
+      "title": "County Council Dist 2 Special Election",
+      "date": "2026-05-12",
+      "start_et": "2026-05-12 07:00:00",
+      "end_et": "2026-05-12 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Clarendon"
+      ],
+      "where": "Clarendon County",
+      "url": "https://scvotes.gov/event/county-council-dist-2-special-election-5/"
+    },
+    {
+      "id": 14942,
+      "title": "Ninety Six School Board Gen Election",
+      "date": "2026-05-12",
+      "start_et": "2026-05-12 07:00:00",
+      "end_et": "2026-05-12 19:00:00",
+      "type": "General",
+      "counties": [
+        "Greenwood"
+      ],
+      "where": "Greenwood County",
+      "url": "https://scvotes.gov/event/ninety-six-school-board-gen-election-5/"
+    },
+    {
+      "id": 14944,
+      "title": "Spartanburg Metro B Water Dist Gen Elect",
+      "date": "2026-05-12",
+      "start_et": "2026-05-12 07:00:00",
+      "end_et": "2026-05-12 19:00:00",
+      "type": "General",
+      "counties": [
+        "Spartanburg"
+      ],
+      "where": "Spartanburg County",
+      "url": "https://scvotes.gov/event/spartanburg-metro-b-water-dist-gen-elect-4/"
+    },
+    {
+      "id": 15432,
+      "title": "Town of Allendale Special Election",
+      "date": "2026-05-12",
+      "start_et": "2026-05-12 07:00:00",
+      "end_et": "2026-05-12 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Allendale"
+      ],
+      "where": "Allendale County",
+      "url": "https://scvotes.gov/event/town-of-allendale-special-election-3/"
+    },
+    {
+      "id": 15433,
+      "title": "Town of Bonneau General Election",
+      "date": "2026-05-12",
+      "start_et": "2026-05-12 07:00:00",
+      "end_et": "2026-05-12 19:00:00",
+      "type": "General",
+      "counties": [
+        "Berkeley"
+      ],
+      "where": "Berkeley County",
+      "url": "https://scvotes.gov/event/town-of-bonneau-general-election-4/"
+    },
+    {
+      "id": 14940,
+      "title": "Town of Windsor General Election",
+      "date": "2026-05-12",
+      "start_et": "2026-05-12 07:00:00",
+      "end_et": "2026-05-12 19:00:00",
+      "type": "General",
+      "counties": [
+        "Aiken"
+      ],
+      "where": "Aiken County",
+      "url": "https://scvotes.gov/event/town-of-windsor-general-election-4/"
+    },
+    {
+      "id": 14943,
+      "title": "Ware Shoals School Board Gen Election",
+      "date": "2026-05-12",
+      "start_et": "2026-05-12 07:00:00",
+      "end_et": "2026-05-12 19:00:00",
+      "type": "General",
+      "counties": [
+        "Abbeville",
+        "Greenwood",
+        "Laurens"
+      ],
+      "where": "Abbeville County, Greenwood County, Laurens County",
+      "url": "https://scvotes.gov/event/ware-shoals-school-board-gen-election-laurens-5/"
+    },
+    {
+      "id": 15241,
+      "title": "County Council District 6 Special",
+      "date": "2026-05-26",
+      "start_et": "2026-05-26 07:00:00",
+      "end_et": "2026-05-26 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Dorchester"
+      ],
+      "where": "Dorchester County",
+      "url": "https://scvotes.gov/event/county-council-district-6-special/"
+    },
+    {
+      "id": 15561,
+      "title": "City of Rock Hill Special Election",
+      "date": "2026-06-02",
+      "start_et": "2026-06-02 07:00:00",
+      "end_et": "2026-06-02 19:00:00",
+      "type": "Special",
+      "counties": [
+        "York"
+      ],
+      "where": "York County",
+      "url": "https://scvotes.gov/event/city-of-rock-hill-special-election/"
+    },
+    {
+      "id": 15438,
+      "title": "City of Florence Primary Election",
+      "date": "2026-06-09",
+      "start_et": "2026-06-09 07:00:00",
+      "end_et": "2026-06-09 19:00:00",
+      "type": "Primary",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/city-of-florence-primary-election/"
+    },
+    {
+      "id": 15720,
+      "title": "North Augusta Republican Primary",
+      "date": "2026-06-09",
+      "start_et": "2026-06-09 07:00:00",
+      "end_et": "2026-06-09 19:00:00",
+      "type": "General",
+      "counties": [
+        "Aiken",
+        "Edgefield"
+      ],
+      "where": "Aiken County, Edgefield County",
+      "url": "https://scvotes.gov/event/north-augusta-republican-primary-edgefield/"
+    },
+    {
+      "id": 16217,
+      "title": "School Board Dist. 4 Special Election",
+      "date": "2026-06-09",
+      "start_et": "2026-06-09 07:00:00",
+      "end_et": "2026-06-09 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Charleston"
+      ],
+      "where": "Charleston County",
+      "url": "https://scvotes.gov/event/school-board-dist-4-special-election-3/"
+    },
+    {
+      "id": 15242,
+      "title": "Statewide Primary",
+      "date": "2026-06-09",
+      "start_et": "2026-06-09 07:00:00",
+      "end_et": "2026-06-09 19:00:00",
+      "type": "Primary",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/statewide-primary-5/"
+    },
+    {
+      "id": 15683,
+      "title": "Town of McCormick Special Election",
+      "date": "2026-06-09",
+      "start_et": "2026-06-09 07:00:00",
+      "end_et": "2026-06-09 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Mccormick"
+      ],
+      "where": "Mccormick County",
+      "url": "https://scvotes.gov/event/town-of-mccormick-special-election/"
+    },
+    {
+      "id": 15562,
+      "title": "Town of Tatum General Election",
+      "date": "2026-06-09",
+      "start_et": "2026-06-09 07:00:00",
+      "end_et": "2026-06-09 19:00:00",
+      "type": "General",
+      "counties": [
+        "Marlboro"
+      ],
+      "where": "Marlboro County",
+      "url": "https://scvotes.gov/event/town-of-tatum-general-election-4/"
+    },
+    {
+      "id": 16218,
+      "title": "Abbeville County Council Dist2 Spec Elec",
+      "date": "2026-06-16",
+      "start_et": "2026-06-16 07:00:00",
+      "end_et": "2026-06-16 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Abbeville"
+      ],
+      "where": "Abbeville County",
+      "url": "https://scvotes.gov/event/abbeville-county-council-dist2-spec-elec-2/"
+    },
+    {
+      "id": 15440,
+      "title": "Abbeville County Council District 2",
+      "date": "2026-06-16",
+      "start_et": "2026-06-16 07:00:00",
+      "end_et": "2026-06-16 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Abbeville"
+      ],
+      "where": "Abbeville County",
+      "url": "https://scvotes.gov/event/abbeville-county-council-district-2/"
+    },
+    {
+      "id": 16219,
+      "title": "Town of Cottageville Special Election",
+      "date": "2026-06-16",
+      "start_et": "2026-06-16 07:00:00",
+      "end_et": "2026-06-16 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Colleton"
+      ],
+      "where": "Colleton County",
+      "url": "https://scvotes.gov/event/town-of-cottageville-special-election-2/"
+    },
+    {
+      "id": 15685,
+      "title": "City of Johnsonville Special Election",
+      "date": "2026-06-23",
+      "start_et": "2026-06-23 07:00:00",
+      "end_et": "2026-06-23 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/city-of-johnsonville-special-election-3/"
+    },
+    {
+      "id": 15724,
+      "title": "Lexington School District #1 Special",
+      "date": "2026-06-23",
+      "start_et": "2026-06-23 07:00:00",
+      "end_et": "2026-06-23 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Lexington"
+      ],
+      "where": "Lexington County",
+      "url": "https://scvotes.gov/event/lexington-school-district-1-special/"
+    },
+    {
+      "id": 16221,
+      "title": "Statewide Primary",
+      "date": "2026-06-23",
+      "start_et": "2026-06-23 07:00:00",
+      "end_et": "2026-06-23 19:00:00",
+      "type": "Primary",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/statewide-primary-6/"
+    },
+    {
+      "id": 16234,
+      "title": "Statewide Primary - Runoff",
+      "date": "2026-06-23",
+      "start_et": "2026-06-23 07:00:00",
+      "end_et": "2026-06-23 19:00:00",
+      "type": "Primary",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/statewide-primary-runoff/"
+    },
+    {
+      "id": 15725,
+      "title": "Town of Allendale Special Election",
+      "date": "2026-06-30",
+      "start_et": "2026-06-30 07:00:00",
+      "end_et": "2026-06-30 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Allendale"
+      ],
+      "where": "Allendale County",
+      "url": "https://scvotes.gov/event/town-of-allendale-special-election-4/"
+    },
+    {
+      "id": 16223,
+      "title": "City of Abbeville Mayor Special Election",
+      "date": "2026-07-14",
+      "start_et": "2026-07-14 07:00:00",
+      "end_et": "2026-07-14 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Abbeville"
+      ],
+      "where": "Abbeville County",
+      "url": "https://scvotes.gov/event/city-of-abbeville-mayor-special-election-2/"
+    },
+    {
+      "id": 16224,
+      "title": "Hanahan City Council Special Election",
+      "date": "2026-07-14",
+      "start_et": "2026-07-14 07:00:00",
+      "end_et": "2026-07-14 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Berkeley"
+      ],
+      "where": "Berkeley County",
+      "url": "https://scvotes.gov/event/hanahan-city-council-special-election-2/"
+    },
+    {
+      "id": 15441,
+      "title": "Town of Hemingway General Election",
+      "date": "2026-07-14",
+      "start_et": "2026-07-14 07:00:00",
+      "end_et": "2026-07-14 19:00:00",
+      "type": "General",
+      "counties": [
+        "Williamsburg"
+      ],
+      "where": "Williamsburg County",
+      "url": "https://scvotes.gov/event/town-of-hemingway-general-election-4/"
+    },
+    {
+      "id": 16225,
+      "title": "Palmetto Rural Fire District Referendum",
+      "date": "2026-07-28",
+      "start_et": "2026-07-28 07:00:00",
+      "end_et": "2026-07-28 19:00:00",
+      "type": "Referendum",
+      "counties": [
+        "Darlington"
+      ],
+      "where": "Darlington County",
+      "url": "https://scvotes.gov/event/palmetto-rural-fire-district-referendum-2/"
+    },
+    {
+      "id": 16226,
+      "title": "Town of Cottageville Special Election",
+      "date": "2026-08-04",
+      "start_et": "2026-08-04 07:00:00",
+      "end_et": "2026-08-04 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Colleton"
+      ],
+      "where": "Colleton County",
+      "url": "https://scvotes.gov/event/town-of-cottageville-special-election-3/"
+    },
+    {
+      "id": 14945,
+      "title": "Board of Public Works General Election",
+      "date": "2026-08-11",
+      "start_et": "2026-08-11 07:00:00",
+      "end_et": "2026-08-11 19:00:00",
+      "type": "General",
+      "counties": [
+        "Cherokee"
+      ],
+      "where": "Cherokee County",
+      "url": "https://scvotes.gov/event/board-of-public-works-general-election-5/"
+    },
+    {
+      "id": 16227,
+      "title": "Center Rock Zoning Referendum",
+      "date": "2026-08-11",
+      "start_et": "2026-08-11 07:00:00",
+      "end_et": "2026-08-11 19:00:00",
+      "type": "Referendum",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/event/center-rock-zoning-referendum-2/"
+    },
+    {
+      "id": 14948,
+      "title": "Cherokee Co School Board Gen Election",
+      "date": "2026-08-11",
+      "start_et": "2026-08-11 07:00:00",
+      "end_et": "2026-08-11 19:00:00",
+      "type": "General",
+      "counties": [
+        "Cherokee"
+      ],
+      "where": "Cherokee County",
+      "url": "https://scvotes.gov/event/cherokee-co-school-board-gen-election/"
+    },
+    {
+      "id": 14947,
+      "title": "City of Gaffney General Election",
+      "date": "2026-08-11",
+      "start_et": "2026-08-11 07:00:00",
+      "end_et": "2026-08-11 19:00:00",
+      "type": "General",
+      "counties": [
+        "Cherokee"
+      ],
+      "where": "Cherokee County",
+      "url": "https://scvotes.gov/event/city-of-gaffney-general-election-5/"
+    },
+    {
+      "id": 14946,
+      "title": "Town of Blacksburg General Election",
+      "date": "2026-08-11",
+      "start_et": "2026-08-11 07:00:00",
+      "end_et": "2026-08-11 19:00:00",
+      "type": "General",
+      "counties": [
+        "Cherokee"
+      ],
+      "where": "Cherokee County",
+      "url": "https://scvotes.gov/event/town-of-blacksburg-general-election-4/"
+    },
+    {
+      "id": 16406,
+      "title": "US Senate Special Republican Primary",
+      "date": "2026-08-11",
+      "start_et": "2026-08-11 07:00:00",
+      "end_et": "2026-08-11 19:00:00",
+      "type": "Primary",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/us-senate-special-republican-primary/"
+    },
+    {
+      "id": 16347,
       "title": "Town of Greeleyville Special Election",
       "date": "2026-08-25",
       "start_et": "2026-08-25 07:00:00",
@@ -35,22 +1291,35 @@
         "Williamsburg"
       ],
       "where": "Williamsburg County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/town-of-greeleyville-special-election/"
     },
     {
-      "id": 900002,
-      "title": "US Senate Special Republican Primary",
+      "id": 16228,
+      "title": "Town of Salley Special Election",
       "date": "2026-08-25",
       "start_et": "2026-08-25 07:00:00",
       "end_et": "2026-08-25 19:00:00",
       "type": "Special",
-      "counties": [],
-      "where": "Statewide",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "counties": [
+        "Aiken"
+      ],
+      "where": "Aiken County",
+      "url": "https://scvotes.gov/event/town-of-salley-special-election-4/"
     },
     {
-      "id": 900003,
-      "title": "S.C. Senate District 15 Special Primary",
+      "id": 16715,
+      "title": "US Senate Special Republican Primary",
+      "date": "2026-08-25",
+      "start_et": "2026-08-25 07:00:00",
+      "end_et": "2026-08-25 19:00:00",
+      "type": "Election",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/us-senate-special-republican-primary-2/"
+    },
+    {
+      "id": 16479,
+      "title": "Senate District 15 Special Primary",
       "date": "2026-09-01",
       "start_et": "2026-09-01 07:00:00",
       "end_et": "2026-09-01 19:00:00",
@@ -59,10 +1328,10 @@
         "York"
       ],
       "where": "York County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/senate-district-15-special-primary/"
     },
     {
-      "id": 900004,
+      "id": 16348,
       "title": "Town of Ehrhardt Special Election",
       "date": "2026-09-22",
       "start_et": "2026-09-22 07:00:00",
@@ -72,35 +1341,86 @@
         "Bamberg"
       ],
       "where": "Bamberg County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/town-of-ehrhardt-special-election-3/"
     },
     {
-      "id": 900005,
-      "title": "Statewide General Election",
+      "id": 16716,
+      "title": "Bethune Mayor Special Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
-      "type": "General",
+      "type": "Election",
       "counties": [],
       "where": "Statewide",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/bethune-mayor-special-election/"
     },
     {
-      "id": 900006,
-      "title": "Town of Allendale General Election",
+      "id": 16636,
+      "title": "City Of Abbeville  Dis 2  Special Elec",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Election",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/city-of-abbeville-dis-2-special-elec/"
+    },
+    {
+      "id": 15442,
+      "title": "City Of Abbeville General Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
       "type": "General",
       "counties": [
-        "Allendale"
+        "Abbeville"
       ],
-      "where": "Allendale County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "where": "Abbeville County",
+      "url": "https://scvotes.gov/event/city-of-abbeville-general-election-4/"
     },
     {
-      "id": 900007,
-      "title": "Town of Quinby General Election",
+      "id": 15686,
+      "title": "City of Beaufort General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Beaufort"
+      ],
+      "where": "Beaufort County",
+      "url": "https://scvotes.gov/event/city-of-beaufort-general-election-4/"
+    },
+    {
+      "id": 14962,
+      "title": "City of Camden General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Kershaw"
+      ],
+      "where": "Kershaw County",
+      "url": "https://scvotes.gov/event/city-of-camden-general-election-4/"
+    },
+    {
+      "id": 14965,
+      "title": "City of Clemson General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Anderson",
+        "Pickens"
+      ],
+      "where": "Anderson County, Pickens County",
+      "url": "https://scvotes.gov/event/city-of-clemson-general-election-pickens/"
+    },
+    {
+      "id": 15246,
+      "title": "City of Florence General Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
@@ -109,23 +1429,10 @@
         "Florence"
       ],
       "where": "Florence County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/city-of-florence-general-election-4/"
     },
     {
-      "id": 900008,
-      "title": "Florence School District 3 General Election",
-      "date": "2026-11-03",
-      "start_et": "2026-11-03 07:00:00",
-      "end_et": "2026-11-03 19:00:00",
-      "type": "General",
-      "counties": [
-        "Florence"
-      ],
-      "where": "Florence County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
-    },
-    {
-      "id": 900009,
+      "id": 14954,
       "title": "City of Greenwood General Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
@@ -135,10 +1442,294 @@
         "Greenwood"
       ],
       "where": "Greenwood County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/city-of-greenwood-general-election-5/"
     },
     {
-      "id": 900010,
+      "id": 15248,
+      "title": "City of Hanahan General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Berkeley"
+      ],
+      "where": "Berkeley County",
+      "url": "https://scvotes.gov/event/city-of-hanahan-general-election-berkeley/"
+    },
+    {
+      "id": 15447,
+      "title": "City of Hardeeville General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Beaufort",
+        "Jasper"
+      ],
+      "where": "Beaufort County, Jasper County",
+      "url": "https://scvotes.gov/event/city-of-hardeeville-general-election-2/"
+    },
+    {
+      "id": 14963,
+      "title": "City of Mullins General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Marion"
+      ],
+      "where": "Marion County",
+      "url": "https://scvotes.gov/event/city-of-mullins-general-election-4/"
+    },
+    {
+      "id": 15564,
+      "title": "City of North Augusta General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Aiken",
+        "Edgefield"
+      ],
+      "where": "Aiken County, Edgefield County",
+      "url": "https://scvotes.gov/event/city-of-north-augusta-general-election-edgefield-13/"
+    },
+    {
+      "id": 15689,
+      "title": "City of Sumter General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Sumter"
+      ],
+      "where": "Sumter County",
+      "url": "https://scvotes.gov/event/city-of-sumter-general-election-4/"
+    },
+    {
+      "id": 14966,
+      "title": "City of Union General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Union"
+      ],
+      "where": "Union County",
+      "url": "https://scvotes.gov/event/city-of-union-general-election-4/"
+    },
+    {
+      "id": 14953,
+      "title": "Florence School District 3 General Elect",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/florence-school-district-3-general-elect/"
+    },
+    {
+      "id": 15450,
+      "title": "Florence School District 5",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/florence-school-district-5-2/"
+    },
+    {
+      "id": 15451,
+      "title": "General Election - Peak",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Newberry"
+      ],
+      "where": "Newberry County",
+      "url": "https://scvotes.gov/event/general-election-peak-2/"
+    },
+    {
+      "id": 15452,
+      "title": "General Election - Silverstreet",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Newberry"
+      ],
+      "where": "Newberry County",
+      "url": "https://scvotes.gov/event/general-election-silverstreet-2/"
+    },
+    {
+      "id": 15453,
+      "title": "General Election - Whitmire",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Newberry"
+      ],
+      "where": "Newberry County",
+      "url": "https://scvotes.gov/event/general-election-whitmire-2/"
+    },
+    {
+      "id": 15454,
+      "title": "Lake City General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/lake-city-general-election-4/"
+    },
+    {
+      "id": 16643,
+      "title": "Richland School Dist 1 Spec Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Richland"
+      ],
+      "where": "Richland County",
+      "url": "https://scvotes.gov/event/richland-school-dist-1-spec-election/"
+    },
+    {
+      "id": 16353,
+      "title": "SC Senate District 15 Special Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "York"
+      ],
+      "where": "York County",
+      "url": "https://scvotes.gov/event/sc-senate-district-15-special-election/"
+    },
+    {
+      "id": 15455,
+      "title": "Statewide General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/statewide-general-election-4/"
+    },
+    {
+      "id": 14950,
+      "title": "Town of Allendale General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Allendale"
+      ],
+      "where": "Allendale County",
+      "url": "https://scvotes.gov/event/town-of-allendale-general-election-4/"
+    },
+    {
+      "id": 15690,
+      "title": "Town of Blenheim General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Marlboro"
+      ],
+      "where": "Marlboro County",
+      "url": "https://scvotes.gov/event/town-of-blenheim-general-election-2/"
+    },
+    {
+      "id": 16645,
+      "title": "Town of Calhoun Falls Special Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Election",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/town-of-calhoun-falls-special-election-3/"
+    },
+    {
+      "id": 14967,
+      "title": "Town of Carlisle General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Union"
+      ],
+      "where": "Union County",
+      "url": "https://scvotes.gov/event/town-of-carlisle-general-election-4/"
+    },
+    {
+      "id": 16461,
+      "title": "Town of Central Special Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Pickens"
+      ],
+      "where": "Pickens County",
+      "url": "https://scvotes.gov/event/town-of-central-special-election/"
+    },
+    {
+      "id": 15565,
+      "title": "Town of Clio General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Marlboro"
+      ],
+      "where": "Marlboro County",
+      "url": "https://scvotes.gov/event/town-of-clio-general-election-4/"
+    },
+    {
+      "id": 15692,
+      "title": "Town of Hilton Head General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Beaufort"
+      ],
+      "where": "Beaufort County",
+      "url": "https://scvotes.gov/event/town-of-hilton-head-general-election-4/"
+    },
+    {
+      "id": 14959,
       "title": "Town of Hodges General Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
@@ -148,11 +1739,87 @@
         "Greenwood"
       ],
       "where": "Greenwood County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/town-of-hodges-general-election-4/"
     },
     {
-      "id": 900011,
-      "title": "City of Clemson General Election",
+      "id": 14964,
+      "title": "Town of Nichols General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Marion"
+      ],
+      "where": "Marion County",
+      "url": "https://scvotes.gov/event/town-of-nichols-general-election-4/"
+    },
+    {
+      "id": 15693,
+      "title": "Town of Pinewood General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Sumter"
+      ],
+      "where": "Sumter County",
+      "url": "https://scvotes.gov/event/town-of-pinewood-general-election-4/"
+    },
+    {
+      "id": 16726,
+      "title": "Town of Pomaria General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Election",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/town-of-pomaria-general-election/"
+    },
+    {
+      "id": 14952,
+      "title": "Town of Quinby General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/town-of-quinby-general-election-4/"
+    },
+    {
+      "id": 15513,
+      "title": "Town of Saluda General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Saluda"
+      ],
+      "where": "Saluda County",
+      "url": "https://scvotes.gov/event/town-of-saluda-general-election-4/"
+    },
+    {
+      "id": 16646,
+      "title": "Town of Silverstreet General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Newberry"
+      ],
+      "where": "Newberry County",
+      "url": "https://scvotes.gov/event/town-of-silverstreet-general-election-3/"
+    },
+    {
+      "id": 15514,
+      "title": "Town of Starr General Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
@@ -161,88 +1828,99 @@
         "Anderson"
       ],
       "where": "Anderson County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "url": "https://scvotes.gov/event/town-of-starr-general-election-4/"
     },
     {
-      "id": 900012,
-      "title": "City of Clemson General Election",
+      "id": 16647,
+      "title": "Town of Tatum Special Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Marlboro"
+      ],
+      "where": "Marlboro County",
+      "url": "https://scvotes.gov/event/town-of-tatum-special-election-3/"
+    },
+    {
+      "id": 14961,
+      "title": "Town of Troy General Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
       "type": "General",
       "counties": [
-        "Pickens"
+        "Greenwood"
       ],
-      "where": "Pickens County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "where": "Greenwood County",
+      "url": "https://scvotes.gov/event/town-of-troy-general-election-4/"
     },
     {
-      "id": 900013,
-      "title": "Governor General Election",
-      "date": "2026-11-03",
-      "start_et": "2026-11-03 07:00:00",
-      "end_et": "2026-11-03 19:00:00",
-      "type": "General",
-      "counties": [],
-      "where": "Statewide",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
-    },
-    {
-      "id": 900014,
-      "title": "Attorney General General Election",
-      "date": "2026-11-03",
-      "start_et": "2026-11-03 07:00:00",
-      "end_et": "2026-11-03 19:00:00",
-      "type": "General",
-      "counties": [],
-      "where": "Statewide",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
-    },
-    {
-      "id": 900015,
-      "title": "Superintendent of Education General Election",
-      "date": "2026-11-03",
-      "start_et": "2026-11-03 07:00:00",
-      "end_et": "2026-11-03 19:00:00",
-      "type": "General",
-      "counties": [],
-      "where": "Statewide",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
-    },
-    {
-      "id": 900016,
-      "title": "U.S. House District 1 General Election",
-      "date": "2026-11-03",
-      "start_et": "2026-11-03 07:00:00",
-      "end_et": "2026-11-03 19:00:00",
-      "type": "General",
-      "counties": [],
-      "where": "Statewide",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
-    },
-    {
-      "id": 900017,
-      "title": "U.S. Senate General Election",
-      "date": "2026-11-03",
-      "start_et": "2026-11-03 07:00:00",
-      "end_et": "2026-11-03 19:00:00",
-      "type": "General",
-      "counties": [],
-      "where": "Statewide",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
-    },
-    {
-      "id": 900018,
-      "title": "S.C. House District 75 General Election",
+      "id": 14960,
+      "title": "Town of Ware Shoals General Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
       "type": "General",
       "counties": [
-        "Richland"
+        "Abbeville",
+        "Greenwood"
       ],
-      "where": "Richland County",
-      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+      "where": "Abbeville County, Greenwood County",
+      "url": "https://scvotes.gov/event/town-of-ware-shoals-general-election-greenwood-3/"
+    },
+    {
+      "id": 16731,
+      "title": "Town of Whitmire General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Newberry"
+      ],
+      "where": "Newberry County",
+      "url": "https://scvotes.gov/event/town-of-whitmire-general-election-3/"
+    },
+    {
+      "id": 15518,
+      "title": "Town of Williamston General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/event/town-of-williamston-general-election-4/"
+    },
+    {
+      "id": 16732,
+      "title": "Walhalla City Council Special Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Oconee"
+      ],
+      "where": "Oconee County",
+      "url": "https://scvotes.gov/event/walhalla-city-council-special-election-4/"
+    },
+    {
+      "id": 14968,
+      "title": "Town of Paxville General Election",
+      "date": "2026-12-01",
+      "start_et": "2026-12-01 07:00:00",
+      "end_et": "2026-12-01 19:00:00",
+      "type": "General",
+      "counties": [
+        "Clarendon"
+      ],
+      "where": "Clarendon County",
+      "url": "https://scvotes.gov/event/town-of-paxville-general-election-5/"
     }
   ]
 }
