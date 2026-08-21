@@ -1,0 +1,248 @@
+{
+  "checked_at": "2026-08-18T03:55:55Z",
+  "checked_at_et": "Aug 17, 2026, 11:55 PM",
+  "generated_at": "2026-08-18T03:55:55Z",
+  "generated_at_et": "Aug 17, 2026, 11:55 PM",
+  "changed_this_run": true,
+  "source": "https://scvotes.gov/elections-statistics/upcoming-elections/",
+  "api": "https://scvotes.gov/wp-json/tribe/events/v1/events",
+  "window_start": "2026-01-01",
+  "filter": "none \u2014 every event on the state's calendar; the page groups them",
+  "seed": true,
+  "count": 19,
+  "elections": [
+    {
+      "id": 900000,
+      "title": "Town of Salley Special Election",
+      "date": "2026-08-25",
+      "start_et": "2026-08-25 07:00:00",
+      "end_et": "2026-08-25 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Aiken"
+      ],
+      "where": "Aiken County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900001,
+      "title": "Town of Greeleyville Special Election",
+      "date": "2026-08-25",
+      "start_et": "2026-08-25 07:00:00",
+      "end_et": "2026-08-25 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Williamsburg"
+      ],
+      "where": "Williamsburg County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900002,
+      "title": "US Senate Special Republican Primary",
+      "date": "2026-08-25",
+      "start_et": "2026-08-25 07:00:00",
+      "end_et": "2026-08-25 19:00:00",
+      "type": "Special",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900003,
+      "title": "S.C. Senate District 15 Special Primary",
+      "date": "2026-09-01",
+      "start_et": "2026-09-01 07:00:00",
+      "end_et": "2026-09-01 19:00:00",
+      "type": "Primary",
+      "counties": [
+        "York"
+      ],
+      "where": "York County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900004,
+      "title": "Town of Ehrhardt Special Election",
+      "date": "2026-09-22",
+      "start_et": "2026-09-22 07:00:00",
+      "end_et": "2026-09-22 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Bamberg"
+      ],
+      "where": "Bamberg County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900005,
+      "title": "Statewide General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900006,
+      "title": "Town of Allendale General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Allendale"
+      ],
+      "where": "Allendale County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900007,
+      "title": "Town of Quinby General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900008,
+      "title": "Florence School District 3 General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900009,
+      "title": "City of Greenwood General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Greenwood"
+      ],
+      "where": "Greenwood County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900010,
+      "title": "Town of Hodges General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Greenwood"
+      ],
+      "where": "Greenwood County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900011,
+      "title": "City of Clemson General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900012,
+      "title": "City of Clemson General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Pickens"
+      ],
+      "where": "Pickens County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900013,
+      "title": "Governor General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900014,
+      "title": "Attorney General General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900015,
+      "title": "Superintendent of Education General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900016,
+      "title": "U.S. House District 1 General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900017,
+      "title": "U.S. Senate General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    },
+    {
+      "id": 900018,
+      "title": "S.C. House District 75 General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Richland"
+      ],
+      "where": "Richland County",
+      "url": "https://scvotes.gov/elections-statistics/upcoming-elections/"
+    }
+  ]
+}
