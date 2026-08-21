@@ -383,7 +383,7 @@
   .spfilter { display: flex; align-items: center; gap: 9px; margin: 16px 0 0; font-size: 12.5px; color: var(--ink-dim); flex-wrap: wrap; }
   .spfilter select {
     font: inherit; font-size: 12.5px; color: var(--ink); background: var(--panel-2);
-    border: 1px solid var(--line); border-radius: 8px; padding: 13px 10px; cursor: pointer; max-width: 100%;
+    border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; max-width: 260px;
   }
   .spfilter select:focus-visible { outline: 2px solid var(--sp); outline-offset: 1px; }
 
@@ -392,24 +392,12 @@
     display: flex; align-items: center; gap: 13px; flex-wrap: wrap;
     font-size: 12px; color: var(--ink-faint); margin: 12px 0 0; line-height: 1.55;
   }
-  /* A grid whose columns are both 1fr: the two buttons take the width of the
-     wider one, so they match without either being measured by hand.
-
-     `flex: none` used to sit here, which meant this strip kept its content
-     width no matter how narrow the screen got — 411px of buttons inside a
-     320px phone, and the whole document scrolled sideways. It can shrink now,
-     and below 520px the pair stacks rather than being squeezed. */
-  .feedbtns {
-    flex: 0 1 auto; min-width: 0; max-width: 100%;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  }
-  .feedbtns > * { min-width: 0; }
-  @media (max-width: 520px) {
-    .feedbtns { grid-template-columns: 1fr; width: 100%; }
-  }
+  /* An inline grid whose columns are all 1fr: both buttons take the width of
+     the wider one, so they match without either being measured by hand. */
+  .feedbtns { flex: none; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; }
   .checkbtn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 14px 15px; border-radius: 9px; border: 1px solid var(--line);
+    padding: 9px 15px; border-radius: 9px; border: 1px solid var(--line);
     background: var(--panel); color: var(--ink); font-family: inherit;
     font-size: 12.5px; font-weight: 600; cursor: pointer; box-shadow: var(--shadow);
     text-decoration: none; white-space: nowrap; text-align: center;
@@ -522,11 +510,9 @@
   .hidden { display: none !important; }
 
   @media (max-width: 720px) {
-    /* Three declarations lived here that could never take effect and have been
-       removed: `header { flex-direction; gap }` (the header is display:block
-       with one child, so flex properties are inert), `h1 { font-size: 23px }`
-       (.masthead #pageTitle outranks a bare h1, so the fluid size always won),
-       and `.yearbay { flex: none }` (its parent is not a flex container). */
+    header { flex-direction: column; align-items: stretch; gap: 14px; }
+    h1 { font-size: 23px; }
+    .yearbay { flex: none; }
     .yeartile { align-self: center; }
     .clocks { grid-template-columns: 1fr; }
     .unit .n { font-size: 26px; }
@@ -636,19 +622,18 @@
 
   <hr class="rule">
 
-  <!-- Special is static markup because its body has controls the generated
-       panels do not; renderGroups detaches and re-inserts it around each
-       rewrite so it stays first in this list. -->
-  <div id="groupList">
-    <details class="sp-panel grp" id="special">
-      <summary>
-        <span class="sp-chev">&#9654;</span>
-        <span class="sp-title">Special Elections</span>
-        <span class="sp-badge" id="spBadge">Checking&hellip;</span>
-        <span class="sp-peek" id="spPeek"></span>
-      </summary>
-      <div class="sp-body" id="spBody"></div>
-    </details>
+  <div id="groupPanels">
+    <div id="groupList">
+      <details class="sp-panel grp" id="special">
+        <summary>
+          <span class="sp-chev">&#9654;</span>
+          <span class="sp-title">Special Elections</span>
+          <span class="sp-badge" id="spBadge">Checking&hellip;</span>
+          <span class="sp-peek" id="spPeek"></span>
+        </summary>
+        <div class="sp-body" id="spBody"></div>
+      </details>
+    </div>
   </div>
 
   <div class="feed">
@@ -722,6 +707,7 @@
     photoId:  { u: "https://scvotes.gov/voters/photo-id-requirements/",                        l: "Check Photo ID Rules" },
     absTrack: { u: "https://vrems.scvotes.sc.gov/Voter/Login?PageMode=AbsenteeInfo",           l: "Track Your Absentee Ballot" },
     polling:  { u: "https://vrems.scvotes.sc.gov/Voter/Login?PageMode=PollingPlace",           l: "Find Your Polling Place" },
+    sample:   { u: "https://vrems.scvotes.sc.gov/Voter/Login?PageMode=Sampleballot",           l: "Get Your Sample Ballot" },
     uocava:   { u: "https://scvotes.gov/voters/military-overseas-citizens/",                   l: "Military And Overseas Voting" },
     audits:   { u: "https://scvotes.gov/elections-statistics/election-audits/",                l: "See Audit Reports" },
     results:  { u: "https://scvotes.gov/elections-statistics/election-results/",               l: "View Certified Results" },
@@ -909,17 +895,21 @@
 
   /* ---------- the live feed ----------
      data/elections.json is rewritten every six hours by a scheduled job that
-     reads the Election Commission's own calendar API. If that file cannot be
-     read, the page says so plainly rather than showing a substitute list.
-
-     A hand-entered fallback used to live here: five 2026 races, stamped with
-     the date someone typed them. It had no entries for any other year, so from
-     2027 on it would have answered "nothing scheduled" — which is a different
-     and worse claim than "the calendar could not be loaded". An honest empty
-     state ages better than stale data. ------------------------------------- */
+     reads the Election Commission's own calendar API. If the fetch fails —
+     offline, first load before the job has ever run, opened from a USB stick —
+     the hand-entered list below takes over so the page is never blank. -------- */
 
   var FEED = null;              // parsed elections.json
   var FEED_STATE = "loading";   // loading | live | offline
+  var FALLBACK_AS_OF = "17 Aug 2026";
+  var FALLBACK = [
+    { y:2026, t:"U.S. Senate Special Republican Primary Runoff", where:"Statewide", type:"Runoff",
+      d:"the winner appears on the Nov 3 general election ballot", day:utc(2026,7,25) },
+    { y:2026, t:"Town Of Salley Special Election", where:"Aiken County", type:"Special", d:"", day:utc(2026,7,25) },
+    { y:2026, t:"Town Of Greeleyville Special Election", where:"Williamsburg County", type:"Special", d:"", day:utc(2026,7,25) },
+    { y:2026, t:"S.C. Senate District 15 Special Primary", where:"York County", type:"Primary", d:"", day:utc(2026,8,1) },
+    { y:2026, t:"Town Of Ehrhardt Special Election", where:"Bamberg County", type:"Special", d:"", day:utc(2026,8,22) }
+  ];
 
   function hhmm(s, dh, dm) {
     if (typeof s === "string" && s.length >= 16) {
@@ -949,14 +939,21 @@
     return out;
   }
 
+  function normFallback(y) {
+    return FALLBACK.filter(function (s) { return s.y === y; }).map(function (s) {
+      return { t: s.t, where: s.where, type: s.type, counties: [], d: s.d, day: s.day,
+               sh: 7, sm: 0, eh: 19, em: 0, url: null };
+    });
+  }
+
   function specialsFor(y) {
-    var all = normFeed(y);
+    var all = (FEED_STATE === "live") ? normFeed(y) : normFallback(y);
     return all.filter(function (e) { return inGroup(e, "special"); });
   }
 
   // Everything for the year, ungrouped — what the five secondary panels sieve.
   function allFor(y) {
-    return normFeed(y);   // empty until the saved calendar loads
+    return (FEED_STATE === "live") ? normFeed(y) : normFallback(y);
   }
 
   /* Two clocks on the data, and they answer different questions.
@@ -1107,15 +1104,15 @@
     return page(1);
   }
 
-  /* One caller, one behaviour: a deliberate press always reports what happened.
-     This used to take a `silent` flag for an automatic on-load pull that no
-     longer exists — and because the click handler was wired straight to this
-     function, the browser's MouseEvent arrived as that flag and suppressed
-     every error the button was supposed to show. */
-  function checkNow() {
+  /* silent=true is the automatic pull that runs once on page load. It behaves
+     exactly like the button except in failure: a visitor who arrives to a red
+     error they did not ask for learns nothing useful, so a silent attempt that
+     is refused simply leaves the saved list and its normal status line in place.
+     The button, pressed deliberately, always reports what happened. */
+  function checkNow(silent) {
     if (checking) return;
     setChecking(true);
-    msg("", "Asking the South Carolina Election Commission for its current calendar…");
+    if (!silent) msg("", "Asking the South Carolina Election Commission for its current calendar…");
 
     // Compare on name-and-date, not on the state's internal event id. Ids are
     // reassigned when an event is re-published, and the seed file shipped with
@@ -1182,7 +1179,8 @@
         " This updates your view only; the published copy is refreshed separately.");
       if (!$("special").open) $("special").open = true;
     }).catch(function (err) {
-      setChecking(false, "Try Again");
+      setChecking(false, silent ? "Check For New Elections" : "Try Again");
+      if (silent) { renderFeedMsg(); return; }
       var why = (err && err.message) || "The request failed.";
       var blocked = !err || !err.message || /Failed to fetch|NetworkError|Load failed|CORS/i.test(String(err.message));
       msg("err",
@@ -1199,9 +1197,8 @@
     if (checking) return;
     if (FEED_STATE === "loading") { msg("", "Loading the saved calendar…"); return; }
     if (FEED_STATE === "offline") {
-      msg("err", "<b>The saved calendar could not be loaded.</b> The statewide clocks above are computed from " +
-        "statute and are unaffected; the election panels cannot be filled until this page can read " +
-        "data/elections.json or ask the state directly. Press the button to try the live calendar.");
+      msg("err", "<b>The saved calendar could not be loaded.</b> Showing the short list written into this file on " +
+        FALLBACK_AS_OF + ". Press the button to ask the state directly.");
       return;
     }
     var checkedH = feedAgeHours("checked_at");
@@ -1424,16 +1421,6 @@
       $("spBody").innerHTML = '<p class="sp-empty">Reading the state&rsquo;s election calendar&hellip;</p>';
       return;
     }
-    /* "None Listed" would be a claim about South Carolina. This is a claim
-       about this page: it could not read its own data file. */
-    if (FEED_STATE === "offline") {
-      setText("spBadge", "Unavailable");
-      setText("spPeek", "");
-      $("spBody").innerHTML = '<p class="sp-empty">The saved calendar could not be loaded, so this page ' +
-        'cannot say what is scheduled. Press <b>Check For New Elections</b> to ask the Election Commission ' +
-        'directly, or open the state&rsquo;s list from the button below.</p>';
-      return;
-    }
 
     setText("spBadge", list.length ? list.length + " Listed" : "None Listed");
 
@@ -1539,16 +1526,14 @@
 
       var body = list.length
         ? '<div class="sp-list">' + rows + '</div>'
-        : '<p class="sp-empty">' + (FEED_STATE === "offline"
-            ? "The saved calendar could not be loaded, so this panel cannot say what is scheduled."
-            : (spec.whenEmpty ||
-               "Nothing in this category is on the state&rsquo;s calendar for " + year + ".")) + '</p>';
+        : '<p class="sp-empty">' + (spec.whenEmpty ||
+            "Nothing in this category is on the state&rsquo;s calendar for " + year + ".") + '</p>';
 
       html += '<details class="sp-panel grp" id="grp-' + spec.key + '">' +
                 '<summary>' +
                   '<span class="sp-chev">&#9654;</span>' +
                   '<span class="sp-title">' + spec.label + '</span>' +
-                  '<span class="sp-badge">' + (list.length ? list.length + " Listed" : (FEED_STATE === "offline" ? "Unavailable" : "None")) + '</span>' +
+                  '<span class="sp-badge">' + (list.length ? list.length + " Listed" : "None") + '</span>' +
                   '<span class="sp-peek">' +
                     (nxt ? "Next: " + fmt(nxt.day) + " &middot; " + humanGap(spOpen(nxt) - now)
                          : (list.length ? "All Held" : "")) +
@@ -1686,9 +1671,7 @@
     if (!document.hidden) { var a = feedAgeHours(); if (a == null || a > 6) loadFeed(); }
   });
 
-  /* The wrapper matters: wired directly, addEventListener would hand checkNow
-     the browser's MouseEvent as its first argument. */
-  $("checkBtn").addEventListener("click", function () { checkNow(); });
+  $("checkBtn").addEventListener("click", checkNow);
   renderYear();
   loadFeed();
   setInterval(tick, 1000);
