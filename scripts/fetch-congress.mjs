@@ -101,18 +101,57 @@ async function currentDelegation() {
 
 const PARTY_SHORT = { REP: "R", DEM: "D", LIB: "L", GRE: "G", CON: "C", IND: "I", UNK: "?" };
 
+/* This roster is optional by design: without data/congress.json the page simply
+   omits the federal rows. So a failure here reports loudly and exits 0. Exiting 1
+   put "Error: Process completed with exit code 1" in the Actions log for an
+   outcome that is not an error, which is a good way to send someone hunting for
+   a problem they do not have. */
 function fail(msg) {
-  console.error("fetch-congress failed: " + msg);
-  process.exit(1);
+  console.error("");
+  console.error("Could not build the federal roster: " + msg);
+  console.error("data/congress.json is left as it was. The page omits the U.S. Congressional");
+  console.error("rows when that file is absent, and everything else on it is unaffected.");
+  console.error("");
+  process.exit(0);
+}
+
+/* URLSearchParams stringifies an array by joining it with a comma, so
+   `{ office: ["H", "S"] }` became `office=H%2CS` — one value reading "H,S".
+   OpenFEC validates `office` against OneOf(['H','S','P']), so every request
+   this script made was rejected 422 before it ever looked at the key. A
+   repeated parameter has to be appended one value at a time.
+
+   This is the bug that made a perfectly good FEC key look broken. */
+function query(params) {
+  const qs = new URLSearchParams();
+  for (const [k, v] of Object.entries(params)) {
+    if (v === undefined || v === null) continue;
+    if (Array.isArray(v)) v.forEach(x => qs.append(k, x));
+    else qs.append(k, v);
+  }
+  qs.append("api_key", KEY);
+  return qs;
 }
 
 async function get(pathname, params) {
-  const qs = new URLSearchParams({ ...params, api_key: KEY });
-  const url = `${API}${pathname}?${qs}`;
+  const url = `${API}${pathname}?${query(params)}`;
   const res = await fetch(url, { headers: { accept: "application/json" } });
-  if (res.status === 429) fail("rate limited by api.data.gov (HTTP 429). The key allows 1,000 calls an hour.");
-  if (!res.ok) fail(`HTTP ${res.status} on ${pathname}`);
-  return res.json();
+  if (res.ok) return res.json();
+
+  /* Say what the FEC said. A bare status code sends you hunting through your
+     own settings for a fault that is described plainly in the response body. */
+  let detail = "";
+  try {
+    const body = await res.text();
+    detail = body.slice(0, 300).replace(/\s+/g, " ").trim();
+  } catch (e) { /* body already consumed or empty */ }
+
+  const hint =
+    res.status === 429 ? "Rate limited. A registered key allows 1,000 calls an hour; DEMO_KEY allows 30." :
+    res.status === 403 ? "Rejected. Check the FEC_API_KEY secret is the key itself, with no quotes or spaces." :
+    res.status === 422 ? "The API refused a parameter — this is a bug in this script, not in your key." :
+    "";
+  fail(`HTTP ${res.status} on ${pathname}${hint ? " — " + hint : ""}${detail ? "\n  API said: " + detail : ""}`);
 }
 
 /* Pages until the API says there are no more. `pagination.pages` is
