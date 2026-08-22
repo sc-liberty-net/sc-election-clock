@@ -1,0 +1,527 @@
+{
+  "checked_at": "2026-08-22T07:50:37.903Z",
+  "cycle": 2026,
+  "state": "SC",
+  "source": "Federal Election Commission (OpenFEC) for filings; @unitedstates congress-legislators for sitting members",
+  "roster_url": "https://unitedstates.github.io/congress-legislators/legislators-current.csv",
+  "api": "https://api.open.fec.gov/v1",
+  "licence": "Public domain, 17 USC 105 / CC0 1.0",
+  "general_election_date": "2026-11-03",
+  "primary_election_date": "2026-06-09",
+  "senate_classes": [
+    {
+      "class": "II",
+      "on_ballot": true
+    },
+    {
+      "class": "III",
+      "on_ballot": false
+    }
+  ],
+  "count": 9,
+  "seats": [
+    {
+      "office": "S",
+      "district": null,
+      "senate_class": "II",
+      "on_ballot": true,
+      "ballot_year": 2026,
+      "label": "U.S. Senate",
+      "where": "Statewide",
+      "url": "https://www.fec.gov/data/elections/senate/SC/2026/",
+      "candidates": [
+        {
+          "name": "ANDREWS, ANNIE",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "BAUER, ANDRE",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "BROWN, BRANDON",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "BUCKNER, DUKE",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "COWEN, CALVIN",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "DANS, PAUL",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "DISMUKES, THOMAS KEITH",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "FREEMAN, KYLE ODONNELL",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "FRY, RUSSELL",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "GRAHAM, DARLINE",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "GRAHAM, LINDSEY O.",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": true
+        },
+        {
+          "name": "HERRMANN, PATRICK JOSEPH",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "JOHNSON, LEE",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "LYNCH, MARK",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "NORMAN, RALPH",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "PARKER, GLENDA GAIL",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "SANFORD, MARSHALL C HON.",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "WHITENER, KASIE DR.",
+          "party": "L",
+          "party_full": "LIBERTARIAN PARTY",
+          "incumbent": false
+        }
+      ],
+      "incumbent": {
+        "name": "Darline Graham",
+        "party": "R",
+        "url": "https://www.dgraham.senate.gov",
+        "bioguide": "G000608"
+      },
+      "filed": 18,
+      "summary": "18 candidates filed · 4 D, 1 L, 13 R"
+    },
+    {
+      "office": "S",
+      "district": null,
+      "senate_class": "III",
+      "on_ballot": false,
+      "ballot_year": 2028,
+      "label": "U.S. Senate",
+      "where": "Statewide",
+      "url": "https://www.fec.gov/data/elections/senate/SC/2026/",
+      "candidates": [],
+      "incumbent": {
+        "name": "Tim Scott",
+        "party": "R",
+        "url": "https://www.scott.senate.gov",
+        "bioguide": "S001184"
+      },
+      "filed": 0,
+      "summary": "Not on the 2026 ballot — next contested in 2028"
+    },
+    {
+      "office": "H",
+      "district": "01",
+      "senate_class": null,
+      "on_ballot": true,
+      "ballot_year": 2026,
+      "label": "U.S. House District 1",
+      "where": "SC District 1",
+      "url": "https://www.fec.gov/data/elections/house/SC/01/2026/",
+      "candidates": [
+        {
+          "name": "ATWOOD, KJ",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "BROWN, DAN",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "CUNNINGHAM, LOGAN",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "DANTZLER, FRANCINA",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "DEFORD, WILLIAM MAC",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "DIAZ, MAX ELIOT",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "DYKES, TYLER",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "FULMER, MATTHEW",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "HONEYCUTT, JENNY COSTA",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "LACORE, NANCY",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "MCCOWN, SAM DR",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "PELBATH, ALEX",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "REESIDE, WILLIAM OLIVER JR.",
+          "party": "L",
+          "party_full": "LIBERTARIAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "RIVERA-VAZQUEZ, MAYRA",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "SMITH, MARK",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        }
+      ],
+      "incumbent": {
+        "name": "Nancy Mace",
+        "party": "R",
+        "url": "https://mace.house.gov",
+        "bioguide": "M000194"
+      },
+      "filed": 15,
+      "summary": "15 candidates filed · 7 D, 1 L, 7 R"
+    },
+    {
+      "office": "H",
+      "district": "02",
+      "senate_class": null,
+      "on_ballot": true,
+      "ballot_year": 2026,
+      "label": "U.S. House District 2",
+      "where": "SC District 2",
+      "url": "https://www.fec.gov/data/elections/house/SC/02/2026/",
+      "candidates": [
+        {
+          "name": "GIBBONS, SAMUEL LUTHER MR. IV",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "KHALIFA, ZYON DESHON",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "KHALIFA, ZYON DESHON",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "PRUITT, ROGER KEITH",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "REDMOND, HAMPTON",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "WILSON, JOE THE HON.",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": true
+        }
+      ],
+      "incumbent": {
+        "name": "Joe Wilson",
+        "party": "R",
+        "url": "https://joewilson.house.gov",
+        "bioguide": "W000795"
+      },
+      "filed": 6,
+      "summary": "6 candidates filed · 3 D, 3 R"
+    },
+    {
+      "office": "H",
+      "district": "03",
+      "senate_class": null,
+      "on_ballot": true,
+      "ballot_year": 2026,
+      "label": "U.S. House District 3",
+      "where": "SC District 3",
+      "url": "https://www.fec.gov/data/elections/house/SC/03/2026/",
+      "candidates": [
+        {
+          "name": "BIGGS, SHERI",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": true
+        },
+        {
+          "name": "LEHMACHER, EUNICE",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        }
+      ],
+      "incumbent": {
+        "name": "Sheri Biggs",
+        "party": "R",
+        "url": "https://sheribiggs.house.gov",
+        "bioguide": "B001325"
+      },
+      "filed": 2,
+      "summary": "2 candidates filed · 1 D, 1 R"
+    },
+    {
+      "office": "H",
+      "district": "04",
+      "senate_class": null,
+      "on_ballot": true,
+      "ballot_year": 2026,
+      "label": "U.S. House District 4",
+      "where": "SC District 4",
+      "url": "https://www.fec.gov/data/elections/house/SC/04/2026/",
+      "candidates": [
+        {
+          "name": "ATCHLEY, DAVID MICHAEL",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "LEE, ROBERT EUGENE",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "MCCLAIN, COURTNEY",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "TIMMONS, WILLIAM R IV",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": true
+        }
+      ],
+      "incumbent": {
+        "name": "William R. Timmons IV",
+        "party": "R",
+        "url": "https://timmons.house.gov",
+        "bioguide": "T000480"
+      },
+      "filed": 4,
+      "summary": "4 candidates filed · 1 D, 3 R"
+    },
+    {
+      "office": "H",
+      "district": "05",
+      "senate_class": null,
+      "on_ballot": true,
+      "ballot_year": 2026,
+      "label": "U.S. House District 5",
+      "where": "SC District 5",
+      "url": "https://www.fec.gov/data/elections/house/SC/05/2026/",
+      "candidates": [
+        {
+          "name": "BLEDSOE, BILL",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "CLIMER, WES",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "CLOUGH, ANDREW",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "DITTMER, MALLORY",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        },
+        {
+          "name": "HARPER, ALEX",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        }
+      ],
+      "incumbent": {
+        "name": "Ralph Norman",
+        "party": "R",
+        "url": "https://norman.house.gov",
+        "bioguide": "N000190"
+      },
+      "filed": 5,
+      "summary": "5 candidates filed · 3 D, 2 R"
+    },
+    {
+      "office": "H",
+      "district": "06",
+      "senate_class": null,
+      "on_ballot": true,
+      "ballot_year": 2026,
+      "label": "U.S. House District 6",
+      "where": "SC District 6",
+      "url": "https://www.fec.gov/data/elections/house/SC/06/2026/",
+      "candidates": [
+        {
+          "name": "CLYBURN, JAMES E",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": true
+        },
+        {
+          "name": "WASHINGTON, MAURICE G MR I",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": false
+        }
+      ],
+      "incumbent": {
+        "name": "James E. Clyburn",
+        "party": "D",
+        "url": "https://clyburn.house.gov",
+        "bioguide": "C000537"
+      },
+      "filed": 2,
+      "summary": "2 candidates filed · 1 D, 1 R"
+    },
+    {
+      "office": "H",
+      "district": "07",
+      "senate_class": null,
+      "on_ballot": true,
+      "ballot_year": 2026,
+      "label": "U.S. House District 7",
+      "where": "SC District 7",
+      "url": "https://www.fec.gov/data/elections/house/SC/07/2026/",
+      "candidates": [
+        {
+          "name": "FRY, RUSSELL",
+          "party": "R",
+          "party_full": "REPUBLICAN PARTY",
+          "incumbent": true
+        },
+        {
+          "name": "VINCENT, JOHN GREGORY",
+          "party": "D",
+          "party_full": "DEMOCRATIC PARTY",
+          "incumbent": false
+        }
+      ],
+      "incumbent": {
+        "name": "Russell Fry",
+        "party": "R",
+        "url": "https://fry.house.gov",
+        "bioguide": "F000478"
+      },
+      "filed": 2,
+      "summary": "2 candidates filed · 1 D, 1 R"
+    }
+  ]
+}
