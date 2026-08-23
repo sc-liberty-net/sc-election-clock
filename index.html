@@ -33,7 +33,7 @@
     color-scheme: dark;
     --bg: #151b27; --panel: #1d2533; --panel-2: #263142; --line: #364357;
     --ink: #e9eff8; --ink-dim: #a6b6cb; --ink-faint: #92a5bb;
-    --ev: #64a6ff; --ed: #ef8465; --good: #45c795; --proj: #d8ab55; --past: #5c6980;
+    --ev: #64a6ff; --ed: #ef6565; --good: #45c795; --proj: #d8ab55; --past: #5c6980;
     --sp: #f0c65f;
     --shadow: 0 1px 2px rgba(4,10,20,.45);
   }
@@ -46,7 +46,7 @@
     font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
     font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 30px 20px 56px; }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 30px 20px 56px; }
 
   /* ---- header + year nav ---- */
   /* The masthead shrink-wraps its text and the tile floats in whatever is left,
@@ -69,7 +69,9 @@
      will slightly over- or under-run, because a fixed coefficient can only be
      exact for one string. */
   .masthead {
-    width: 100%; max-width: 342px; min-width: 0;
+    /* Exactly half the wrap's content box: max-width 800 less 20px of padding
+       either side is 760, and half of that is 380. */
+    width: 100%; max-width: 380px; min-width: 0;
     container-type: inline-size; container-name: masthead;
   }
   /* Leading of 1 makes each box exactly its own type size, so the box hugs the
@@ -91,28 +93,26 @@
      that justifies the FINAL line of a block, and on a one-line block that is
      the only line: the words spread to meet both edges exactly, so all three
      rules end on the same pixel as the year tile below them. */
+  /* The eyebrow joins these two now that its bullet is gone. It had been a flex
+     row so the styled dot could sit between two independently justified runs;
+     with the dot deleted the line is one continuous text run, and a flex
+     container has no line to justify — its single anonymous item sizes to its
+     own content and leaves the slack outside itself, where text-align cannot
+     reach. As a block it justifies the way the other two do. */
   .masthead .eyebrow,
   .masthead #pageTitle,
   .masthead #pageSub { display: block; width: 100%;
                        text-align: justify; text-align-last: justify;
                        white-space: normal; overflow-wrap: break-word; }
-  /* As a flex row with space-between this line had only one gap to absorb all
-     the slack, so the label and the timestamp were shoved to opposite ends with
-     a void between them. As a block it justifies the way the three lines above
-     it do — the space is shared across every word gap, so the line reaches both
-     edges without a hole in the middle. Each span stays nowrap, so when the
-     room runs out the break falls between the label and the timestamp rather
-     than inside a word. */
+  /* One short line, centred. There is nothing left to justify or space apart:
+     the label, the seconds, the zone and the place all moved into the tooltip,
+     and what stays on the tile is a single phrase that should sit in the middle
+     of it. */
   .masthead .nowbar {
-    display: block; width: 100%;
-    text-align: justify; text-align-last: justify;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; flex-wrap: wrap;
     overflow-wrap: normal; word-break: normal;
   }
-  /* The spans are deliberately NOT nowrap. Justification can only stretch the
-     spaces it is allowed to break at, so nowrap spans leave exactly one elastic
-     gap — the void again, just achieved a different way. Letting every word gap
-     participate is what spreads the slack evenly across the line. */
-  .masthead .nowbar > span { white-space: normal; }
 
   /* Each ceiling is the largest size at which that string still holds one line
      in a 390px masthead, found by binary search rather than by eye, then shaved
@@ -136,7 +136,7 @@
      but only since 2023 — an engine that does not parse `cqw` discards the whole
      clamp() and would otherwise fall back to the inherited body size, which is
      wrong for all four. This way it lands on the intended ceiling instead. */
-  .masthead .eyebrow   { font-size: 12px; font-size: clamp(8px,  3.509cqw, 12px); }
+  .masthead .eyebrow   { font-size: 12px; font-size: clamp(8px,  3.13cqw, 11.7px); }
   .masthead #pageTitle { font-size: 24px; font-size: clamp(14px, 7.018cqw, 24px); }
   .masthead #pageSub   { font-size: 18px; font-size: clamp(12px, 5.264cqw, 18px); }
   .masthead .nowbar    { font-size: 12px; font-size: clamp(10px, 3.509cqw, 12px); }
@@ -152,19 +152,44 @@
   h1 { font-size: 27px; line-height: 1.18; margin: 0; font-weight: 650; letter-spacing: -.015em; }
   .sub { color: var(--ink-dim); font-size: 14px; margin: 0; }
 
-  /* Fixed box, built like the panels below it — same surface, border and radius.
-     Now that the range label is gone it holds a single row, so it is short and
-     wide rather than tall: one line of controls centred on both axes. */
+  /* Built like the panels below it — same surface, border and radius. It holds
+     two rows now: the year dial, and the "Today Is" strip that used to sit
+     outside as a sibling of the masthead. A column rather than a fixed 64px box,
+     because the strip wraps to two lines for out-of-state readers and a fixed
+     height would clip the timezone warning. The dial keeps its own 64px so the
+     row above is exactly as tall as it was before the strip moved in. */
   .yeartile {
-    flex: 1 1 auto; width: 100%; max-width: none; min-width: 0; height: 64px; padding: 0;
-    display: flex; align-items: center; justify-content: center;
+    flex: 1 1 auto; width: 100%; max-width: none; min-width: 0; padding: 0 0 12px;
+    display: flex; flex-direction: column; align-items: stretch;
     border-radius: 16px;
     border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow);
   }
-  .yearnav { display: flex; align-items: center; justify-content: center; gap: 16px; }
+  /* No inset. The 12px each side existed to line "Today Is:" up with the left
+     arrow back when the strip was left-aligned; the strip is centred now, so the
+     padding bought nothing and cost 24px — enough that the full stamp overflowed
+     its own bar by 6px at the widest the masthead ever gets, and the fit test
+     could therefore never choose it. Measured 360 needed against 354 available. */
+  .yeartile .nowbar { padding: 0; }
+  /* The arrows were a fixed 40px, so a narrow tile squeezed the gaps instead of
+     the buttons. They flex down to 32px now and the row fills the tile, which
+     keeps a steady inset from both tile edges and a steady gap either side of
+     the numeral — the year stays centred because the two sides are symmetric. */
+  /* Everything in this row scales at one rate. Mixing fixed padding and gaps
+     with fluid type meant the numeral's box shrank faster than the numeral did,
+     so a phone-width tile pushed the digits out through the sides. Padding, gap,
+     button width and font size are all shares of the same container now, so the
+     fit ratio holds at every width — with px floors so nothing collapses. */
+  .yearnav {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; height: 64px; flex: none;
+    gap: 16px; gap: clamp(7px, 4.7cqw, 16px);
+    padding: 0 12px; padding: 0 clamp(5px, 3.5cqw, 12px);
+  }
+  .yearnav .y { flex: 1 1 auto; min-width: 0; }
   .yearnav button {
-    align-self: center;
-    width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line);
+    align-self: center; flex: 0 0 auto;
+    width: 75px; width: clamp(38px, 21.9cqw, 75px);
+    height: 40px; border-radius: 12px; border: 1px solid var(--line);
     background: var(--panel-2); color: var(--ink); font-size: 24px; line-height: 1;
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     transition: background .12s ease, border-color .12s ease, color .12s ease;
@@ -172,18 +197,81 @@
   .yearnav button:hover:not(:disabled) { border-color: var(--ev); color: var(--ev); }
   .yearnav button:disabled { opacity: .3; cursor: not-allowed; }
   .yearnav button:focus-visible { outline: 2px solid var(--ev); outline-offset: 2px; }
+  /* The arrows take 75px each, so the numeral's box is what is left: 342 tile
+     minus 24px padding, minus two 75px buttons, minus two 16px gaps = 136px.
+     The type is sized to fill that box rather than sit in the middle of it —
+     the ceiling is set by the tile's 64px height, not by the width, which is
+     why it stops at 54px rather than the ~62px the width alone would allow.
+     Fluid in cqw so it tracks the masthead down to a phone, capped at both ends. */
   .yearnav .y {
-    min-width: 106px; text-align: center; font-size: 42px; font-weight: 660;
+    box-sizing: border-box; padding: 0; align-self: center;
+    flex: 1 1 auto; min-width: 0;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; font-weight: 660;
+    font-size: 54px;
+    font-size: clamp(22px, 15.8cqw, 54px);
     letter-spacing: -.025em; line-height: 1; color: var(--ink);
   }
 
   /* ---- "right now in South Carolina" strip ---- */
   .nowbar {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    position: relative;
+    display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
     font-size: 12.5px; color: var(--ink-dim); margin: 0; line-height: 1.5;
   }
+  /* Two presentations of one set of nodes, switched by a class on the bar.
+
+     DEFAULT — the full stamp sits in the flow and is the whole display. It is
+     nowrap on purpose: this is the state that must not break across lines, and
+     letting it wrap would hide the very condition the swap exists to detect.
+
+     .brief — the stamp did not fit, so it lifts out of the flow into a tooltip
+     and the short line takes its place. Nothing is duplicated; the same element
+     is either the display or the tooltip, which is why the two can never drift
+     apart in content. fitNowBar() owns the class; the rule below owns the look. */
+  .nowbar .nowbrief { display: none; }
+  .nowbar.brief .nowbrief {
+    display: inline; color: var(--ink); font-weight: 600; cursor: help; white-space: nowrap;
+    border-bottom: 1px dotted var(--line); padding-bottom: 1px;
+  }
+  .nowbar.brief .nowbrief:hover, .nowbar.brief .nowbrief:focus-visible { color: var(--ev); border-bottom-color: var(--ev); }
+  .nowbar.brief .nowbrief:focus-visible { outline: 2px solid var(--ev); outline-offset: 3px; border-radius: 3px; }
+
+  .nowbar .nowfull { min-width: 0; text-align: center; }
+  /* Hidden by visibility rather than display:none so it keeps a box to measure
+     and stays reachable to assistive technology through aria-describedby. */
+  .nowbar.brief .nowfull {
+    position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%);
+    z-index: 40; width: max-content; max-width: min(320px, 92cqw);
+    padding: 9px 12px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--panel-2); box-shadow: var(--shadow);
+    line-height: 1.45;
+    opacity: 0; visibility: hidden; transition: opacity .12s ease, visibility .12s ease;
+  }
+  /* :focus as well as :focus-visible. A tap on a touch screen focuses the span
+     but does not match :focus-visible — that pseudo-class is for keyboard intent.
+     It happened to work anyway because phones apply a sticky :hover on tap, which
+     is incidental behaviour to be relying on. :focus makes it deliberate.
+     The visible focus RING still keys off :focus-visible, so a tap does not paint
+     an outline the way a Tab does. */
+  .nowbar.brief .nowbrief:hover ~ .nowfull,
+  .nowbar.brief .nowbrief:focus ~ .nowfull,
+  .nowbar.brief .nowbrief:focus-visible ~ .nowfull,
+  .nowbar.brief .nowfull:hover { opacity: 1; visibility: visible; }
+  /* nowrap ONLY in the default state, where the stamp is the fit test's subject
+     and wrapping would hide the very condition being tested. Inside the tooltip it
+     must wrap: the panel is capped at 320px, so a nowrap stamp overflowed it and
+     — being positioned, and merely visibility:hidden rather than display:none —
+     dragged the document's scrollWidth out with it. That is 24px of sideways
+     scroll on a 320px phone, caused by an element nobody could see. */
+  .nowbar .nowstamp { display: block; min-width: 0; white-space: nowrap; }
+  .nowbar.brief .nowstamp { white-space: normal; }
+  .nowbar .nowlbl { color: var(--ink-faint); }
   .nowbar .nowclock { color: var(--ink); font-weight: 600; }
-  .nowbar .tzwarn { color: var(--proj); }
+  .nowbar .nowwhere { color: var(--ink-dim); }
+  /* The warning is a sentence, not a stamp — it is allowed to wrap, and it is
+     not part of what the fit test measures. */
+  .nowbar .tzwarn { display: block; margin-top: 6px; color: var(--proj); white-space: normal; }
 
   /* Placed after .sub and .nowbar deliberately. Both of those set `margin: 0`
      at the same specificity as the rhythm rule below, so declaration order is
@@ -197,15 +285,37 @@
      without a new rule. */
   .masthead > * { margin-top: 0; margin-bottom: 0; }
   .masthead > * + * { margin-top: 8px; }
+  /* Three blocks want more room than the default 8px. Adjacent margins collapse
+     to the larger of the two in a block container, so 12px below the eyebrow
+     against 8px above the title resolves to 12px — not 20. */
+  .masthead .eyebrow   { margin-bottom: 12px; }
+  .masthead #pageTitle { margin-bottom: 12px; }
+  .masthead .yearbay   { margin-top: 12px; }
 
   /* ---- provenance banner ---- */
   /* The source list turned this from one line into a paragraph, so the tier chip
      aligns to the first line rather than floating in the middle of the block. */
+  /* Inside the panel now, so the box, border and shadow belong to the panel and
+     this holds only the prose. */
   .prov {
-    display: flex; align-items: flex-start; gap: 10px; padding: 11px 16px; border-radius: 12px;
-    border: 1px solid var(--line); background: var(--panel); font-size: 12.5px;
-    color: var(--ink-dim); line-height: 1.5; margin-bottom: 8px; box-shadow: var(--shadow);
+    padding: 0 20px 18px; font-size: 12.5px;
+    color: var(--ink-dim); line-height: 1.55;
   }
+  .provline { margin: 0 0 10px; text-align: justify; }
+  .provline:last-child { margin-bottom: 0; }
+  .provline code { font-size: .92em; }
+  /* Green throughout, matching the Official chip it carries: the rule across the
+     top, the marker, the hover and the focus ring all read as one object. */
+  .provwrap { margin-top: 0; margin-bottom: 8px; }
+  #provPanel::before { background: var(--good); }
+  #provPanel > summary .sp-chev { color: var(--good); }
+  #provPanel > summary:hover .sp-title { color: var(--good); }
+  #provPanel > summary:focus-visible { outline-color: var(--good); }
+  /* The chip sits immediately after the title, not pushed to the far edge: it
+     qualifies the words next to it, so it reads as part of the phrase. The tick
+     takes the right edge instead. */
+  #provPanel > summary .tier { margin-left: 0; }
+
   .prov > span:last-child { min-width: 0; }
   .prov a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
   .prov a:hover { color: var(--ev); border-bottom-color: var(--ev); }
@@ -226,7 +336,8 @@
   .clock::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--c); }
   .clock.ev { --c: var(--ev); }
   .clock.ed { --c: var(--ed); }
-  .clock-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+  .clock-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .clock-head .clock-date { margin-left: auto; }
   .clock-title { font-size: 15px; font-weight: 620; letter-spacing: -.005em; }
   .clock-date { font-size: 11.5px; color: var(--ink-faint); white-space: nowrap; }
   .clock-note { font-size: 12.5px; color: var(--ink-dim); margin-bottom: 16px; }
@@ -237,8 +348,12 @@
   .unit.lead .n { color: var(--c); }
   .unit .l { font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
              color: var(--ink-faint); margin-top: 8px; display: block; font-weight: 600; }
-  .clock-foot { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
-                font-size: 12.5px; color: var(--ink-dim); }
+  /* The rule and the top margin move to the row, so the closing time sits on the
+     same line as the countdown summary rather than under it. */
+  .clock-footrow { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
+                   display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .clock-foot { font-size: 12.5px; color: var(--ink-dim); min-width: 0; }
+  .clock-close { flex: none; font-size: 12.5px; color: var(--ink-faint); white-space: nowrap; }
   .clock-foot b { color: var(--ink); font-weight: 600; }
   .bar { height: 5px; background: var(--panel-2); border: 1px solid var(--line);
          border-radius: 99px; overflow: hidden; margin-top: 12px; }
@@ -277,6 +392,15 @@
   .seq-panel > summary::-webkit-details-marker { display: none; }
   .seq-panel > summary:focus-visible { outline: 2px solid var(--ev); outline-offset: -2px; }
   .seq-panel > summary:hover .sp-title { color: var(--ev); }
+  /* An exclamation that only appears on hover: the bar is the one panel on the
+     page a first-time voter most needs to open, and the mark is a nudge rather
+     than a permanent shout. ::after so it costs no markup and cannot be copied
+     out with the heading. */
+  .seq-panel > summary:hover .sp-title::after { content: "\00a0!"; color: var(--ev); font-weight: 800; }
+  /* The bar wraps by default, which puts the peek on a line of its own under the
+     title. On this bar the peek is a glance, not a heading — a second line for it
+     costs more than it earns, so it is dropped instead. fitPeek() sets the class. */
+  .seq-panel > summary.nopeek .sp-peek { display: none; }
   .seq-panel[open] .sp-chev { transform: rotate(90deg); }
   .seq-body { padding: 18px 20px 20px; border-top: 1px solid var(--line); }
   .seq-body .legend { margin: 0 0 12px; }
@@ -354,6 +478,13 @@
   .sp-panel > summary::-webkit-details-marker { display: none; }
   .sp-panel > summary:focus-visible { outline: 2px solid var(--sp); outline-offset: -2px; }
   .sp-panel > summary:hover .sp-title { color: var(--sp); }
+  /* Open panels keep the highlight. Hover tells you what you are about to open;
+     this tells you what you already did, which matters once several are open. */
+  .sp-panel[open] > summary .sp-title { color: var(--sp); }
+  .sp-panel.grp[open] > summary .sp-title { color: var(--ev); }
+  #special[open] > summary .sp-title { color: var(--sp); }
+  .seq-panel[open] > summary .sp-title { color: var(--ev); }
+  #provPanel[open] > summary .sp-title { color: var(--good); }
   .sp-chev { color: var(--ink-faint); font-size: 11px; transition: transform .18s ease; display: inline-block; }
   /* Every dropdown bar's marker takes the same blue as the Important Voter
      Information accent, which ties the reference panels together. Special is
@@ -362,7 +493,24 @@
   .seq-panel > summary .sp-chev,
   .sp-panel.grp:not(#special) > summary .sp-chev { color: var(--ev); }
   .sp-panel[open] .sp-chev { transform: rotate(90deg); }
-  .sp-title { font-size: 15px; font-weight: 620; letter-spacing: -.005em; transition: color .12s ease; }
+  /* A tight box on the words themselves — no padding, height driven by the type
+     — and inline-flex so the title centres against the chevron, badge and chip
+     beside it rather than sitting on their shared baseline. */
+  .sp-title {
+    box-sizing: border-box; padding: 0;
+    display: inline-flex; align-items: center;
+    font-size: 15px; line-height: 1; font-weight: 620; letter-spacing: -.005em;
+    transition: color .12s ease;
+  }
+  /* Each panel is its own container so the badge can respond to the BAR's width
+     rather than the window's — the bars are narrower than the page and wrap at
+     their own threshold. "Unavailable" is the longest badge on the page and the
+     first thing to push a bar onto two lines; below 430px it becomes "N/A". */
+  .sp-panel { container-type: inline-size; }
+  @container (max-width: 430px) {
+    .sp-badge.na { font-size: 0; letter-spacing: 0; }
+    .sp-badge.na::after { content: "N/A"; font-size: 9.5px; letter-spacing: .1em; }
+  }
   .sp-badge {
     font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
     color: var(--sp); border: 1px solid currentColor; border-radius: 5px; padding: 3px 7px;
@@ -405,6 +553,16 @@
      keep their own tight spacing and wrap together rather than one pill peeling
      off onto the next line by itself. */
   .pills { display: inline-flex; align-items: center; gap: 5px; flex: none; }
+  /* :visited is given the same colour deliberately. A civic list is something a
+     reader works through; dimming the ones already opened turns a reference into
+     a to-do list and quietly changes what the page looks like it is saying. */
+  .sp-n a.member, .sp-where a.member,
+  /* colour: inherit first, so a member with no party on record keeps the row's
+     own ink instead of falling back to the browser's default link blue. */
+  a.member, a.member:visited { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+  a.member.p-d, a.member.p-d:visited { color: var(--ev); }
+  a.member.p-r, a.member.p-r:visited { color: var(--ed); }
+  a.member.p-d:hover, a.member.p-r:hover { border-bottom-color: transparent; }
   .sp-where { min-width: 0; }
   .sp-w { text-align: right; font-size: 13px; line-height: 19px; font-weight: 560;
           color: var(--ink-dim); white-space: nowrap; }
@@ -456,7 +614,8 @@
 
   /* ---- the check control ---- */
   .feed {
-    display: flex; align-items: center; gap: 13px; flex-wrap: wrap;
+    box-sizing: border-box;
+    display: flex; align-items: center; gap: 13px; row-gap: 0; flex-wrap: wrap;
     font-size: 12px; color: var(--ink-faint); margin: 12px 0 0; line-height: 1.55;
   }
   /* A grid whose columns are both 1fr: the two buttons take the width of the
@@ -481,13 +640,25 @@
     text-decoration: none; white-space: nowrap; text-align: center;
     transition: border-color .12s ease, color .12s ease, background .12s ease;
   }
+  /* Each button borrows the colour of what it does. Check Upcoming keeps the
+     Special-Elections yellow; Check Past takes the Election Day orange-red,
+     because that is the page's colour for a thing that has happened; Open The
+     State's List takes the Official green, because it goes to the official
+     record. One rule per button rather than one shared rule, so a reader can
+     tell them apart before reading the labels. */
   .checkbtn:hover:not(:disabled) { border-color: var(--sp); color: var(--sp); background: var(--panel-2); }
   .checkbtn:focus-visible { outline: 2px solid var(--sp); outline-offset: 2px; }
+  #pastBtn:hover:not(:disabled) { border-color: var(--ed); color: var(--ed); }
+  #pastBtn:focus-visible { outline-color: var(--ed); }
+  a.checkbtn:hover:not(:disabled) { border-color: var(--good); color: var(--good); }
+  a.checkbtn:focus-visible { outline-color: var(--good); }
   .checkbtn:disabled { opacity: .6; cursor: progress; }
   .checkbtn .glyph { font-size: 13px; line-height: 1; }
   .checkbtn.busy .glyph { animation: spin 1s linear infinite; display: inline-block; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .feedmsg { flex: 1 1 280px; min-width: 0; }
+  /* Its own line, 8px clear above and below, and justified. row-gap is zeroed on
+     the strip so those 8px are the whole spacing rather than 8 plus the flex gap. */
+  .feedmsg { box-sizing: border-box; flex: 1 1 100%; min-width: 0; margin: 8px 0 2px; text-align: justify; }
   .feedmsg b { color: var(--ink); font-weight: 600; }
   .feedmsg.ok b { color: var(--good); }
   .feedmsg.err b { color: var(--ed); }
@@ -577,15 +748,45 @@
      as every panel edge so it reads as part of the same system. */
   hr.rule { border: 0; border-top: 1px solid var(--line); margin: 12px 0; height: 0; }
 
-  footer { margin-top: 0; font-size: 11.5px; color: var(--ink-faint); line-height: 1.6; }
+  footer { box-sizing: border-box; margin-top: 0; font-size: 11.5px; color: var(--ink-faint); line-height: 1.6; text-align: justify; }
   footer a { color: var(--ink-dim); }
   .tick { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--good);
-          margin-right: 6px; vertical-align: middle; animation: pulse 2s ease-in-out infinite; }
+          margin: 6px 6px 6px 6px; vertical-align: middle; animation: pulse 2s ease-in-out infinite; }
+  /* On the bar it is a status light, not a bullet: it needs no right margin
+     because the summary's own padding already holds it off the edge. */
+  /* 1.75x, parked beside the Official chip rather than at the far edge, and it
+     slides the width of the bar when the panel opens. The transition is on
+     `transform` alone — animating `margin` or `left` would relayout the summary
+     on every frame, and this runs next to a clock that repaints every second. */
+  #provPanel > summary .provtick {
+    flex: none; width: 10.5px; height: 10.5px; margin: 6px;
+    transform: translateX(0); transition: transform .45s cubic-bezier(.22,.61,.36,1);
+  }
+  #provPanel[open] > summary .provtick { transform: translateX(var(--tick-travel, 0px)); }
+  @media (prefers-reduced-motion: reduce) {
+    #provPanel > summary .provtick { transition: none; }
+  }
   @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .3 } }
   @media (prefers-reduced-motion: reduce) {
     .tick { animation: none; } .bar > i { transition: none; }
   }
   .hidden { display: none !important; }
+
+  /* Ten transitions and one infinite spinner. A reader who has asked their system
+     to reduce motion has usually asked for a reason — vestibular symptoms, or a
+     screen-reader workflow that repeated repaints disrupt. Nothing here conveys
+     meaning through movement: the tick still slides to the same place, the panel
+     still opens, the spinner still marks the button as busy. Only the animating
+     stops. `!important` because several of these are set in rules more specific
+     than this one, and a preference should not lose a specificity argument. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: .001ms !important;
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+  }
 
   @media (max-width: 720px) {
     /* Three declarations lived here that could never take effect and have been
@@ -619,7 +820,7 @@
 
   <header>
     <div class="masthead">
-      <div class="eyebrow">Unofficial &middot; Rechecked Every Six Hours</div>
+      <div class="eyebrow">Unofficial &middot; Rechecked Every Six Hours &middot; v3.7</div>
       <h1 id="pageTitle">South Carolina Election Clock</h1>
       <p class="sub" id="pageSub">Every Date Between Now And Certification</p>
 
@@ -630,24 +831,43 @@
             <span class="y" id="yearLabel" aria-live="polite">2026</span>
             <button id="nextYear" aria-label="Next Year" title="Next Year">&#8250;</button>
           </div>
-        </div>
-      </div>
 
-      <div class="nowbar">
-        <span>Right Now In South Carolina:</span>
-        <span class="nowclock" id="nowET">&mdash;</span>
-        <span class="tzwarn hidden" id="tzWarn"></span>
+          <div class="nowbar" id="nowBar">
+            <span class="nowbrief" id="nowBrief" tabindex="0">&mdash;</span>
+            <div class="nowfull" id="nowFull">
+              <span class="nowstamp">
+                <span class="nowlbl">Today is</span>
+                <span class="nowclock" id="nowET">&mdash;</span>
+                <span class="nowwhere">in South Carolina</span>
+              </span>
+              <span class="tzwarn hidden" id="tzWarn"></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
-  <div class="prov" id="prov"></div>
+  <!-- The source list is reference, not headline. It sits behind a bar like every
+       other panel on the page: the tier word is on the bar itself, so a reader
+       sees at a glance whether the dates are Official or Projected without
+       opening anything. -->
+  <details class="sp-panel provwrap" id="provPanel">
+    <summary>
+      <span class="sp-chev">&#9654;</span>
+      <span class="sp-title">Citations &amp; Disclaimer</span>
+      <span class="tier" id="provTier">&mdash;</span>
+      <span class="tick provtick"></span>
+    </summary>
+    <div class="prov" id="prov"></div>
+  </details>
 
   <hr class="rule">
 
   <!-- The clocks and the reference panel travel together: one is the answer,
-       the other is everything behind it. -->
-  <div id="topBlock">
+       the other is everything behind it. The wrapper is unstyled and unselected;
+       it exists to keep the two together if either is ever moved. -->
+  <div class="topblock">
     <section class="clocks" id="clocks">
       <div class="clock ev">
         <div class="clock-head">
@@ -662,16 +882,19 @@
           <div class="unit"><span class="n" id="ev-m">–</span><span class="l">Min</span></div>
           <div class="unit"><span class="n" id="ev-s">–</span><span class="l">Sec</span></div>
         </div>
-        <div class="clock-foot" id="ev-foot"></div>
+        <div class="clock-footrow">
+          <div class="clock-foot" id="ev-foot"></div>
+          <div class="clock-close" id="ev-close"></div>
+        </div>
         <div class="bar"><i id="ev-bar"></i></div>
       </div>
 
       <div class="clock ed">
         <div class="clock-head">
-          <span class="clock-title" id="edTitle">Election Day</span>
+          <span class="clock-title" id="edTitle">Election Day Begins</span>
           <span class="clock-date" id="edDate">&mdash;</span>
         </div>
-        <div class="clock-note">Polls Open Statewide, 7:00 a.m. To 7:00 p.m.</div>
+        <div class="clock-note">Polling Locations Open Statewide</div>
         <div class="units">
           <div class="unit lead"><span class="n" id="ed-w">–</span><span class="l">Wk</span></div>
           <div class="unit"><span class="n" id="ed-d">–</span><span class="l">Day</span></div>
@@ -679,7 +902,10 @@
           <div class="unit"><span class="n" id="ed-m">–</span><span class="l">Min</span></div>
           <div class="unit"><span class="n" id="ed-s">–</span><span class="l">Sec</span></div>
         </div>
-        <div class="clock-foot" id="ed-foot"></div>
+        <div class="clock-footrow">
+          <div class="clock-foot" id="ed-foot"></div>
+          <div class="clock-close" id="ed-close"></div>
+        </div>
         <div class="bar"><i id="ed-bar"></i></div>
       </div>
     </section>
@@ -699,8 +925,8 @@
       <div class="timeline" id="timeline"></div>
 
       <div class="facts">
-        <p><b>Early Voting:</b> Monday through Saturday for the two weeks before the election, 8:30 a.m. to 6:00 p.m., closed the intervening Sunday. Any early voting center in your county, <a href="https://scvotes.gov/voters/photo-id-requirements/" target="_blank" rel="noopener">photo ID required</a>, same machines as Election Day.</p>
-        <p><b>Absentee Ballots:</b> must be <em>received</em> by your county board by 7:00 p.m. on Election Day — a postmark is not enough. Military and overseas ballots are accepted for two additional days.</p>
+        <p><b>Early Voting:</b> Monday through Saturday for the two weeks before the election, 8:30 A.M. to 6:00 P.M., closed the intervening Sunday. Any early voting center in your county, <a href="https://scvotes.gov/voters/photo-id-requirements/" target="_blank" rel="noopener">photo ID required</a>, same machines as Election Day.</p>
+        <p><b>Absentee Ballots:</b> must be <em>received</em> by your county board by 7:00 P.M. on Election Day — a postmark is not enough. Military and overseas ballots are accepted for two additional days.</p>
         <p><b>On Election Day:</b> you must vote at your own assigned precinct, unlike early voting.</p>
         <p><b>Special Elections:</b> see the panel above the timeline. That list is pulled straight from the South Carolina Election Commission's published calendar on a schedule, so special elections called to fill a vacancy show up without anyone editing this page.</p>
       </div>
@@ -762,16 +988,12 @@
   <hr class="rule">
 
   <footer>
-    <span class="tick"></span>Live countdown — both clocks recalculate every second. Every time on this page is
-    South Carolina local time (America/New_York), read from your device's time zone database, so the numbers are
-    the same whether you open this in Charleston or Tokyo.
-    Every button in the timeline opens an official South Carolina <code>.gov</code> page in a new tab.<br>
-    <b>Special and local elections</b> come from the Election Commission's own
+    <b>Special &amp; Local Elections</b> come from the Election Commission's own
     <a href="https://scvotes.gov/elections-statistics/upcoming-elections/" target="_blank" rel="noopener">upcoming elections calendar</a>,
     re-checked automatically every six hours.
     <b>2026 statewide dates</b> are transcribed from the
     <a href="https://scvotes.gov/wp-content/uploads/2026/04/2026-Election-Calendar-Draft-scVOTES_.pdf" target="_blank" rel="noopener">2026 Election Calendar</a>.
-    <b>U.S. House and Senate seats</b> and the candidates filed for them come from the
+    <b>U.S. House &amp; Senate Seats</b> and the candidates filed for them come from the
     <a href="https://api.open.fec.gov/developers/" target="_blank" rel="noopener">Federal Election Commission&rsquo;s OpenFEC API</a>,
     a work of the United States government in the public domain.
     <b>Later years</b> are computed from statute — S.C. Code
@@ -789,6 +1011,7 @@
   var SEC = 1000, MIN = 60e3, HOUR = 36e5, DAY = 864e5, WEEK = 7 * 864e5;
   var DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var MON_LONG = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
   /* Where the scheduled job writes the state's calendar. Relative, so it works
      on any host and on a local file:// copy alike. */
@@ -850,14 +1073,53 @@
      inherits whatever the device's time zone data says, and stays right.
      A fixed rule is kept only as a fallback for ancient browsers. ---------- */
 
-  var ET_OFFSET_FMT = null, ET_CLOCK_FMT = null, ET_DATE_FMT = null;
+  var ET_OFFSET_FMT = null, ET_TIME_FMT = null, ET_CLOCK_FMT = null, ET_CLOCK_FMT_Y = null,
+      ET_BRIEF_TIME_FMT = null, ET_BRIEF_DAY_FMT = null, ET_BRIEF_DAY_FMT_Y = null, ET_DATE_FMT = null;
   try {
     ET_OFFSET_FMT = new Intl.DateTimeFormat("en-US", {
       timeZone: "America/New_York", timeZoneName: "longOffset", year: "numeric"
     });
+    /* Weekday and month spelled out. The line lost its "Right Now In South
+       Carolina" prefix, so the zone abbreviation at the end is now the only
+       thing saying whose clock this is — worth the extra width. */
+    /* Split in two so the time can lead. Every one of these names
+       America/New_York explicitly, so the strip reports South Carolina's clock
+       whatever the reader's device is set to — that is the whole premise of the
+       page and it must not depend on where it is opened. */
+    /* No timeZoneName. The abbreviation was only ever a label — `timeZone` is
+       what actually reads South Carolina's clock, and it is untouched. Dropping
+       "EDT" changes what the reader sees and nothing about which clock is read:
+       the strip still says 2:30 P.M. when it is 3:30 a.m. in Tokyo. The device
+       mismatch is still announced, in the warning line, where it belongs. */
+    ET_TIME_FMT = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      hour: "numeric", minute: "2-digit", second: "2-digit"
+    });
+    /* The tile face: hour, minute, meridiem, month and day. No seconds, because
+       a digit changing once a second draws the eye to the one part of this line
+       nobody is reading. */
+    ET_BRIEF_TIME_FMT = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York", hour: "numeric", minute: "2-digit"
+    });
+    ET_BRIEF_DAY_FMT = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York", month: "long", day: "numeric"
+    });
+    /* Used only while the dial is off the current year, where the short line has
+       to say which year "today" belongs to or it reads as a date in the year on
+       the tile. */
+    ET_BRIEF_DAY_FMT_Y = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York", year: "numeric", month: "long", day: "numeric"
+    });
     ET_CLOCK_FMT = new Intl.DateTimeFormat("en-US", {
-      timeZone: "America/New_York", weekday: "short", month: "short", day: "numeric",
-      hour: "numeric", minute: "2-digit", second: "2-digit", timeZoneName: "short"
+      timeZone: "America/New_York", weekday: "long", month: "long", day: "numeric"
+    });
+    /* The same day with the year in it. Only used while the dial is parked on
+       some year other than today's: "Today Is: Sunday, August 23" under a tile
+       reading 2031 invites the reader to think the date belongs to 2031. Naming
+       the year removes the ambiguity, and leaving it off the rest of the time
+       keeps the line from carrying a word that says nothing. */
+    ET_CLOCK_FMT_Y = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York", weekday: "long", year: "numeric", month: "long", day: "numeric"
     });
     // yyyy-mm-dd in Eastern time. The API's start_date wants a calendar day, and
     // the calendar day that matters is South Carolina's, not the reader's.
@@ -865,7 +1127,9 @@
       timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit"
     });
     ET_OFFSET_FMT.formatToParts(new Date());
-  } catch (e) { ET_OFFSET_FMT = null; ET_DATE_FMT = null; }
+  } catch (e) { ET_OFFSET_FMT = null; ET_TIME_FMT = null; ET_CLOCK_FMT_Y = null;
+                ET_BRIEF_TIME_FMT = null; ET_BRIEF_DAY_FMT = null; ET_BRIEF_DAY_FMT_Y = null;
+                ET_DATE_FMT = null; }
 
   /* Falls back to the browser's own date if Intl has no zone database — a wrong
      day by a few hours is better than a request with "undefined" in it. */
@@ -946,20 +1210,21 @@
       official: true, hasGeneral: true, year: 2026,
       evStart: at(evS, 8, 30), evEnd: at(evE, 18), edStart: at(ed, 7), edEnd: at(ed, 19),
       evStartLabel: fmt(evS), edStartLabel: fmt(ed),
+      evEndLabel: fmt(evE), edEndLabel: fmt(ed),
       events: [
-        { k:"ev", phase:"Get On The Rolls", t:"Register To Vote — In Person", d:"5:00 p.m. at your county voter registration office", ms:at(utc(2026,9,2),17), label:fmt(utc(2026,9,2)), you:true, link:LINK.county },
-        { k:"ev", t:"Register To Vote — Online", d:"11:59 p.m. via scvotes.gov, fax, or email", ms:at(utc(2026,9,4),23,59), label:fmt(utc(2026,9,4)), you:true, link:LINK.ovr },
+        { k:"ev", phase:"Get On The Rolls", t:"Register To Vote — In Person", d:"5:00 P.M. at your county voter registration office", ms:at(utc(2026,9,2),17), label:fmt(utc(2026,9,2)), you:true, link:LINK.county },
+        { k:"ev", t:"Register To Vote — Online", d:"11:59 P.M. via scvotes.gov, fax, or email", ms:at(utc(2026,9,4),23,59), label:fmt(utc(2026,9,4)), you:true, link:LINK.ovr },
         { k:"ev", t:"Register To Vote — By Mail", d:"Must be postmarked by this date", ms:at(utc(2026,9,5),23,59), label:fmt(utc(2026,9,5)), you:true, link:LINK.mailForm },
-        { k:"ev", phase:"Cast A Ballot", t:"Early Voting Begins", d:"8:30 a.m. — any early voting center in your county", ms:at(evS,8,30), label:fmt(evS), you:true, link:LINK.early },
-        { k:"ev", t:"Apply For An Absentee Ballot", d:"5:00 p.m. — last chance to request a mail ballot", ms:at(utc(2026,9,23),17), label:fmt(utc(2026,9,23)), you:true, link:LINK.absentee },
-        { k:"ev", t:"Early Voting Ends", d:"6:00 p.m. on the final Saturday — bring a valid photo ID", ms:at(evE,18), label:fmt(evE), you:true, link:LINK.photoId },
-        { k:"ed", phase:"Election Day Window", t:"Absentee Envelope Processing May Begin", d:"7:00 a.m. — earliest county boards may open mailing envelopes", ms:at(utc(2026,10,1),7), label:fmt(utc(2026,10,1)), link:LINK.absTrack },
-        { k:"ed", t:"Election Day — Polls Open", d:"7:00 a.m. at your assigned precinct", ms:at(ed,7), label:fmt(ed), you:true, link:LINK.polling },
-        { k:"ed", t:"Absentee Ballots Must Be Received", d:"7:00 p.m. — received, not postmarked. Polls close at the same hour.", ms:at(ed,19), label:fmt(ed), you:true, link:LINK.county },
-        { k:"ed", t:"Military And Overseas Ballot Deadline", d:"5:00 p.m. — the one ballot type accepted after Election Day", ms:at(utc(2026,10,5),17), label:fmt(utc(2026,10,5)), link:LINK.uocava },
-        { k:"admin", phase:"Counting And Certification", t:"Hand-Count Audit Due To The State", d:"5:00 p.m. — county boards report audit results", ms:at(utc(2026,10,4),17), label:fmt(utc(2026,10,4)), link:LINK.audits },
-        { k:"admin", t:"County Canvass And Certification", d:"1:00 p.m. — provisional ballot hearings, canvass, certify", ms:at(utc(2026,10,6),13), label:fmt(utc(2026,10,6)), link:LINK.county },
-        { k:"admin", t:"State Board Of Canvassers Certifies", d:"3:00 p.m. — statewide results become official", ms:at(utc(2026,10,12),15), label:fmt(utc(2026,10,12)), link:LINK.results }
+        { k:"ev", phase:"Cast A Ballot", t:"Early Voting Begins", d:"8:30 A.M. — any early voting center in your county", ms:at(evS,8,30), label:fmt(evS), you:true, link:LINK.early },
+        { k:"ev", t:"Apply For An Absentee Ballot", d:"5:00 P.M. — last chance to request a mail ballot", ms:at(utc(2026,9,23),17), label:fmt(utc(2026,9,23)), you:true, link:LINK.absentee },
+        { k:"ev", t:"Early Voting Ends", d:"6:00 P.M. on the final Saturday — bring a valid photo ID", ms:at(evE,18), label:fmt(evE), you:true, link:LINK.photoId },
+        { k:"ed", phase:"Election Day Window", t:"Absentee Envelope Processing May Begin", d:"7:00 A.M. — earliest county boards may open mailing envelopes", ms:at(utc(2026,10,1),7), label:fmt(utc(2026,10,1)), link:LINK.absTrack },
+        { k:"ed", t:"Election Day — Polls Open", d:"7:00 A.M. at your assigned precinct", ms:at(ed,7), label:fmt(ed), you:true, link:LINK.polling },
+        { k:"ed", t:"Absentee Ballots Must Be Received", d:"7:00 P.M. — received, not postmarked. Polls close at the same hour.", ms:at(ed,19), label:fmt(ed), you:true, link:LINK.county },
+        { k:"ed", t:"Military And Overseas Ballot Deadline", d:"5:00 P.M. — the one ballot type accepted after Election Day", ms:at(utc(2026,10,5),17), label:fmt(utc(2026,10,5)), link:LINK.uocava },
+        { k:"admin", phase:"Counting And Certification", t:"Hand-Count Audit Due To The State", d:"5:00 P.M. — county boards report audit results", ms:at(utc(2026,10,4),17), label:fmt(utc(2026,10,4)), link:LINK.audits },
+        { k:"admin", t:"County Canvass And Certification", d:"1:00 P.M. — provisional ballot hearings, canvass, certify", ms:at(utc(2026,10,6),13), label:fmt(utc(2026,10,6)), link:LINK.county },
+        { k:"admin", t:"State Board Of Canvassers Certifies", d:"3:00 P.M. — statewide results become official", ms:at(utc(2026,10,12),15), label:fmt(utc(2026,10,12)), link:LINK.results }
       ]
     };
   }
@@ -981,18 +1246,19 @@
       official: false, hasGeneral: true, year: y,
       evStart: at(evS, 8, 30), evEnd: at(evE, 18), edStart: at(ed, 7), edEnd: at(ed, 19),
       evStartLabel: fmt(evS), edStartLabel: fmt(ed),
+      evEndLabel: fmt(evE), edEndLabel: fmt(ed),
       events: [
         { k:"ev", phase:"Primary Season", t:"Statewide Primary", d:"Second Tuesday in June, per §7-13-40", ms:at(primary,7), label:fmt(primary), you:true, link:LINK.upcoming },
         { k:"ev", t:"Primary Runoff, If Needed", d:"Two weeks after the primary", ms:at(runoff,7), label:fmt(runoff), link:LINK.results },
-        { k:"ev", phase:"Get On The Rolls", t:"Register To Vote — In Person", d:"5:00 p.m. at your county voter registration office", ms:at(regIn,17), label:fmt(regIn), you:true, link:LINK.county },
-        { k:"ev", t:"Register To Vote — Online", d:"11:59 p.m. — the 30-day cutoff", ms:at(reg,23,59), label:fmt(reg), you:true, link:LINK.ovr },
+        { k:"ev", phase:"Get On The Rolls", t:"Register To Vote — In Person", d:"5:00 P.M. at your county voter registration office", ms:at(regIn,17), label:fmt(regIn), you:true, link:LINK.county },
+        { k:"ev", t:"Register To Vote — Online", d:"11:59 P.M. — the 30-day cutoff", ms:at(reg,23,59), label:fmt(reg), you:true, link:LINK.ovr },
         { k:"ev", t:"Register To Vote — By Mail", d:"Must be postmarked by this date", ms:at(regMail,23,59), label:fmt(regMail), you:true, link:LINK.mailForm },
-        { k:"ev", phase:"Cast A Ballot", t:"Early Voting Begins", d:"8:30 a.m. — any early voting center in your county", ms:at(evS,8,30), label:fmt(evS), you:true, link:LINK.early },
-        { k:"ev", t:"Apply For An Absentee Ballot", d:"5:00 p.m. — last chance to request a mail ballot", ms:at(abs,17), label:fmt(abs), you:true, link:LINK.absentee },
-        { k:"ev", t:"Early Voting Ends", d:"6:00 p.m. on the final Saturday — bring a valid photo ID", ms:at(evE,18), label:fmt(evE), you:true, link:LINK.photoId },
-        { k:"ed", phase:"Election Day Window", t:"Election Day — Polls Open", d:"7:00 a.m. at your assigned precinct", ms:at(ed,7), label:fmt(ed), you:true, link:LINK.polling },
-        { k:"ed", t:"Absentee Ballots Must Be Received", d:"7:00 p.m. — received, not postmarked. Polls close at the same hour.", ms:at(ed,19), label:fmt(ed), you:true, link:LINK.county },
-        { k:"ed", t:"Military And Overseas Ballot Deadline", d:"5:00 p.m. — the one ballot type accepted after Election Day", ms:at(uocava,17), label:fmt(uocava), link:LINK.uocava }
+        { k:"ev", phase:"Cast A Ballot", t:"Early Voting Begins", d:"8:30 A.M. — any early voting center in your county", ms:at(evS,8,30), label:fmt(evS), you:true, link:LINK.early },
+        { k:"ev", t:"Apply For An Absentee Ballot", d:"5:00 P.M. — last chance to request a mail ballot", ms:at(abs,17), label:fmt(abs), you:true, link:LINK.absentee },
+        { k:"ev", t:"Early Voting Ends", d:"6:00 P.M. on the final Saturday — bring a valid photo ID", ms:at(evE,18), label:fmt(evE), you:true, link:LINK.photoId },
+        { k:"ed", phase:"Election Day Window", t:"Election Day — Polls Open", d:"7:00 A.M. at your assigned precinct", ms:at(ed,7), label:fmt(ed), you:true, link:LINK.polling },
+        { k:"ed", t:"Absentee Ballots Must Be Received", d:"7:00 P.M. — received, not postmarked. Polls close at the same hour.", ms:at(ed,19), label:fmt(ed), you:true, link:LINK.county },
+        { k:"ed", t:"Military And Overseas Ballot Deadline", d:"5:00 P.M. — the one ballot type accepted after Election Day", ms:at(uocava,17), label:fmt(uocava), link:LINK.uocava }
       ]
     };
   }
@@ -1598,7 +1864,9 @@
           : " scheduled from today onward, sorted into the panels above." + newsFlash +
             " Races already held are not in this view") +
         " — reload the page for the saved calendar, past and future together.");
-      if (!$("special").open) $("special").open = true;
+      /* Deliberately does NOT open the Special panel. A button that rewrites the
+         lists should not also decide what the reader is looking at — the badge
+         and the status line report the result without moving anything. */
     }).catch(function (err) {
       setChecking(false, "Try Again", mode);
       var why = (err && err.message) || "The request failed.";
@@ -1668,17 +1936,105 @@
 
   /* ---------- the Eastern Time strip ---------- */
 
+  /* South Carolina's year, not the device's. On 31 December a reader in Tokyo
+     is already into January, and this line speaks for South Carolina. */
+  function nowYearET() { return parseInt(todayET().slice(0, 4), 10); }
+
+  /* Does the full stamp fit on one line in the room the bar has?
+
+     Measured, not guessed at with a breakpoint. The string's width is not a
+     function of the viewport: "Wednesday, September 30, 2026" is far wider than
+     "Sun, May 3", the year appears only while the dial is off the current one,
+     and the type is fluid — so any fixed cqw threshold would be right for one
+     string and wrong for the next.
+
+     The stamp is nowrap, so its own rect is its natural single-line width even
+     when that overflows. Compare against the bar's content box and swap.
+
+     Only re-measured when something that could change the answer has changed —
+     the string's length, or the bar's width. Seconds tick every second and the
+     digits are tabular, so a ticking clock does not re-run this. */
+  var fitKey = null;
+  function fitNowBar(force) {
+    var bar = $("nowBar"), stamp = bar && bar.querySelector(".nowstamp"), brief = $("nowBrief");
+    if (!bar || !stamp || !brief) return;
+    /* clientWidth includes the bar's own left and right padding, and the stamp
+       cannot use that. Measure against the CONTENT box or the test hands itself
+       24px of room that does not exist. */
+    var cs = getComputedStyle(bar);
+    var have = bar.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    var key = stamp.textContent.length + "|" + Math.round(have);
+    if (!force && key === fitKey) return;
+    fitKey = key;
+
+    var wasBrief = bar.classList.contains("brief");
+    bar.classList.remove("brief");                       // measure in the default state
+    /* scrollWidth, NOT the bounding rect. The stamp is a block, so its rect is
+       whatever its container gives it — 295.6 in a 295.6 box — no matter how far
+       the nowrap text runs past the edge. scrollWidth is the only one of the two
+       that reports the overflow, and the overflow is the entire question here. */
+    var need = stamp.scrollWidth;
+    var isBrief = need > have + 1;                       // scrollWidth rounds up
+    bar.classList.toggle("brief", isBrief);
+
+    /* The tooltip role and the description only make sense while the short line
+       is standing in for something. In the default state the stamp IS the
+       content, and announcing it twice would be worse than not announcing it. */
+    var full = $("nowFull");
+    if (isBrief) {
+      full.setAttribute("role", "tooltip");
+      brief.setAttribute("aria-describedby", "nowFull");
+    } else {
+      full.removeAttribute("role");
+      brief.removeAttribute("aria-describedby");
+    }
+    if (wasBrief !== isBrief) fitKey = key;
+  }
+
+  function briefTime(now) {
+    return ET_BRIEF_TIME_FMT.format(now).replace(/\bAM\b/, "A.M.").replace(/\bPM\b/, "P.M.");
+  }
+
   function renderNow() {
     var now = new Date();
-    if (ET_CLOCK_FMT) {
+    var offYear = year !== nowYearET();
+    if (ET_TIME_FMT && ET_CLOCK_FMT) {
+      var day = (offYear && ET_CLOCK_FMT_Y) ? ET_CLOCK_FMT_Y : ET_CLOCK_FMT;
       // Capitalised both, not just P.M. — a line reading "9:14 a.m." one hour and
       // "1:14 P.M." the next would look like a bug rather than a choice.
-      setText("nowET", ET_CLOCK_FMT.format(now).replace(/\bAM\b/, "A.M.").replace(/\bPM\b/, "P.M."));
+      var t = ET_TIME_FMT.format(now).replace(/\bAM\b/, "A.M.").replace(/\bPM\b/, "P.M.");
+      setText("nowET", day.format(now) + ", " + t);
+      if (ET_BRIEF_TIME_FMT && ET_BRIEF_DAY_FMT) {
+        setText("nowBrief",
+          /* On the current year the short line is a sentence — it can afford the
+             words because the reader is being told about now. Off it, the words
+             go and the year arrives: what matters there is which year the
+             timestamp belongs to, not that it is "today". */
+          offYear
+            ? briefTime(now) + " " + ET_BRIEF_DAY_FMT_Y.format(now)
+            : "Today is " + briefTime(now) + " " + ET_BRIEF_DAY_FMT.format(now) + " in SC");
+      }
     } else {
+      /* No Intl zone database. etOffset() still resolves South Carolina's own
+         offset from the DST rules, so this branch is Eastern too — never the
+         device's wall clock. */
       var off = etOffset(now), shifted = new Date(now.getTime() + off * HOUR);
-      setText("nowET", fmt(shifted) + " · " + pad(shifted.getUTCHours()) + ":" +
-        pad(shifted.getUTCMinutes()) + ":" + pad(shifted.getUTCSeconds()) + (off === -4 ? " EDT" : " EST"));
+      var fh24 = shifted.getUTCHours(), fh12 = fh24 % 12 === 0 ? 12 : fh24 % 12;
+      setText("nowET",
+        fmt(shifted) + (offYear ? ", " + shifted.getUTCFullYear() : "") + ", " +
+        fh12 + ":" + pad(shifted.getUTCMinutes()) + ":" + pad(shifted.getUTCSeconds()) +
+        (fh24 < 12 ? " A.M." : " P.M."));
+      /* MON is abbreviated because the timeline labels want it that way; this
+         line spells the month out to match what the Intl path above produces. */
+      var h24 = shifted.getUTCHours(), h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+      var bt = h12 + ":" + pad(shifted.getUTCMinutes()) + (h24 < 12 ? " A.M." : " P.M.");
+      var bd = MON_LONG[shifted.getUTCMonth()] + " " + shifted.getUTCDate();
+      setText("nowBrief", offYear
+        ? bt + " " + bd + ", " + shifted.getUTCFullYear()
+        : "Today is " + bt + " " + bd + " in SC");
     }
+    fitNowBar(false);
+
     var warn = $("tzWarn");
     if (!warn) return;
     // Device offset vs South Carolina offset, in minutes.
@@ -1691,9 +2047,46 @@
     } else {
       warn.classList.add("hidden");
     }
+    /* The warning appearing or vanishing changes nothing about the stamp's own
+       width, but it does change the bar's height — and on a narrow tile it can
+       change its width too, so re-test rather than assume. */
+    fitNowBar(false);
+  }
+
+  /* Width can change without the clock ticking: a rotated phone, a resized
+     window, a zoom step. ResizeObserver fires on the bar's own box, which is the
+     only measurement the test depends on. */
+  if (typeof ResizeObserver === "function") {
+    try {
+      var ro = new ResizeObserver(function () { fitNowBar(true); fitSeqPeek(); });
+      ro.observe($("nowBar"));
+      var seqSum = document.querySelector(".seq-panel > summary");
+      if (seqSum) ro.observe(seqSum);
+    } catch (e) { /* older engine — the per-second re-test still catches it */ }
   }
 
   /* ---------- render on year change ---------- */
+
+  /* The tier word goes on the bar, the sentence goes in the body. One function
+     writes both so a reader cannot see "Official" on a closed panel and find
+     projected dates inside it. */
+  /* The standing disclaimer. It used to open the footer, where it sat below every
+     list on the page — a long way from the clocks it describes. It belongs with
+     the sources, because it is the same kind of claim: here is what this page is
+     doing and where the numbers come from. */
+  var DISCLAIMER =
+    'Both clocks recalculate every second. Every time on this page is South Carolina local time ' +
+    '(ET \u2014 America / New York), read from your device&rsquo;s time zone database, so the numbers are the same ' +
+    'whether you open this in Charleston or Tokyo. Every button in the Important Voter Information ' +
+    'panel opens an official ' +
+    'South Carolina <code>.gov</code> page in a new tab.';
+
+  function setProv(tier, label, html) {
+    var chip = $("provTier");
+    if (chip) { chip.className = "tier " + tier; chip.textContent = label; }
+    var body = $("prov");
+    if (body) body.innerHTML = '<p class="provline">' + DISCLAIMER + '</p><p class="provline">' + html + '</p>';
+  }
 
   function renderYear() {
     data = buildYear(year);
@@ -1715,11 +2108,12 @@
       var jump = $("offJump");
       jump.textContent = "Go To " + target;
       jump.classList.toggle("hidden", target > MAXY);
-      prov.innerHTML = '<span class="tier projected">Off Year</span>' +
-        '<span>South Carolina runs no statewide election in odd-numbered years. Municipal, school board, and ' +
-        'special elections still happen, and are listed below. <b>Sources:</b> ' + sourceListHtml() + '.</span>';
+      setProv("projected", "Off Year",
+        'South Carolina runs no statewide election in odd-numbered years. Municipal, school board, and ' +
+        'special elections still happen, and are listed below. <b>Sources:</b> ' + sourceListHtml() + '.');
       spKey = null;
-      renderSpecial(Date.now());
+      renderNow();          // this path returns before tick(), and the strip has
+      renderSpecial(Date.now());   // to gain or lose its year the moment the dial moves
       return;
     }
 
@@ -1728,18 +2122,25 @@
     wakeClocks();
     $("seqWrap").classList.remove("hidden");
     $("offyear").classList.add("hidden");
-    setText("evDate", data.evStartLabel + " · 8:30 a.m.");
-    setText("edDate", data.edStartLabel + " · 7:00 a.m.");
+    setText("evDate", data.evStartLabel + " · 8:30 A.M.");
+    setText("edDate", data.edStartLabel + " · 7:00 A.M.");
+    /* Computed from the same evEnd/edEnd the bars count against, not typed in.
+       A hardcoded "Sat, Oct 31" is right for one year and wrong for every
+       other, on a page whose whole claim is that it keeps itself current. */
+    setText("ev-close", "Closes: 6:00 P.M. " + data.evEndLabel);
+    setText("ed-close", "Closes: 7:00 P.M. " + data.edEndLabel);
 
-    prov.innerHTML = data.official
-      ? '<span class="tier official">Official</span>' +
-        '<span>Every statewide date below is transcribed from the South Carolina Election Commission&rsquo;s published ' + year +
-        ' election calendar. <b>Sources:</b> ' + sourceListHtml() + '.</span>'
-      : '<span class="tier projected">Projected</span>' +
-        '<span>The Election Commission has not published a ' + year + ' calendar yet. These statewide dates are derived from statute ' +
+    if (data.official) {
+      setProv("official", "Official",
+        'Every statewide date below is transcribed from the South Carolina Election Commission&rsquo;s published ' + year +
+        ' election calendar. <b>Sources:</b> ' + sourceListHtml() + '.');
+    } else {
+      setProv("projected", "Projected",
+        'The Election Commission has not published a ' + year + ' calendar yet. These statewide dates are derived from statute ' +
         '(S.C. Code &sect;7-13-10, &sect;7-13-15, &sect;7-13-25 and the 30-day registration cutoff) and are unofficial. ' +
         'Administrative dates that follow Election Day are set year by year and are omitted rather than guessed. ' +
-        '<b>Sources:</b> ' + sourceListHtml() + '.</span>';
+        '<b>Sources:</b> ' + sourceListHtml() + '.');
+    }
 
     lastDay = null;
     spKey = null;
@@ -1761,9 +2162,11 @@
       $(pfx + "-foot").innerHTML = "Nothing To Count &mdash; No Statewide Election In " + y + ".";
     });
     setText("evTitle", "Early Voting Opens");
-    setText("edTitle", "Election Day");
+    setText("edTitle", "Election Day Begins");
     setText("evDate", "\u2013");
     setText("edDate", "\u2013");
+    setText("ev-close", "\u2013");
+    setText("ed-close", "\u2013");
   }
 
   function wakeClocks() {
@@ -1869,7 +2272,10 @@
     if (/\bspecial\b/i.test(t)) push("Special");
     if (/\bprimary\b/i.test(t)) push("Primary");
     if (/\brunoff\b/i.test(t)) push("Runoff");
-    push(e.type);
+    /* "Election" is normFeed's placeholder for an event the state filed with no
+       category at all. It labels nothing — every row here is an election — so it
+       is dropped rather than printed. */
+    if (!/^election$/i.test(String(e.type || "").trim())) push(e.type);
     return out;
   }
 
@@ -1935,6 +2341,7 @@
        about this page: it could not read its own data file. */
     if (FEED_STATE === "offline") {
       setText("spBadge", "Unavailable");
+      $("spBadge").classList.add("na");
       setText("spPeek", "");
       setClockBay("");
       $("spBody").innerHTML = '<p class="sp-empty">The saved calendar could not be loaded, so this page ' +
@@ -1949,6 +2356,7 @@
     setText("spBadge", split.up.length
       ? split.up.length + " Upcoming"
       : (split.held.length ? "All Held" : "None Listed"));
+    $("spBadge").classList.remove("na");
 
     var filterHtml = countyOptions(all);
 
@@ -1973,7 +2381,7 @@
       ? '<div class="clock-head">' +
           '<span class="clock-title" id="spClockTitle">' + esc(nxt.t) + '</span>' +
           '<span class="clock-date">' + fmt(nxt.day) + ' &middot; ' +
-            (nxt.sh == null ? 7 : nxt.sh) + ':' + pad(nxt.sm || 0) + ' a.m.</span>' +
+            (nxt.sh == null ? 7 : nxt.sh) + ':' + pad(nxt.sm || 0) + ' A.M.</span>' +
         '</div>' +
         '<div class="clock-note">' + esc(nxt.where || "") + '</div>' +
         '<div class="units">' +
@@ -2058,8 +2466,14 @@
     if (!inc || !inc.name) return "Seat vacant";
     var label = esc(inc.name) + (inc.party ? " (" + esc(inc.party) + ")" : "");
     var href = safeUrl(inc.url);
+    /* The two clocks already teach this page's colours: blue is Early Voting,
+       orange-red is Election Day. Reusing them for D and R keeps the palette to
+       one vocabulary rather than inventing a second. Anything else — an
+       independent, an appointee with no party on record — stays neutral. */
+    var party = String(inc.party || "").toUpperCase();
+    var cls = party === "D" ? " p-d" : party === "R" ? " p-r" : "";
     return "Held by " + (href
-      ? '<a href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + label + '</a>'
+      ? '<a class="member' + cls + '" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + label + '</a>'
       : label);
   }
 
@@ -2242,7 +2656,7 @@
                 '<summary>' +
                   '<span class="sp-chev">&#9654;</span>' +
                   '<span class="sp-title">' + spec.label + '</span>' +
-                  '<span class="sp-badge">' + (gsplit.up.length ? gsplit.up.length + " Upcoming"
+                  '<span class="sp-badge' + (!gsplit.up.length && FEED_STATE === "offline" ? " na" : "") + '">' + (gsplit.up.length ? gsplit.up.length + " Upcoming"
                      : (FEED_STATE === "offline" ? "Unavailable" : (gsplit.held.length ? "All Held" : "None"))) + '</span>' +
                   '<span class="sp-peek">' +
                     (nxt ? "Next: " + fmt(nxt.day) + " &middot; " + humanGap(spOpen(nxt) - now) : "") +
@@ -2284,7 +2698,7 @@
       titleId: "spClockTitle",
       idle: nxt.t,
       title: "Polls Are Open Now",
-      done: "<b>Polls are open now</b> until 7:00&nbsp;p.m.",
+      done: "<b>Polls are open now</b> until 7:00&nbsp;P.M.",
       window: 90 * DAY          // specials are called weeks out, not a year
     });
     setText("spPeek", diff <= 0 ? "Polls Are Open Today"
@@ -2326,6 +2740,37 @@
     setText("seqPeek", upcoming
       ? upcoming + (upcoming === 1 ? " date left · next: " : " dates left · next: ") + nextLabel
       : "Every date this cycle has passed");
+    fitSeqPeek();          // the string just changed length, so re-test the fit
+  }
+
+  /* Would the peek wrap onto its own line? Sum what the row actually needs — every
+     child at its natural width, plus the gaps between them — and compare with the
+     content box. Measured with the class off, because a hidden peek always fits and
+     would answer its own question yes forever.
+
+     The allowance covers the exclamation mark the title grows on hover: without it
+     the row fits until the pointer arrives and then wraps under it, which reads as
+     a glitch rather than a hover state. */
+  function fitPeek(sum) {
+    if (!sum) return;
+    var peek = sum.querySelector(".sp-peek");
+    if (!peek) return;
+    sum.classList.remove("nopeek");
+    var cs = getComputedStyle(sum);
+    var have = sum.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    var gap = parseFloat(cs.columnGap) || parseFloat(cs.gap) || 0;
+    var kids = [].slice.call(sum.children), need = 0;
+    for (var i = 0; i < kids.length; i++) {
+      // scrollWidth for the peek: it is nowrap and may already be squeezed.
+      need += (kids[i] === peek) ? peek.scrollWidth : kids[i].getBoundingClientRect().width;
+    }
+    need += gap * Math.max(0, kids.length - 1) + 12;     // 12 = room for the hover "!"
+    sum.classList.toggle("nopeek", need > have + 1);
+  }
+
+  function fitSeqPeek() {
+    var p = document.querySelector(".seq-panel > summary");
+    if (p) fitPeek(p);
   }
 
   function tick() {
@@ -2338,15 +2783,15 @@
       titleId: "evTitle", idle: "Early Voting Opens",
       title: now <= data.evEnd ? "Early Voting Is Open" : "Early Voting Has Closed",
       done: now <= data.evEnd
-        ? "<b>Open now.</b> 8:30&nbsp;a.m.–6:00&nbsp;p.m., Mon–Sat, through the final Saturday."
+        ? "<b>Open now.</b> 8:30&nbsp;A.M.–6:00&nbsp;P.M., Mon–Sat, through the final Saturday."
         : "<b>Closed.</b> The early voting period has ended."
     });
 
     paintClock("ed", data.edStart, now, {
-      titleId: "edTitle", idle: "Election Day",
+      titleId: "edTitle", idle: "Election Day Begins",
       title: now <= data.edEnd ? "Polls Are Open" : "Polls Have Closed",
       done: now <= data.edEnd
-        ? "<b>Polls open until 7:00&nbsp;p.m.</b> Vote at your assigned precinct."
+        ? "<b>Polls open until 7:00&nbsp;P.M.</b> Vote at your assigned precinct."
         : "<b>Voting has ended.</b> Counting and certification follow."
     });
 
@@ -2376,6 +2821,43 @@
   document.addEventListener("visibilitychange", function () {
     if (!document.hidden) { var a = feedAgeHours(); if (a == null || a > 6) loadFeed(); }
   });
+
+  /* How far the tick has to travel to reach the right edge. Measured rather than
+     guessed, because the summary's width changes with the viewport and with the
+     Official/Projected chip beside it. Recomputed on resize and whenever the
+     chip's text changes, so the slide always lands on the edge. */
+  (function () {
+    var panel = $("provPanel");
+    if (!panel) return;
+    function measure() {
+      var sum = panel.querySelector("summary");
+      var tick = panel.querySelector(".provtick");
+      if (!sum || !tick) return;
+      /* Measure the tick where it LIVES, not where the transform has put it.
+         Reading the transformed rect and adding the previous travel back was
+         wrong twice over — it compounded on every re-measure. Neutralising the
+         transform for one frame, with the transition off so nothing animates,
+         gives the untranslated position directly. */
+      var prevTransition = tick.style.transition, prevTransform = tick.style.transform;
+      tick.style.transition = "none";
+      tick.style.transform = "none";
+      var home = tick.getBoundingClientRect();
+      var pad = parseFloat(getComputedStyle(sum).paddingRight) || 0;
+      var margin = parseFloat(getComputedStyle(tick).marginRight) || 0;
+      var travel = sum.getBoundingClientRect().right - pad - margin - home.right;
+      tick.style.transform = prevTransform;
+      void tick.offsetWidth;                       // settle before the transition returns
+      tick.style.transition = prevTransition;
+      panel.style.setProperty("--tick-travel", Math.max(0, Math.round(travel)) + "px");
+    }
+    measure();
+    panel.addEventListener("toggle", measure);
+    window.addEventListener("resize", measure);
+    var chip = $("provTier");
+    if (chip && typeof MutationObserver === "function") {
+      new MutationObserver(measure).observe(chip, { childList: true, characterData: true, subtree: true });
+    }
+  })();
 
   /* The wrapper matters: wired directly, addEventListener would hand checkNow
      the browser's MouseEvent as its first argument. */
