@@ -1,14 +1,14 @@
 {
-  "checked_at": "2026-09-14T12:33:55.768Z",
-  "checked_at_et": "Sep 14, 2026, 8:33 AM",
-  "generated_at": "2026-08-21T21:46:39.840Z",
-  "generated_at_et": "Aug 21, 2026, 5:46 PM",
-  "changed_this_run": false,
+  "checked_at": "2026-09-14T18:30:40.365Z",
+  "checked_at_et": "Sep 14, 2026, 2:30 PM",
+  "generated_at": "2026-09-14T18:30:40.365Z",
+  "generated_at_et": "Sep 14, 2026, 2:30 PM",
+  "changed_this_run": true,
   "source": "https://scvotes.gov/elections-statistics/upcoming-elections/",
   "api": "https://scvotes.gov/wp-json/tribe/events/v1/events",
   "window_start": "2026-01-01",
   "filter": "none — every event on the state's calendar; the page groups them",
-  "count": 148,
+  "count": 155,
   "elections": [
     {
       "id": 14890,
@@ -778,18 +778,18 @@
       "url": "https://scvotes.gov/event/inman-city-council-special-election-3/"
     },
     {
-      "id": 15490,
+      "id": 16629,
       "title": "School District Two Bond Referendum",
       "date": "2026-05-02",
       "start_et": "2026-05-02 07:00:00",
       "end_et": "2026-05-02 19:00:00",
-      "type": "General",
+      "type": "Referendum",
       "counties": [
         "Anderson",
         "Greenville"
       ],
       "where": "Anderson County, Greenville County",
-      "url": "https://scvotes.gov/event/school-district-two-bond-referendum-greenville/"
+      "url": "https://scvotes.gov/event/school-district-two-bond-referendum-anderson/"
     },
     {
       "id": 15233,
@@ -976,18 +976,18 @@
       "url": "https://scvotes.gov/event/city-of-florence-primary-election/"
     },
     {
-      "id": 15720,
+      "id": 16631,
       "title": "North Augusta Republican Primary",
       "date": "2026-06-09",
       "start_et": "2026-06-09 07:00:00",
       "end_et": "2026-06-09 19:00:00",
-      "type": "General",
+      "type": "Primary",
       "counties": [
         "Aiken",
         "Edgefield"
       ],
       "where": "Aiken County, Edgefield County",
-      "url": "https://scvotes.gov/event/north-augusta-republican-primary-edgefield/"
+      "url": "https://scvotes.gov/event/north-augusta-republican-primary-aiken/"
     },
     {
       "id": 16217,
@@ -1312,7 +1312,7 @@
       "date": "2026-08-25",
       "start_et": "2026-08-25 07:00:00",
       "end_et": "2026-08-25 19:00:00",
-      "type": "Election",
+      "type": "Primary",
       "counties": [],
       "where": "Statewide",
       "url": "https://scvotes.gov/event/us-senate-special-republican-primary-2/"
@@ -1355,14 +1355,55 @@
       "url": "https://scvotes.gov/event/bethune-mayor-special-election/"
     },
     {
+      "id": 16947,
+      "title": "Bethune Special Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Kershaw"
+      ],
+      "where": "Kershaw County",
+      "url": "https://scvotes.gov/event/bethune-special-election-2/"
+    },
+    {
+      "id": 16948,
+      "title": "Board of Education Special Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Marion"
+      ],
+      "where": "Marion County",
+      "url": "https://scvotes.gov/event/board-of-education-special-election/"
+    },
+    {
+      "id": 16949,
+      "title": "Broadview Zoning Referendum",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Referendum",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/event/broadview-zoning-referendum-2/"
+    },
+    {
       "id": 16636,
       "title": "City Of Abbeville  Dis 2  Special Election",
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
-      "type": "Election",
-      "counties": [],
-      "where": "Statewide",
+      "type": "Special",
+      "counties": [
+        "Abbeville"
+      ],
+      "where": "Abbeville County",
       "url": "https://scvotes.gov/event/city-of-abbeville-dis-2-special-elec/"
     },
     {
@@ -1590,6 +1631,19 @@
       "url": "https://scvotes.gov/event/general-election-whitmire-2/"
     },
     {
+      "id": 16950,
+      "title": "Green Pond Station A",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Referendum",
+      "counties": [
+        "Anderson"
+      ],
+      "where": "Anderson County",
+      "url": "https://scvotes.gov/event/green-pond-station-a-2/"
+    },
+    {
       "id": 15454,
       "title": "Lake City General Election",
       "date": "2026-11-03",
@@ -1601,6 +1655,19 @@
       ],
       "where": "Florence County",
       "url": "https://scvotes.gov/event/lake-city-general-election-4/"
+    },
+    {
+      "id": 16951,
+      "title": "Livingston Town Council Spec Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Orangeburg"
+      ],
+      "where": "Orangeburg County",
+      "url": "https://scvotes.gov/event/livingston-town-council-spec-election/"
     },
     {
       "id": 16643,
@@ -1671,9 +1738,11 @@
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
-      "type": "Election",
-      "counties": [],
-      "where": "Statewide",
+      "type": "Special",
+      "counties": [
+        "Abbeville"
+      ],
+      "where": "Abbeville County",
       "url": "https://scvotes.gov/event/town-of-calhoun-falls-special-election-3/"
     },
     {
@@ -1742,6 +1811,19 @@
       "url": "https://scvotes.gov/event/town-of-hodges-general-election-4/"
     },
     {
+      "id": 16952,
+      "title": "Town of McBee General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Chesterfield"
+      ],
+      "where": "Chesterfield County",
+      "url": "https://scvotes.gov/event/town-of-mcbee-general-election-4/"
+    },
+    {
       "id": 14964,
       "title": "Town of Nichols General Election",
       "date": "2026-11-03",
@@ -1753,6 +1835,19 @@
       ],
       "where": "Marion County",
       "url": "https://scvotes.gov/event/town-of-nichols-general-election-4/"
+    },
+    {
+      "id": 16953,
+      "title": "Town of Olanta General Election",
+      "date": "2026-11-03",
+      "start_et": "2026-11-03 07:00:00",
+      "end_et": "2026-11-03 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/town-of-olanta-general-election-4/"
     },
     {
       "id": 15693,
@@ -1773,9 +1868,11 @@
       "date": "2026-11-03",
       "start_et": "2026-11-03 07:00:00",
       "end_et": "2026-11-03 19:00:00",
-      "type": "Election",
-      "counties": [],
-      "where": "Statewide",
+      "type": "General",
+      "counties": [
+        "Newberry"
+      ],
+      "where": "Newberry County",
       "url": "https://scvotes.gov/event/town-of-pomaria-general-election/"
     },
     {
