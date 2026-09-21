@@ -19,23 +19,43 @@
 <meta property="og:type" content="website">
 <style>
   /* ==== PALETTE START ====
-     One palette: a desaturated navy. There is no light mode and no toggle —
+     One palette: a slate navy. There is no light mode and no toggle —
      the page ships the colours it was designed in.
 
      Note that nothing here is pure black either. #000 as a page background
      maximises the halation that makes light text smear on an LCD; the darkest
-     surface is #151b27.
+     surface is the page ground, #1a2437.
+
+     The surface ramp was lifted from its original near-black (#151b27 …
+     #364357) in September 2026: the page reads as blue now rather than as dark
+     grey with a blue cast. Accents did not move. Lifting the surfaces spends
+     contrast — the pair that binds first is the blue countdown numeral on a
+     card. That is the headroom any further lift eats into.
+
+     The ramp is not monotonic, and that is deliberate. --panel-2 is DARKER
+     than --panel, not lighter: it is the fill for things set into a card —
+     the countdown tiles, the progress trough — and a recess is darker than
+     the face it is cut into. Read the ramp as ground, then card raised off it,
+     then wells sunk back into the card; not as four steps up. --shadow carries
+     a lit top edge as its first layer for the same reason.
 
      Checked pair by pair for WCAG contrast: every text-on-surface pair clears
      4.5:1 and every accent clears 3:1. Run scripts/check-contrast.mjs after
-     changing any value below. */
+     changing any value below.
+
+     One caution about that script: it scores --ink-faint against a 3.0 floor,
+     on the assumption the token only ever carries small uppercase tags. That
+     is not true — .clock-note sets a full sentence in it on a card. So when
+     --panel was lifted, the script still read green while that sentence sat
+     at 4.26:1. --ink-faint was raised from #92a5bb to #9db0c5 to put it back
+     over 4.5:1 on --panel. Judge that token by the 4.5 rule, not the script. */
   :root {
     color-scheme: dark;
-    --bg: #151b27; --panel: #1d2533; --panel-2: #263142; --line: #364357;
-    --ink: #e9eff8; --ink-dim: #a6b6cb; --ink-faint: #92a5bb;
+    --bg: #1a2437; --panel: #2d3e5b; --panel-2: #22314a; --line: #4c6285;
+    --ink: #e9eff8; --ink-dim: #a6b6cb; --ink-faint: #9db0c5;
     --ev: #64a6ff; --ed: #ef6565; --good: #45c795; --proj: #d8ab55; --past: #5c6980;
     --sp: #f0c65f;
-    --shadow: 0 1px 2px rgba(4,10,20,.45);
+    --shadow: inset 0 1px 0 rgba(168,198,238,.11), 0 1px 2px rgba(4,10,20,.5), 0 12px 30px -10px rgba(2,6,14,.8);
   }
   /* ==== PALETTE END ==== */
 
@@ -46,6 +66,24 @@
     font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
     font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased;
   }
+  /* ---- the surfaces the page did not draw ----
+     Selection highlight, scrollbar and form-control accent all ship with a
+     browser default that was picked for a white page. On a dark one they are
+     the three places the design visibly stops, so they are themed from the
+     palette like everything else. */
+  ::selection { background: rgba(100,166,255,.3); color: var(--ink); }
+  :root {
+    accent-color: var(--ev);              /* the select's own dropdown marker */
+    scrollbar-color: var(--line) var(--bg);
+  }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line); border-radius: 99px;
+    border: 3px solid var(--bg);          /* inset the thumb off the track edge */
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--past); }
+
   .wrap { max-width: 800px; margin: 0 auto; padding: 30px 20px 56px; }
 
   /* ---- header + year nav ---- */
@@ -320,7 +358,7 @@
   .prov a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
   .prov a:hover { color: var(--ev); border-bottom-color: var(--ev); }
   .tier {
-    flex: none; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+    flex: none; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
     padding: 3px 7px; border-radius: 5px; border: 1px solid currentColor;
   }
   .prov a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px;
@@ -339,15 +377,26 @@
   .clock-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
   .clock-head .clock-date { margin-left: auto; }
   .clock-title { font-size: 15px; font-weight: 620; letter-spacing: -.005em; }
-  .clock-date { font-size: 11.5px; color: var(--ink-faint); white-space: nowrap; }
+  /* The date is the second thing anyone wants off this card — the countdown
+     tells you how long, this tells you when — and it was set in the smallest
+     size and the faintest ink on the page. */
+  .clock-date { font-size: 12.5px; color: var(--ink-dim); white-space: nowrap; }
   .clock-note { font-size: 12.5px; color: var(--ink-dim); margin-bottom: 16px; }
   .units { display: flex; gap: 7px; }
+  /* Sunk, not stacked. The tile fill is --panel-2, which is darker than the
+     card it sits in, and the inner shadow puts the card's own edge over its
+     top lip — so the tile reads as a well cut into the card rather than a
+     smaller card resting on it. */
   .unit { flex: 1 1 0; background: var(--panel-2); border: 1px solid var(--line);
-          border-radius: 10px; padding: 12px 4px 9px; text-align: center; }
+          border-radius: 10px; padding: 12px 4px 9px; text-align: center;
+          box-shadow: inset 0 1px 2px rgba(0,0,0,.45); }
   .unit .n { font-size: 30px; font-weight: 640; line-height: 1; letter-spacing: -.03em; display: block; }
   .unit.lead .n { color: var(--c); }
-  .unit .l { font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
-             color: var(--ink-faint); margin-top: 8px; display: block; font-weight: 600; }
+  /* 11px, not the 9px this started at. These five are the only labels telling
+     you what the five numerals above them count, and at 9px they were the
+     smallest type on the page. The numerals still carry the hierarchy at 30px. */
+  .unit .l { font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+             color: var(--ink-faint); margin-top: 7px; display: block; font-weight: 600; }
   /* The rule and the top margin move to the row, so the closing time sits on the
      same line as the countdown summary rather than under it. */
   .clock-footrow { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
@@ -355,8 +404,11 @@
   .clock-foot { font-size: 12.5px; color: var(--ink-dim); min-width: 0; }
   .clock-close { flex: none; font-size: 12.5px; color: var(--ink-faint); white-space: nowrap; }
   .clock-foot b { color: var(--ink); font-weight: 600; }
+  /* Same well, in trough form: the unfilled part of the bar is the same sunk
+     surface as a countdown tile, so the fill sits in a channel. */
   .bar { height: 5px; background: var(--panel-2); border: 1px solid var(--line);
-         border-radius: 99px; overflow: hidden; margin-top: 12px; }
+         border-radius: 99px; overflow: hidden; margin-top: 12px;
+         box-shadow: inset 0 1px 2px rgba(0,0,0,.5); }
   .bar > i { display: block; height: 100%; width: 0%; background: var(--c); border-radius: 99px; transition: width .6s ease; }
 
   /* ---- dormant clocks (odd years) ----
@@ -512,7 +564,7 @@
     .sp-badge.na::after { content: "N/A"; font-size: 9.5px; letter-spacing: .1em; }
   }
   .sp-badge {
-    font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
     color: var(--sp); border: 1px solid currentColor; border-radius: 5px; padding: 3px 7px;
   }
   .sp-peek { margin-left: auto; font-size: 12.5px; color: var(--ink-dim); white-space: nowrap; }
@@ -594,8 +646,8 @@
      on the same pixel grid and none of them reads heavier than the others. */
   .pill {
     display: inline-flex; align-items: center; flex: none;
-    height: 17px; padding: 0 7px; border: 1px solid var(--line); border-radius: 4px;
-    font-size: 9px; line-height: 1; letter-spacing: .09em; text-transform: uppercase;
+    height: 19px; padding: 0 7px; border: 1px solid var(--line); border-radius: 4px;
+    font-size: 11px; line-height: 1; letter-spacing: .09em; text-transform: uppercase;
     font-weight: 700; color: var(--ink-faint);
   }
   .pill-special { color: var(--sp); border-color: currentColor; }
@@ -667,13 +719,13 @@
   /* ---- timeline ---- */
   h2 { font-size: 15px; letter-spacing: .1em; text-transform: uppercase;
        color: var(--ink-faint); font-weight: 650; margin: 34px 0 13px; }
-  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11.5px; color: var(--ink-faint); margin: -4px 0 12px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink-faint); margin: -4px 0 12px; }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .chip { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
   .timeline { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--panel); box-shadow: var(--shadow); }
   .phase { padding: 9px 18px; background: var(--panel-2); border-bottom: 1px solid var(--line);
-           font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 650; }
+           font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 650; }
   /* Four fixed tracks so the button and date columns land on the same x in every
      row: dot / text (flexes) / button (208px) / date (104px). Nothing is `auto`,
      so no row can size its own columns and knock the others out of alignment. */
@@ -705,7 +757,7 @@
   }
   .when .away { display: block; font-size: 13px; font-weight: 500; color: var(--ink-faint); margin-top: 5px; }
   .row.action .t::after {
-    content: "You"; margin-left: 8px; font-size: 9.5px; letter-spacing: .09em;
+    content: "You"; margin-left: 8px; font-size: 11px; letter-spacing: .09em;
     text-transform: uppercase; font-weight: 700; color: var(--ink-faint);
     border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; vertical-align: 2px;
   }
@@ -727,7 +779,9 @@
   /* ---- off-year notice ---- */
   .offyear { border: 1px solid var(--line); border-radius: 16px; background: var(--panel);
              padding: 30px 26px; text-align: center; box-shadow: var(--shadow); }
-  .offyear h3 { font-size: 18px; font-weight: 640; margin: 0 0 10px; letter-spacing: -.01em; }
+  /* h2, not h3. It was an h3 under the page's only h1, which skips a level and
+     makes a screen reader announce a subsection that has no section. */
+  .offyear h2 { font-size: 18px; font-weight: 640; margin: 0 0 10px; letter-spacing: -.01em; }
   .offyear p { font-size: 13.5px; color: var(--ink-dim); line-height: 1.65; margin: 0 auto 8px; max-width: 580px; }
   .offlinks { margin-top: 18px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
   .offlinks a, .offlinks button {
@@ -736,6 +790,24 @@
     font-size: 13px; font-weight: 560; cursor: pointer; text-decoration: none; font-family: inherit;
   }
   .offlinks a:hover, .offlinks button:hover { border-color: var(--ink-faint); }
+  /* The only two controls on the page that had a hover state and no focus
+     ring, so a keyboard user reached them and saw nothing. */
+  .offlinks a:focus-visible, .offlinks button:focus-visible {
+    outline: 2px solid var(--ev); outline-offset: 2px;
+  }
+
+  /* ---- press feedback ----
+     Every control here had hover and focus and nothing for the moment of the
+     click itself, so a tap on a phone — where there is no hover at all — gave
+     no acknowledgement until the work finished. One pixel down is enough; it
+     reads as the surface taking the press. Transform only, so nothing reflows,
+     and no transition, because a press should not lag behind the finger. */
+  .checkbtn:active:not(:disabled),
+  .btn:active,
+  .yearnav button:active:not(:disabled),
+  .offlinks a:active, .offlinks button:active {
+    transform: translateY(1px);
+  }
 
   .facts { margin-top: 14px; border: 1px solid var(--line); border-radius: 14px;
            background: var(--panel); padding: 16px 18px; font-size: 13.5px;
@@ -748,7 +820,11 @@
      as every panel edge so it reads as part of the same system. */
   hr.rule { border: 0; border-top: 1px solid var(--line); margin: 12px 0; height: 0; }
 
-  footer { box-sizing: border-box; margin-top: 0; font-size: 11.5px; color: var(--ink-faint); line-height: 1.6; text-align: justify; }
+  /* 13px, not the 11.5px this started at. This is the longest continuous prose
+     on the page — five sentences of sourcing and statute — and it was set
+     smaller than every label above it. The one paragraph that says which dates
+     are projections rather than certified is not the one to shrink. */
+  footer { box-sizing: border-box; margin-top: 0; font-size: 13px; color: var(--ink-faint); line-height: 1.65; text-align: justify; }
   footer a { color: var(--ink-dim); }
   .tick { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--good);
           margin: 6px 6px 6px 6px; vertical-align: middle; animation: pulse 2s ease-in-out infinite; }
@@ -770,6 +846,40 @@
   @media (prefers-reduced-motion: reduce) {
     .tick { animation: none; } .bar > i { transition: none; }
   }
+  /* ---- campaign disclaimer ----
+     Deliberately not folded into the footer above it. That footer is sourcing
+     and methodology — where the dates come from, which ones are projections.
+     This is who paid for the page, which is a different kind of statement and
+     the one thing on the page that must not be findable only by reading a
+     paragraph about statute citations to its end.
+
+     So: its own rule, its own line, sitting on the page ground rather than
+     inside a panel, because it is an attribution and not content. And set at
+     14px — larger than the footnotes it follows — because "clear and
+     conspicuous" is the bar a paid-for line has to clear. */
+  .paidfor {
+    margin: 26px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    color: var(--ink-dim);
+  }
+  /* The committee name is the link, and it keeps the underline every other
+     external link on this page carries — a disclaimer that hides the fact it
+     is clickable is worse than one that is plain text. */
+  .paidfor a {
+    color: var(--ink); font-weight: 650;
+    letter-spacing: .06em; white-space: nowrap;
+    text-decoration: underline; text-underline-offset: 3px;
+    text-decoration-color: var(--ink-faint);
+    transition: color .12s ease, text-decoration-color .12s ease;
+  }
+  .paidfor a:hover { color: var(--ev); text-decoration-color: var(--ev); }
+  .paidfor a:focus-visible { outline: 2px solid var(--ev); outline-offset: 3px; border-radius: 3px; }
+
   .hidden { display: none !important; }
 
   /* Ten transitions and one infinite spinner. A reader who has asked their system
@@ -809,11 +919,15 @@
 </head>
 <body>
 <noscript>
-  <div style="max-width:1060px;margin:16px auto;padding:12px 16px;border-radius:12px;border:1px solid #364357;
-              background:#1d2533;color:#e9eff8;font:13px/1.6 ui-sans-serif,-apple-system,'Segoe UI',Roboto,sans-serif;">
+  <!-- Styled from the tokens, not from copies of them. This block held the
+       only hardcoded surface hexes in the file, and they went stale the moment
+       the palette moved. The stylesheet above is inline and needs no script, so
+       the variables resolve here exactly as they do everywhere else. -->
+  <div style="max-width:1060px;margin:16px auto;padding:12px 16px;border-radius:12px;border:1px solid var(--line);
+              background:var(--panel);color:var(--ink);font:14px/1.6 ui-sans-serif,-apple-system,'Segoe UI',Roboto,sans-serif;">
     This page counts down in real time, so it needs JavaScript. With scripts off, nothing below will fill in.
     The South Carolina Election Commission publishes the same dates without any script at
-    <a href="https://scvotes.gov/elections-statistics/upcoming-elections/" style="color:#64a6ff">scvotes.gov</a>.
+    <a href="https://scvotes.gov/elections-statistics/upcoming-elections/" style="color:var(--ev)">scvotes.gov</a>.
   </div>
 </noscript>
 <div class="wrap">
@@ -975,7 +1089,7 @@
   </div>
 
   <div class="offyear hidden" id="offyear">
-    <h3 id="offTitle">No Statewide Election Scheduled</h3>
+    <h2 id="offTitle">No Statewide Election Scheduled</h2>
     <p id="offBody"></p>
     <p>South Carolina holds its general election on the first Tuesday after the first Monday in November of each <em>even-numbered</em> year, and its statewide primary on the second Tuesday in June of those same years.</p>
     <p>Odd years still carry <b>municipal elections, school board races, and special elections</b> called to fill a vacancy. Those are in the panel above — this page pulls the state's own calendar automatically, so a special election called next month will appear here on its own.</p>
@@ -1003,6 +1117,8 @@
     The Election Commission publishes the binding calendar for each year separately, and the legislature can change any of
     these rules. Reconfirm at <a href="https://scvotes.gov" target="_blank" rel="noopener">scvotes.gov</a> before relying on a date near its cutoff.
   </footer>
+
+  <p class="paidfor">Paid for by <a href="https://www.reesideforcongress.com/" target="_blank" rel="noopener">REESIDE FOR CONGRESS</a></p>
 
 </div>
 
