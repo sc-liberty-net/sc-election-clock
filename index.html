@@ -799,6 +799,7 @@
   .offlinks { margin-top: 18px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
   .offlinks a, .offlinks button {
     display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 9px;
+    min-height: 44px; box-sizing: border-box;            /* a thumb's height; wraps one per line when the pair won't fit */
     border: 1px solid var(--line); background: var(--panel-2); color: var(--ink);
     font-size: 13px; font-weight: 560; cursor: pointer; text-decoration: none; font-family: inherit;
   }
