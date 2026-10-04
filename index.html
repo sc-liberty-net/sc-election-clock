@@ -2810,9 +2810,14 @@
        open state, its event listeners, and the has-clock class that squares off
        the seam between the two boxes. */
     var featured = document.getElementById("specialStack");
+    // Detaching the stack drops focus from anything inside it (the county picker,
+    // a panel bar); it comes back as the same nodes, so focus can follow.
+    var had = document.activeElement;
+    var keep = featured && had && featured.contains(had) ? had : null;
     if (featured && featured.parentNode === host) host.removeChild(featured);
     host.innerHTML = html;
     if (featured) host.insertBefore(featured, host.firstChild);
+    if (keep && keep.isConnected) keep.focus({ preventScroll: true });
     var now2 = host.querySelectorAll("details");
     for (var m = 0; m < now2.length; m++) if (open[now2[m].id]) now2[m].open = true;
   }
@@ -2823,7 +2828,14 @@
     var nxt = nextSpecial(list, now);
     var key = FEED_STATE + "|" + year + "|" + spCounty + "|" +
               (nxt ? nxt.t + nxt.day.getTime() : "none") + "|" + Math.floor(now / DAY);
-    if (key !== spKey) { spKey = key; buildSpecialBody(all, list, nxt, now); renderGroups(now); }
+    if (key !== spKey) {
+      /* The rebuild replaces the county <select>. If the reader was on it — after
+         a pick, or when the feed lands, a check returns, the tab wakes or the day
+         turns — focus would fall to <body>; hand it to the new one instead. */
+      var onSel = document.activeElement && document.activeElement.id === "spCountySel";
+      spKey = key; buildSpecialBody(all, list, nxt, now); renderGroups(now);
+      var sel = onSel && $("spCountySel"); if (sel) sel.focus({ preventScroll: true });
+    }
     if (!nxt) { setText("spPeek", list.length ? "All Held" : ""); return; }
 
     var open = spOpen(nxt), diff = open - now;
@@ -2960,9 +2972,7 @@
   // The county <select> is rebuilt with the panel, so listen on the container.
   $("spBody").addEventListener("change", function (e) {
     if (e.target && e.target.id === "spCountySel") {
-      spCounty = e.target.value; spKey = null; renderSpecial(Date.now());
-      // The rewrite replaced the <select> the reader was on; hand focus to the new one.
-      var s = $("spCountySel"); if (s) s.focus({ preventScroll: true });
+      spCounty = e.target.value; spKey = null; renderSpecial(Date.now());   // renderSpecial keeps focus on the picker
     }
   });
   // Re-check the feed when the tab comes back after a long sleep.
