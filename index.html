@@ -227,7 +227,7 @@
   .yearnav button {
     align-self: center; flex: 0 0 auto;
     width: 75px; width: clamp(38px, 21.9cqw, 75px);
-    height: 40px; border-radius: 12px; border: 1px solid var(--line);
+    height: 44px; border-radius: 12px; border: 1px solid var(--line);
     background: var(--panel-2); color: var(--ink); font-size: 24px; line-height: 1;
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     transition: background .12s ease, border-color .12s ease, color .12s ease;
@@ -285,6 +285,10 @@
     border: 1px solid var(--line); background: var(--panel-2); box-shadow: var(--shadow);
     line-height: 1.45;
     opacity: 0; visibility: hidden; transition: opacity .12s ease, visibility .12s ease;
+    /* Taps pass through. Below ~389px it opens over the Citations bar, and as a
+       hit target it swallowed every tap there — the bar would not open and the
+       tooltip, holding sticky :hover, would not close. It holds no controls. */
+    pointer-events: none;
   }
   /* :focus as well as :focus-visible. A tap on a touch screen focuses the span
      but does not match :focus-visible — that pseudo-class is for keyboard intent.
@@ -294,8 +298,7 @@
      an outline the way a Tab does. */
   .nowbar.brief .nowbrief:hover ~ .nowfull,
   .nowbar.brief .nowbrief:focus ~ .nowfull,
-  .nowbar.brief .nowbrief:focus-visible ~ .nowfull,
-  .nowbar.brief .nowfull:hover { opacity: 1; visibility: visible; }
+  .nowbar.brief .nowbrief:focus-visible ~ .nowfull { opacity: 1; visibility: visible; }
   /* nowrap ONLY in the default state, where the stamp is the fit test's subject
      and wrapping would hide the very condition being tested. Inside the tooltip it
      must wrap: the panel is capped at 320px, so a nowrap stamp overflowed it and
@@ -353,6 +356,15 @@
      qualifies the words next to it, so it reads as part of the phrase. The tick
      takes the right edge instead. */
   #provPanel > summary .tier { margin-left: 0; }
+  /* The bar never wraps: at 360px the dot fell to a line of its own and the bar
+     grew from 59px to 92px. Below 400px the gaps tighten so all four fit; on a
+     phone narrower still, the title wraps inside itself before the dot moves. */
+  #provPanel > summary { flex-wrap: nowrap; }
+  #provPanel > summary .sp-title { min-width: 0; }
+  @media (max-width: 400px) {
+    #provPanel > summary { gap: 8px; }
+    #provPanel > summary .tick.provtick { margin-left: 0; margin-right: 0; }  /* outranks the base rule further down */
+  }
 
   .prov > span:last-child { min-width: 0; }
   .prov a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid var(--line); }
@@ -634,7 +646,8 @@
   .heldwrap > summary {
     list-style: none; cursor: pointer; font-size: 12px; font-weight: 600;
     letter-spacing: .04em; text-transform: uppercase; color: var(--ink-faint);
-    display: inline-flex; align-items: center; gap: 8px; padding: 4px 0;
+    display: inline-flex; align-items: center; gap: 8px; padding: 0;
+    min-height: 44px;                                    /* a thumb's width, not the text's */
   }
   .heldwrap > summary::-webkit-details-marker { display: none; }
   .heldwrap > summary:hover { color: var(--ink-dim); }
@@ -698,13 +711,13 @@
      State's List takes the Official green, because it goes to the official
      record. One rule per button rather than one shared rule, so a reader can
      tell them apart before reading the labels. */
-  .checkbtn:hover:not(:disabled) { border-color: var(--sp); color: var(--sp); background: var(--panel-2); }
+  .checkbtn:hover:not([aria-disabled="true"]) { border-color: var(--sp); color: var(--sp); background: var(--panel-2); }
   .checkbtn:focus-visible { outline: 2px solid var(--sp); outline-offset: 2px; }
-  #pastBtn:hover:not(:disabled) { border-color: var(--ed); color: var(--ed); }
+  #pastBtn:hover:not([aria-disabled="true"]) { border-color: var(--ed); color: var(--ed); }
   #pastBtn:focus-visible { outline-color: var(--ed); }
   a.checkbtn:hover:not(:disabled) { border-color: var(--good); color: var(--good); }
   a.checkbtn:focus-visible { outline-color: var(--good); }
-  .checkbtn:disabled { opacity: .6; cursor: progress; }
+  .checkbtn[aria-disabled="true"] { opacity: .6; cursor: progress; }
   .checkbtn .glyph { font-size: 13px; line-height: 1; }
   .checkbtn.busy .glyph { animation: spin 1s linear infinite; display: inline-block; }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -802,7 +815,7 @@
      no acknowledgement until the work finished. One pixel down is enough; it
      reads as the surface taking the press. Transform only, so nothing reflows,
      and no transition, because a press should not lag behind the finger. */
-  .checkbtn:active:not(:disabled),
+  .checkbtn:active:not([aria-disabled="true"]),
   .btn:active,
   .yearnav button:active:not(:disabled),
   .offlinks a:active, .offlinks button:active {
@@ -1796,7 +1809,10 @@
     for (var k in CHECK_UI) {
       var ui = CHECK_UI[k], b = $(ui.btn), l = $(ui.label);
       if (!b) continue;
-      b.disabled = on;
+      /* aria-disabled, not disabled: a disabled button drops focus to <body> the
+         moment it is pressed. checkNow's `checking` guard already ignores the
+         repeat press that `disabled` was there to block. */
+      if (on) b.setAttribute("aria-disabled", "true"); else b.removeAttribute("aria-disabled");
       b.classList.toggle("busy", on && k === (mode || "upcoming"));
       if (l) l.textContent = (ui === active)
         ? (label || (on ? "Asking scvotes.gov…" : ui.idle))
@@ -2917,20 +2933,35 @@
 
   /* ---------- wiring ---------- */
 
-  $("prevYear").addEventListener("click", function () { if (year > BASE) { year--; renderYear(); } });
-  $("nextYear").addEventListener("click", function () { if (year < MAXY) { year++; renderYear(); } });
+  /* A control that disables or hides itself drops keyboard focus to <body>, and
+     the reader starts again from the top. The arrow at the end of the range
+     disables, and "Go To 2028" hides with the off-year block, so after a year
+     change focus moves to whichever arrow is still live. */
+  function changeYear(to) {
+    var had = document.activeElement;
+    year = to; renderYear();
+    if (had && had !== document.body &&
+        (had.disabled || !had.isConnected || !had.getClientRects().length)) {
+      var live = $("nextYear").disabled ? $("prevYear") : $("nextYear");
+      live.focus({ preventScroll: true });
+    }
+  }
+  $("prevYear").addEventListener("click", function () { if (year > BASE) changeYear(year - 1); });
+  $("nextYear").addEventListener("click", function () { if (year < MAXY) changeYear(year + 1); });
   $("offJump").addEventListener("click", function () {
-    var t = nextEven(year); if (t <= MAXY) { year = t; renderYear(); }
+    var t = nextEven(year); if (t <= MAXY) changeYear(t);
   });
   document.addEventListener("keydown", function (e) {
     if (e.target && (e.target.tagName === "A" || e.target.tagName === "SELECT")) return;
-    if (e.key === "ArrowLeft" && year > BASE) { year--; renderYear(); }
-    if (e.key === "ArrowRight" && year < MAXY) { year++; renderYear(); }
+    if (e.key === "ArrowLeft" && year > BASE) changeYear(year - 1);
+    if (e.key === "ArrowRight" && year < MAXY) changeYear(year + 1);
   });
   // The county <select> is rebuilt with the panel, so listen on the container.
   $("spBody").addEventListener("change", function (e) {
     if (e.target && e.target.id === "spCountySel") {
       spCounty = e.target.value; spKey = null; renderSpecial(Date.now());
+      // The rewrite replaced the <select> the reader was on; hand focus to the new one.
+      var s = $("spCountySel"); if (s) s.focus({ preventScroll: true });
     }
   });
   // Re-check the feed when the tab comes back after a long sleep.
