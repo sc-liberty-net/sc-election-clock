@@ -12,6 +12,7 @@ Download `sc-election-clock.zip` and unzip it. At the top level you should see:
 
 ```
 index.html          README.md          INSTALL.md         SETUP.md
+og.png              favicon.svg        favicon-32.png     apple-touch-icon.png
 data/               scripts/           .github/
 ```
 
@@ -28,7 +29,8 @@ common way this upload goes wrong: you get a green checkmark and no workflow.
 
 1. Go to **https://github.com/drugsforrobots/sc-election-clock**
 2. **Add file** → **Upload files**
-3. Drag in `index.html`, `README.md`, `INSTALL.md`, `SETUP.md`, and the `data` and `scripts`
+3. Drag in `index.html`, `README.md`, `INSTALL.md`, `SETUP.md`, the four image files (`og.png`,
+   `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`), and the `data` and `scripts`
    **folders** — drag the folders themselves, not their contents.
 4. Commit message: `Deploy the self-updating build`
 5. Leave **Commit directly to the main branch** selected → **Commit changes**

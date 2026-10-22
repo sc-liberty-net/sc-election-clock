@@ -8,6 +8,7 @@ and special — that keeps itself current without anyone editing it.
 | File | What It Does |
 | --- | --- |
 | `index.html` | The page itself. Open it in any browser; it needs no build step and no server. |
+| `og.png`, `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` | The link-preview card and the icons for the browser tab and phone home screen. The mark is a clock whose hands, at 10:08, make a check mark. |
 | `data/elections.json` | The machine-readable election list the page reads. Rewritten on every check. Ships with a small hand-made seed; Cronvass replaces it with the state's full calendar on its first run. |
 | `scripts/fetch-elections.mjs` | **Cronvass** — the script that reads the state's calendar and rewrites `data/elections.json`. |
 | `scripts/fetch-congress.mjs` | Reads the Federal Election Commission's roster and writes `data/congress.json`. Optional — needs a free API key. |
