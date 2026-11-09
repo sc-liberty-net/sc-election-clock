@@ -1,14 +1,14 @@
 {
-  "checked_at": "2026-11-09T06:26:51.047Z",
-  "checked_at_et": "Nov 9, 2026, 1:26 AM",
-  "generated_at": "2026-09-28T23:16:12.838Z",
-  "generated_at_et": "Sep 28, 2026, 7:16 PM",
-  "changed_this_run": false,
+  "checked_at": "2026-11-09T22:20:48.654Z",
+  "checked_at_et": "Nov 9, 2026, 5:20 PM",
+  "generated_at": "2026-11-09T22:20:48.654Z",
+  "generated_at_et": "Nov 9, 2026, 5:20 PM",
+  "changed_this_run": true,
   "source": "https://scvotes.gov/elections-statistics/upcoming-elections/",
   "api": "https://scvotes.gov/wp-json/tribe/events/v1/events",
   "window_start": "2026-01-01",
   "filter": "none — every event on the state's calendar; the page groups them",
-  "count": 156,
+  "count": 161,
   "elections": [
     {
       "id": 14890,
@@ -2018,6 +2018,69 @@
       ],
       "where": "Oconee County",
       "url": "https://scvotes.gov/event/walhalla-city-council-special-election-4/"
+    },
+    {
+      "id": 17275,
+      "title": "City Of Abbeville General Election",
+      "date": "2026-11-17",
+      "start_et": "2026-11-17 07:00:00",
+      "end_et": "2026-11-17 19:00:00",
+      "type": "General",
+      "counties": [
+        "Abbeville"
+      ],
+      "where": "Abbeville County",
+      "url": "https://scvotes.gov/event/city-of-abbeville-general-election-5/"
+    },
+    {
+      "id": 17276,
+      "title": "Statewide General Election",
+      "date": "2026-11-17",
+      "start_et": "2026-11-17 07:00:00",
+      "end_et": "2026-11-17 19:00:00",
+      "type": "General",
+      "counties": [],
+      "where": "Statewide",
+      "url": "https://scvotes.gov/event/statewide-general-election-5/"
+    },
+    {
+      "id": 17277,
+      "title": "Town of Central Special Election",
+      "date": "2026-11-17",
+      "start_et": "2026-11-17 07:00:00",
+      "end_et": "2026-11-17 19:00:00",
+      "type": "Special",
+      "counties": [
+        "Pickens"
+      ],
+      "where": "Pickens County",
+      "url": "https://scvotes.gov/event/town-of-central-special-election-3/"
+    },
+    {
+      "id": 17278,
+      "title": "Town of Pinewood General Election",
+      "date": "2026-11-17",
+      "start_et": "2026-11-17 07:00:00",
+      "end_et": "2026-11-17 19:00:00",
+      "type": "General",
+      "counties": [
+        "Sumter"
+      ],
+      "where": "Sumter County",
+      "url": "https://scvotes.gov/event/town-of-pinewood-general-election-5/"
+    },
+    {
+      "id": 17279,
+      "title": "Town of Saluda General Election",
+      "date": "2026-11-17",
+      "start_et": "2026-11-17 07:00:00",
+      "end_et": "2026-11-17 19:00:00",
+      "type": "General",
+      "counties": [
+        "Saluda"
+      ],
+      "where": "Saluda County",
+      "url": "https://scvotes.gov/event/town-of-saluda-general-election-5/"
     },
     {
       "id": 14968,
