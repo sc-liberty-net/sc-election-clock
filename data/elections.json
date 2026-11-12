@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-11-12T07:09:30.044Z",
-  "checked_at_et": "Nov 12, 2026, 2:09 AM",
-  "generated_at": "2026-11-09T22:20:48.654Z",
-  "generated_at_et": "Nov 9, 2026, 5:20 PM",
-  "changed_this_run": false,
+  "checked_at": "2026-11-12T19:53:24.102Z",
+  "checked_at_et": "Nov 12, 2026, 2:53 PM",
+  "generated_at": "2026-11-12T19:53:24.102Z",
+  "generated_at_et": "Nov 12, 2026, 2:53 PM",
+  "changed_this_run": true,
   "source": "https://scvotes.gov/elections-statistics/upcoming-elections/",
   "api": "https://scvotes.gov/wp-json/tribe/events/v1/events",
   "window_start": "2026-01-01",
@@ -2039,8 +2039,16 @@
       "start_et": "2026-11-17 07:00:00",
       "end_et": "2026-11-17 19:00:00",
       "type": "General",
-      "counties": [],
-      "where": "Statewide",
+      "counties": [
+        "Abbeville",
+        "Edgefield",
+        "Florence",
+        "Laurens",
+        "Pickens",
+        "Saluda",
+        "Sumter"
+      ],
+      "where": "Abbeville County, Edgefield County, Florence County, Laurens County, Pickens County, Saluda County, Sumter County",
       "url": "https://scvotes.gov/event/statewide-general-election-5/"
     },
     {
