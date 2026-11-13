@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-11-12T19:53:24.102Z",
-  "checked_at_et": "Nov 12, 2026, 2:53 PM",
+  "checked_at": "2026-11-13T06:44:10.606Z",
+  "checked_at_et": "Nov 13, 2026, 1:44 AM",
   "generated_at": "2026-11-12T19:53:24.102Z",
   "generated_at_et": "Nov 12, 2026, 2:53 PM",
-  "changed_this_run": true,
+  "changed_this_run": false,
   "source": "https://scvotes.gov/elections-statistics/upcoming-elections/",
   "api": "https://scvotes.gov/wp-json/tribe/events/v1/events",
   "window_start": "2026-01-01",
