@@ -1,14 +1,14 @@
 {
-  "checked_at": "2026-11-23T07:37:19.221Z",
-  "checked_at_et": "Nov 23, 2026, 2:37 AM",
-  "generated_at": "2026-11-12T19:53:24.102Z",
-  "generated_at_et": "Nov 12, 2026, 2:53 PM",
-  "changed_this_run": false,
+  "checked_at": "2026-11-23T23:52:36.812Z",
+  "checked_at_et": "Nov 23, 2026, 6:52 PM",
+  "generated_at": "2026-11-23T23:52:36.812Z",
+  "generated_at_et": "Nov 23, 2026, 6:52 PM",
+  "changed_this_run": true,
   "source": "https://scvotes.gov/elections-statistics/upcoming-elections/",
   "api": "https://scvotes.gov/wp-json/tribe/events/v1/events",
   "window_start": "2026-01-01",
   "filter": "none — every event on the state's calendar; the page groups them",
-  "count": 161,
+  "count": 162,
   "elections": [
     {
       "id": 14890,
@@ -2033,22 +2033,27 @@
       "url": "https://scvotes.gov/event/city-of-abbeville-general-election-5/"
     },
     {
+      "id": 17331,
+      "title": "Florence School District 3 General Election",
+      "date": "2026-11-17",
+      "start_et": "2026-11-17 07:00:00",
+      "end_et": "2026-11-17 19:00:00",
+      "type": "General",
+      "counties": [
+        "Florence"
+      ],
+      "where": "Florence County",
+      "url": "https://scvotes.gov/event/florence-school-district-3-general-elect-3/"
+    },
+    {
       "id": 17276,
       "title": "Statewide General Election",
       "date": "2026-11-17",
       "start_et": "2026-11-17 07:00:00",
       "end_et": "2026-11-17 19:00:00",
       "type": "General",
-      "counties": [
-        "Abbeville",
-        "Edgefield",
-        "Florence",
-        "Laurens",
-        "Pickens",
-        "Saluda",
-        "Sumter"
-      ],
-      "where": "Abbeville County, Edgefield County, Florence County, Laurens County, Pickens County, Saluda County, Sumter County",
+      "counties": [],
+      "where": "Statewide",
       "url": "https://scvotes.gov/event/statewide-general-election-5/"
     },
     {
